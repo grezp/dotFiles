@@ -116,7 +116,6 @@ nnoremap <Leader>Q :q!<CR>|              " exit window w/o saving
 "______________"
 "___VIM.PLUG___"
 silent! call plug#begin()
-    Plug 'git/git'
     Plug 'scrooloose/nerdtree'                      " file system explorer
     Plug 'scrooloose/nerdcommenter'                 " comment code easily
     Plug 'vim-airline/vim-airline'                  " improves status bar
@@ -126,14 +125,23 @@ silent! call plug#begin()
     Plug 'junegunn/fzf.vim'                         " fzf embeded into vim
     Plug 'kana/vim-submode'                         " repeat cmd's with a single press
     Plug 'tpope/vim-fugitive'                       " git wrapper for vim
-    "Plug 'vim-syntastic/syntastic'
+    Plug 'jez/vim-superman'                         " vim for man pages
 call plug#end()
 
 
+"______________"
+"___FUGITIVE___"
+noremap <Leader>g :Git |                    " init Git cmd 
+noremap <Leader>ga :Git add |               " init Git add cmd 
+noremap <Leader>gd :Git diff |              " init Git diff cmd 
+noremap <Leader>gs :Git status<CR>|         " exec Git status cmd 
+noremap <Leader>gc :Git commit<CR>|         " exec Git commit cmd 
+noremap <Leader>gl :Git log<CR>|            " exec Git log cmd 
+
 "_________"
 "___FZF___"
-noremap <Leader>f :Files 
-noremap <Leader>ff :Files<CR> 
+noremap <Leader>f :Files |                  " init fzf search pattern
+noremap <Leader>ff :Files<CR>|              " begin fzf w/o search pattern 
 
 "______________"
 "___NERDTREE___"

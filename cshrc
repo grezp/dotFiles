@@ -203,5 +203,11 @@ alias wifi-find 'nmap -sP "10.20.1.*"'
 # --inFile=<control file> <csv pats>
 alias di-pat './di-config.rb convert --mode=MIPI_SINGLE_BUS --conv-type=qcm --read-type=compare --read-strobe=60ns --wtset=TS52MHz_MIPI --rtset=TS26MHz_MIPI'
  
+# exports
+setenv PATH ${PATH}:$HOME/.vim/plugged/vim-superman/bin
+setenv PATH ${PATH}:$HOME/.vim/plugged/fzf/bin
 
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+
