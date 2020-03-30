@@ -131,12 +131,12 @@ call plug#end()
 
 "______________"
 "___FUGITIVE___"
-noremap <Leader>g :Git |                    " init Git cmd 
-noremap <Leader>ga :Git add |               " init Git add cmd 
-noremap <Leader>gd :Git diff |              " init Git diff cmd 
-noremap <Leader>gs :Git status<CR>|         " exec Git status cmd 
+noremap <Leader>g :Git! |                   " init Git cmd 
+noremap <Leader>ga :Git! add |              " init Git add cmd 
+noremap <Leader>gd :Git! diff |             " init Git diff cmd 
+noremap <Leader>gs :Git! status<CR>|        " exec Git status cmd 
 noremap <Leader>gc :Git commit<CR>|         " exec Git commit cmd 
-noremap <Leader>gl :Git log<CR>|            " exec Git log cmd 
+noremap <Leader>gl :Git! log<CR>|           " exec Git log cmd 
 
 "_________"
 "___FZF___"
