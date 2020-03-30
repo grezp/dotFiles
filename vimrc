@@ -130,10 +130,15 @@ silent! call plug#begin()
 call plug#end()
 
 
+"_________"
+"___FZF___"
+noremap <Leader>f :Files 
+noremap <Leader>ff :Files<CR> 
+
 "______________"
 "___NERDTREE___"
-map <Leader>n :NERDTreeToggle<CR>
-map <Leader>f :NERDTreeFind
+noremap <Leader>n :NERDTreeToggle<CR>
+"map <Leader>f :NERDTreeFind
 let NERDTreeShowLineNumbers = 1
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '~'
