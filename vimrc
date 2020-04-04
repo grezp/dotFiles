@@ -49,7 +49,9 @@ map <Space> <Leader>|                       " make space leader key
 noremap <Leader>o o<Esc>|                   " enter new line below & gt normal
 noremap <Leader>O O<Esc>|                   " enter new line above & gt normal
 nnoremap <Leader>, :noh<CR>|                " stops highlight from search
-noremap <Leader>m :set cursorline!<CR>      " toggle cursor line
+"noremap <Leader>m :set cursorline!<CR>      " toggle cursor line
+nnoremap <Leader>" :reg<CR>|                 " open registers
+vnoremap <Leader>" :reg<CR>|                 " open registers
 
 "__________"
 "___TABS___"
@@ -126,6 +128,7 @@ silent! call plug#begin()
     Plug 'kana/vim-submode'                         " repeat cmd's with a single press
     Plug 'tpope/vim-fugitive'                       " git wrapper for vim
     Plug 'jez/vim-superman'                         " vim for man pages
+    Plug 'ludovicchabant/vim-gutentags'             " ctag manager
 call plug#end()
 
 
