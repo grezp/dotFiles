@@ -18,15 +18,20 @@ set laststatus=2            " always show status bar
 "set tabline=1               " shows # of tab lines
 "set noshowmode              " hides the mode (eg. insert, visual)
 "set encoding=utf-8
+set tags+=tags,/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
 
 
 "___________________"
 "___COLOR_OPTIONS___"
-set termguicolors
-syntax on
-"colorscheme desert
-"hi IncSearch term=NONE ctermfg=Black ctermbg=Cyan
-"hi Search cterm=NONE ctermfg=black ctermbg=yellow
+set termguicolors                               " 24 bit colors
+syntax on                                       " Turn on syntax hilighting
+colorscheme space-vim-dark                      " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+hi cppOperators gui=none  guifg=#87afff|        " change cpp operator color
+hi Folded gui=none guibg=#262626 guifg=#005f5f| " change folding fg & bg color
+hi unisonClass gui=none  guifg=#bc6ec5|         " highlight unison Classes
+hi unisonDataTypes gui=none  guifg=#5f87d7|     " highlight usision data types
+hi unisonTypeDefs gui=none  guifg=#5f87d7|      " hi unison type defs
+hi unisonEnums gui=bold  guifg=#5f87d7|         " hi unison enums
 
 "____________________"
 "___PATTERN SEARCH___"
@@ -41,7 +46,7 @@ set smartcase               " stop ignorecase when searching w/ caps
 "let &t_SR = "\<Esc>]50;CursorShape=2\x7"        " replace mode cursor
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"        " switch back to block cursor
 set cursorline                                  " cursor highlight on start
-hi CursorLine ctermbg=DarkGrey cterm=bold|           " cursor highlight color
+"hi CursorLine ctermbg=DarkGrey cterm=bold|           " cursor highlight color
 
 
 """"""""""""""""""""
@@ -81,8 +86,6 @@ nmap <Leader>6 <Plug>AirlineSelectTab6      " change to buffer #
 nmap <Leader>7 <Plug>AirlineSelectTab7      " change to buffer #
 nmap <Leader>8 <Plug>AirlineSelectTab8      " change to buffer #
 nmap <Leader>9 <Plug>AirlineSelectTab9      " change to buffer #
-"MAKE BUFFER MAP FOR Insert
-"C-1 for buf 1
 
 "_____________________"
 "___SCROLL/POSITION___"

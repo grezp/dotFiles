@@ -61,7 +61,7 @@ set history = 1000                 # Increase history length.
 #setenv path "$PATH:$opusPath"
 
 # General variables:
-setenv EDITOR vim 
+#setenv EDITOR vim 
 setenv CDPATH ".:~:${which_ltx}:/user"
 
 # This variable is needed for X application resource files.
@@ -171,8 +171,8 @@ alias res-2k 'xrandr -s 2560x1440'
 alias res-info 'xdpyinfo | grep dimensions'
 
 # set default editor to vim
-setenv VISUAL vim
-setenv EDITOR vim
+setenv VISUAL $HOME/local/bin/vim
+setenv EDITOR $HOME/local/bin/vim
 
 # grep inside file
 alias g-word 'grep -rnw . -e $1'
@@ -208,8 +208,4 @@ setenv PATH ${PATH}:$HOME/local/bin
 
 # alias exports
 alias vim '$HOME/local/bin/vim'
-
-
-
-
 
