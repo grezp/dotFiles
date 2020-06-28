@@ -126,7 +126,6 @@ silent! call plug#begin()
     Plug 'rafi/awesome-vim-colorschemes'
     Plug 'vim-airline/vim-airline'                  " improves status bar
     Plug 'vim-airline/vim-airline-themes'           " themes for airline
-    Plug 'kana/vim-submode'                         " repeat cmd's with a single press
     "Plug 'powerline/fonts'                          " fonts needed for airline symbols
 call plug#end()
 
@@ -209,50 +208,6 @@ autocmd User AirlineAfterInit call AirlineInit()
 "___SUBMODE___"
 let g:submode_timeout = 0                   " disable timeouts
 let g:submode_keep_leaving_key = 1          " external cmd executes and exits submode
-
-call submode#enter_with('undo/redo', 'n', '', 'g-', 'g-')                                 " undo by pressing g-
-call submode#enter_with('undo/redo', 'n', '', 'g=', 'g+')                                 " redo by pressing g-
-call submode#map('undo/redo', 'n', '', '-', 'g-')                                         " undo by repeat   -
-call submode#map('undo/redo', 'n', '', '=', 'g+')                                         " redo by repeat   +
-
-call submode#enter_with('buffHeight', 'n', 's', '<C-w>=', ':exe "resize +6"<CR>')         " inc height by pressing <C-w> =
-call submode#enter_with('buffHeight', 'n', 's', '<C-w>-', ':exe "resize -6"<CR>')         " dec height by pressing <C-w> -
-call submode#map('buffHeight', 'n', 's', '=', ':exe "resize +6"<CR>')                     " inc height by repeat    =
-call submode#map('buffHeight', 'n', 's', '-', ':exe "resize -6"<CR>')                     " dec height by repeat    -
-
-call submode#enter_with('buffWidth', 'n', 's', '<C-w>>', ':exe "vert resize +6"<CR>')     " inc width by pressing <C-w> >
-call submode#enter_with('buffWidth', 'n', 's', '<C-w><', ':exe "vert resize -6"<CR>')     " dec width by pressing <C-w> <
-call submode#map('buffWidth', 'n', 's', '>', ':exe "vert resize +6"<CR>')                 " inc width by repeat    >
-call submode#map('buffWidth', 'n', 's', '<', ':exe "vert resize -6"<CR>')                 " dec width by repeat    <
-call submode#map('buffWidth', 'n', 's', '.', ':exe "vert resize +6"<CR>')                 " inc width by repeat    .
-call submode#map('buffWidth', 'n', 's', ',', ':exe "vert resize -6"<CR>')                 " dec width by repeat    ,
-
-call submode#enter_with('chBuff', 'n', '', '<Leader>bk', ':bnext<CR>')                    " next buffer by pressing <Leader><bk
-call submode#enter_with('chBuff', 'n', '', '<Leader>bj', ':bprev<CR>')                    " prev buffer by pressing <Leader><bj
-call submode#map('chBuff', 'n', '', 'k', ':bnext<CR>')                                    " next buffer by repeat    k
-call submode#map('chBuff', 'n', '', 'j', ':bprev<CR>')                                    " prev buffer by repeat    j
-
-call submode#enter_with('scrolling', 'n', '', '<C-j>', '<C-e><C-e>')                      " scroll down  by pressing <C-j> x2
-call submode#enter_with('scrolling', 'n', '', '<C-k>', '<C-y><C-y>')                      " scroll up    by pressing <C-k> x2
-call submode#enter_with('scrolling', 'n', '', '<C-l>', 'zlzlzlzl')                        " scroll right by pressing <C-l> x4
-call submode#enter_with('scrolling', 'n', '', '<C-h>', 'zhzhzhzh')                        " scroll left  by pressing <C-h> x4
-call submode#map('scrolling', 'n', '', 'j', '<C-e><C-e>')                                 " scroll down  by repeat    j    x2
-call submode#map('scrolling', 'n', '', 'k', '<C-y><C-y>')                                 " scroll up    by repeat    k    x2
-call submode#map('scrolling', 'n', '', 'l', 'zlzlzlzl')                                   " scroll right by repeat    l    x4
-call submode#map('scrolling', 'n', '', 'h', 'zhzhzhzh')                                   " scroll left  by repeat    h    x4
-
-call submode#enter_with('halfPage', 'n', '', '<Leader><C-j>', '<C-e>')                    " half pg down  by pressing <Leader><C-j>
-call submode#enter_with('halfPage', 'n', '', '<Leader><C-k>', '<C-y>')                    " half pg up    by pressing <Leader><C-k>
-call submode#enter_with('halfPage', 'n', '', '<Leader><C-l>', 'zl')                       " half pg right by pressing <Leader><C-l>
-call submode#enter_with('halfPage', 'n', '', '<Leader><C-h>', 'zh')                       " half pg left  by pressing <Leader><C-h>
-call submode#map('halfPage', 'n', '', '<C-j>', '<C-d>')                                   " half pg down  by repeat   <C-j>
-call submode#map('halfPage', 'n', '', '<C-k>', '<C-u>')                                   " half pg up    by repeat   <C-k>
-call submode#map('halfPage', 'n', '', '<C-l>', 'zL')                                      " half pg right by repeat   <C-l>
-call submode#map('halfPage', 'n', '', '<C-h>', 'zH')                                      " half pg left  by repeat   <C-h>
-call submode#map('halfPage', 'n', '', 'j', '<C-d>')                                       " half pg down  by repeat    j
-call submode#map('halfPage', 'n', '', 'k', '<C-u>')                                       " half pg up    by repeat    k
-call submode#map('halfPage', 'n', '', 'l', 'zL')                                          " half pg right by repeat    l
-call submode#map('halfPage', 'n', '', 'h', 'zH')                                          " half pg left  by repeat    h
 
 
 """""""""""""""""
