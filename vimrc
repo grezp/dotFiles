@@ -1,10 +1,58 @@
-"----------------------------"
-"---GENERAL CONFIG OPTIONS---"
+" vim:fdm=marker
+
+"---BINDINGS TO REMEMBER---"
+"--------------------------"
+""""""""""""""""""""""""""""
+
+" :set nowrap number relativenumber wildmenu foldmethod=syntax
+
+"_____________________"
+"___SCROLL/POSITION___"
+"
+" ^C-d      half page down
+" ^C-u      half page up
+" zL        half page left
+" zH        half page right
+"
+" zt        move cursor - window top
+" zb        move cursor - window bottom
+" zz        move cursor - window middle
+"
+" ^C-e      single line down
+" ^C-y      single line up
+" zl        single line left
+" zh        single line right
+
+"________________"
+"___NAVIGATION___"
+"
+" m(x)      [m] creates a mark
+" '(x)      ['] goes to mark
+" f(x)      [f] finds next chard [F] for backwards
+
+"__________"
+"___MISC___"
+"
+" ^C-6      toggle between last 2 buffers
+" ^C-r      redo prev cmd - undos undo
+" "(#)      ["] stores into reg, used with y/p
+" .         repeat prev cmd
+
+"___________________"
+"___NERDCOMMENTER___"
+" [count]<leader>c<space>        comment toggle
+" [count]<leader>cc              comment single line
+" [count]<leader>ci              remove single line comment
+" [count]<leader>cm              comment minimal block
+" [count]<leader>cs              comment sexy block
+" <leader>ca                     comment altDelims
+
+"---GENERAL CONFIG OPTIONS---" {{{
 "----------------------------"
 """"""""""""""""""""""""""""""
 
+"___GENERAL_SETTINGS___" {{{{
 "______________________"
-"___GENERAL_SETTINGS___"
 set nowrap                  " no wrapping to next line
 set tabstop=4               " set tab space to 4
 set expandtab               " expand tabs to spaces
@@ -15,14 +63,15 @@ set hidden                  " change buffer w/o saving
 set noswapfile              " prevent vim from creating swap files
 set showcmd                 " show keys pressed in cmd line
 set laststatus=2            " always show status bar
-"set tabline=1               " shows # of tab lines
-"set noshowmode              " hides the mode (eg. insert, visual)
-"set encoding=utf-8
+set noshowmode              " hides the mode (eg. insert, visual)
+set path+=.,**
+set wildmenu
+set wildignore=*/build/*,*.bak
 set tags+=tags,/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
+" }}}
 
-
+"___COLOR_OPTIONS___" {{{
 "___________________"
-"___COLOR_OPTIONS___"
 set termguicolors                               " 24 bit colors
 syntax on                                       " Turn on syntax hilighting
 colorscheme space-vim-dark                      " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
@@ -32,201 +81,227 @@ hi unisonClass gui=none  guifg=#bc6ec5|         " highlight unison Classes
 hi unisonDataTypes gui=none  guifg=#5f87d7|     " highlight usision data types
 hi unisonTypeDefs gui=none  guifg=#5f87d7|      " hi unison type defs
 hi unisonEnums gui=bold  guifg=#5f87d7|         " hi unison enums
+" }}}
 
+"___PATTERN SEARCH___" {{{
 "____________________"
-"___PATTERN SEARCH___"
 set hlsearch                " high light search patterns
 set incsearch               " find patter as you type
 set ignorecase              " ignore case when searching
 set smartcase               " stop ignorecase when searching w/ caps
+" }}}
 
+""___CURSOR OPTIONS___" {{{
 ""____________________"
-""___CURSOR OPTIONS___"
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"        " insert mode cursor
 "let &t_SR = "\<Esc>]50;CursorShape=2\x7"        " replace mode cursor
 "let &t_EI = "\<Esc>]50;CursorShape=0\x7"        " switch back to block cursor
 set cursorline                                  " cursor highlight on start
 "hi CursorLine ctermbg=DarkGrey cterm=bold|           " cursor highlight color
+" }}}
 
+" }}}
 
-""""""""""""""""""""
+"---GENERAL MAPS---" {{{
 "------------------"
-"---GENERAL MAPS---"
-"------------------"
 """"""""""""""""""""
 
+"___GENERAL___" {{{
 "_____________"
-""___GENERAL___"
 map <Space> <Leader>|                       " make space leader key
 noremap <Leader>o o<Esc>|                   " enter new line below & gt normal
 noremap <Leader>O O<Esc>|                   " enter new line above & gt normal
 nnoremap <Leader>, :noh<CR>|                " stops highlight from search
-"noremap <Leader>m :set cursorline!<CR>      " toggle cursor line
-nnoremap <Leader>" :reg<CR>|                 " open registers
-vnoremap <Leader>" :reg<CR>|                 " open registers
+" }}}
 
+"___WINDOWS___" {{{
 "_____________"
-"___WINDOWS___"
-set winheight=6
-set winminheight=6                          " smallest window possible
-map <Leader>w <C-w>|                        " window keybind
-nnoremap <C-w>+ <C-w>=|                     " swap window same-height & increase
+map <Leader>w <C-w>|                             " window keybind
+nnoremap <Leader>w+ 10<C-w>+|                    " inc window height 
+nnoremap <Leader>w- 10<C-w>-|                    " dec window height
+nnoremap <leader>w> 30<C-w>>|                    " inc > window height 
+nnoremap <leader>w< 30<C-w><|                    " inc < window height
+" }}}
 
+"___OPENING FILES___" {{{
+"___________________"
+noremap <Leader>f :find |                   " default find files
+" noremap <Leader>ff :find<CR>|                  " default find files
+noremap <Leader>F :Files |                  " init fzf search pattern
+noremap <Leader>FF :Files<CR>|                 " init fzf search pattern
+" }}}
+
+"___BUFFERS___" {{{
 "_____________"
-"___BUFFERS___"
-nnoremap <leader>bd :bd<CR>|                " delete current buffer
-nmap <Leader>bk :bnext<CR>|                 " move to next buffer
-nmap <Leader>bj :bprev<CR>|                 " move to prev buffer
-nmap <Leader>1 <Plug>AirlineSelectTab1      " change to buffer #
-nmap <Leader>2 <Plug>AirlineSelectTab2      " change to buffer #
-nmap <Leader>3 <Plug>AirlineSelectTab3      " change to buffer #
-nmap <Leader>4 <Plug>AirlineSelectTab4      " change to buffer #
-nmap <Leader>5 <Plug>AirlineSelectTab5      " change to buffer #
-nmap <Leader>6 <Plug>AirlineSelectTab6      " change to buffer #
-nmap <Leader>7 <Plug>AirlineSelectTab7      " change to buffer #
-nmap <Leader>8 <Plug>AirlineSelectTab8      " change to buffer #
-nmap <Leader>9 <Plug>AirlineSelectTab9      " change to buffer #
+nnoremap <Leader>bl :ls<CR>|                " list buffers
+nnoremap <Leader>bL :Buffers<CR>|           " fzf buffer
+nnoremap <Leader>bd :bd<CR>|                " delete current buffer
+nnoremap <Leader>bk :bnext<CR>|             " move to next buffer
+nnoremap <Leader>bj :bprev<CR>|             " move to prev buffer
+nnoremap <silent> <Leader>b1 :b1<CR>|       " go to buffer #
+nnoremap <silent> <Leader>b2 :b2<CR>|       " go to buffer #
+nnoremap <silent> <Leader>b3 :b3<CR>|       " go to buffer #
+nnoremap <silent> <Leader>b4 :b4<CR>|       " go to buffer #
+nnoremap <silent> <Leader>b5 :b5<CR>|       " go to buffer #
+nnoremap <silent> <Leader>b6 :b6<CR>|       " go to buffer #
+nnoremap <silent> <Leader>b7 :b7<CR>|       " go to buffer #
+nnoremap <silent> <Leader>b8 :b8<CR>|       " go to buffer #
+nnoremap <silent> <Leader>b9 :b9<CR>|       " go to buffer #
+nnoremap <silent> <Leader>b0 :b10<CR>|      " go to buffer #
+" }}}
 
-"_____________________"
-"___SCROLL/POSITION___"
-nnoremap <C-j> <C-e>|           " scroll down
-nnoremap <C-k> <C-y>|           " scroll up
-nnoremap <C-l> zl|              " scroll left
-nnoremap <C-h> zh|              " scroll right
-nnoremap <Leader><C-j> <C-d>|   " half page down
-nnoremap <Leader><C-k> <C-u>|   " half page up
-nnoremap <Leader><C-l> zL|      " half page left
-nnoremap <Leader><C-h> zH|      " half page right
-nnoremap zj zb|                 " move window @ bottom cursor line
-nnoremap zk zt|                 " move window @ top cursor line
-
+"___SYSTEM FILE___" {{{
 "_________________"
-"___SYSTEM FILE___"
 nnoremap <Leader>s :w<CR>|               " saves current file
 nnoremap <Leader>q :q<CR>|               " exit window
 nnoremap <Leader>Q :q!<CR>|              " exit window w/o saving
+" }}}
 
+" }}}
 
-"""""""""""""""
+"---PLUGINS---" {{{
 "-------------"
-"---PLUGINS---"
-"-------------"
 """""""""""""""
 
-"______________"
 "___VIM.PLUG___"
 silent! call plug#begin()
-    Plug 'preservim/nerdtree'                      " file system explorer
-    Plug 'preservim/nerdcommenter'                 " comment code easily
+    Plug 'preservim/nerdtree'                       " browse files/folders
+    Plug 'preservim/nerdcommenter'                  " comment code easily
     Plug 'junegunn/fzf'                             " command line fuzzy finder
     Plug 'junegunn/fzf.vim'                         " fzf embeded into vim
     Plug 'tpope/vim-fugitive'                       " git wrapper for vim
-    Plug 'jez/vim-superman'                         " vim for man pages
     Plug 'ludovicchabant/vim-gutentags'             " ctag manager
-    Plug 'rafi/awesome-vim-colorschemes'
-    Plug 'vim-airline/vim-airline'                  " improves status bar
-    Plug 'vim-airline/vim-airline-themes'           " themes for airline
-    "Plug 'powerline/fonts'                          " fonts needed for airline symbols
 call plug#end()
 
-
+"___NERDTREE___" {{{
 "______________"
-"___NERDTREE___"
 noremap <Leader>n :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers = 1
 let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '~'
+" }}}
 
+"___NERDCOMMENTER___" {{{
 "___________________"
-"___NERDCOMMENTER___"
-"[count]<leader>c<space>        NERDCommenterToggle
-"[count]<leader>cm              NERDCommenterMinimal
-"[count]<leader>cs              NERDCommenterSexy
-"<leader>ca                     NERDCommenterAltDelims
+let g:NERDSpaceDelims = 1 |                 " adds space between comment & char
+let g:NERDDefaultAlign = 'left' |           " flush single line comments
+let g:NERDCommentEmptyLines = 1 |           " comment empty lines
+" }}}
 
-"_________"
-"___FZF___"
-noremap <Leader>f :Files |                  " init fzf search pattern
-noremap <Leader>ff :Files<CR>|              " begin fzf w/o search pattern
-
+"___FUGITIVE___" {{{
 "______________"
-"___FUGITIVE___"
 noremap <Leader>g :Git! |                   " init Git cmd
 noremap <Leader>ga :Git! add |              " init Git add cmd
 noremap <Leader>gd :Git! diff |             " init Git diff cmd
 noremap <Leader>gs :Git! status<CR>|        " exec Git status cmd
 noremap <Leader>gc :Git commit<CR>|         " exec Git commit cmd
 noremap <Leader>gl :Git! log<CR>|           " exec Git log cmd
+" }}}
+" }}}
 
-"_____________"
-"___AIRLINE___"
-let g:airline_theme='bubblegum'                                 " select theme
-let g:airline_powerline_fonts = 0                               " enables powerline fonts
-let g:airline#extensions#tabline#enabled = 1                    " enable tabline
-let g:airline#extensions#tabline#buf_label_first = 1            " place buffers on the left
-"let g:airline#extensions#tabline#show_tabs = 0                  " disable tabs from being shown
-let g:airline#extensions#tabline#fnamemod = ':t'                " display filename only & not pwd
-let g:airline#extensions#tabline#buffer_idx_mode = 1            " show buffer tab index not b#
-let g:airline#extensions#tabline#buffers_label = 'Buffers'      " display buffer label
-let g:airline#extensions#tabline#buffer_idx_format = {
-                                                     \ '0': '0 ',
-                                                     \ '1': '1 ',
-                                                     \ '2': '2 ',
-                                                     \ '3': '3 ',
-                                                     \ '4': '4 ',
-                                                     \ '5': '5 ',
-                                                     \ '6': '6 ',
-                                                     \ '7': '7 ',
-                                                     \ '8': '8 ',
-                                                     \ '9': '9 '
-                                                     \ }
-"let g:airline_mode_map = {
-                         "\ '__' : '------',
-                         "\ 'n'  : 'Normal',
-                         "\ 'i'  : 'Insert',
-                         "\ 'R'  : 'Replace',
-                         "\ 'v'  : 'Visual',
-                         "\ 'V'  : 'V-Line',
-                         "\ 'c'  : 'Command',
-                         "\ '^V' : 'V-Block',
-                         "\ 's'  : 'Select',
-                         "\ 'S'  : 'S-Line',
-                         "\ '^S' : 'S-Block',
-                         "\ 't'  : 'Terminal',
-                         "\ }
-
-function! AirlineInit()
-  let g:airline_section_a = airline#section#create(['mode', ' ', 'branch'])
-  let g:airline_section_b = airline#section#create_left(['path', 'readonly'])
-  let g:airline_section_c = ""
-  let g:airline_section_z = airline#section#create_right(['%l ', '%L ☰', '%p%%'])
-  "let g:airline_section_z = airline#section#create_right(['%l ', '%L ☰', '%v ‖', '%p%%'])
-endfunction
-autocmd User AirlineAfterInit call AirlineInit()
-
-"_____________"
-"___SUBMODE___"
-let g:submode_timeout = 0                   " disable timeouts
-let g:submode_keep_leaving_key = 1          " external cmd executes and exits submode
-
-
-"""""""""""""""""
-"---------------"
-"---FUNCTIONS---"
+"---FUNCTIONS---" {{{
 "---------------"
 """""""""""""""""
 
-" removes relative number line when not focused
+" removes relative number line when not focused " {{{
+" --------------------------------------------- "
 :set number relativenumber
 :augroup numbertoggle
 :  autocmd!
 :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber            " relative nr when focused
 :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber          " normal nw when not focused
 :augroup END
+" }}}
 
-" removes highlight cursor when not focused
+" removes highlight cursor when not focused " {{{
+" ----------------------------------------- "
 :augroup cursorFocus
 :  autocmd!
 :  autocmd BufEnter,FocusGained,InsertLeave * set cursorline                " cursor highlight when focused
 :  autocmd BufLeave,FocusLost,InsertEnter   * set nocursorline              " no cursor when not focused
 :augroup END
+" }}}
+" }}}
+
+"---STATUSLINE---" {{{
+"------------ ---"
+" statusline modes {{{
+let g:currentmode={
+    \ 'n'      : 'NORMAL',
+    \ 'no'     : 'N·Operator Pending',
+    \ 'v'      : 'VISUAL',
+    \ 'V'      : 'V·LINE',
+    \ "\<C-V>" : 'V·BLOCK',
+    \ 's'      : 'SELECT',
+    \ 'S'      : 'S·LINE',
+    \ "\<C-S>" : 'S·BLOCK',
+    \ 'i'      : 'INSERT',
+    \ 'R'      : 'REPLACE',
+    \ 'Rv'     : 'V·REPLACE',
+    \ 'c'      : 'COMMAND',
+    \ 'cv'     : 'VIM EX',
+    \ 'ce'     : 'EX',
+    \ 'r'      : 'PROMPT',
+    \ 'rm'     : 'MORE',
+    \ 'r?'     : 'CONFIRM',
+    \ '!'      : 'SHELL',
+    \ 't'      : 'TERMINAL'
+    \}
+" }}}
+
+" FileSize() {{{
+" Find out current buffer's size and output it.
+function! FileSize()
+  let bytes = getfsize(expand('%:p'))
+  if (bytes >= 1024)
+    let kbytes = bytes / 1024
+  endif
+
+  if (exists('kbytes') && kbytes >= 1000)
+    let mbytes = kbytes / 1000
+  endif
+
+  if bytes <= 0
+    return '0'
+  endif
+
+  if (exists('mbytes'))
+    return mbytes . 'MB '
+  elseif (exists('kbytes'))
+    return kbytes . 'KB '
+  else
+    return bytes . 'B '
+  endif
+endfunction
+" }}}
+
+" statusline colors {{{{
+hi User1 guifg=#b2b2b2 guibg=#262626            " white
+hi User2 guifg=#E697E6 guibg=#262626            " magenta
+hi User3 guifg=#20af81 guibg=#262626            " dark green
+hi User4 guifg=#74BAAC guibg=#262626            " light green
+hi User5 guifg=#4f97d7 guibg=#262626            " blue
+hi User6 guifg=#D881ED guibg=#262626            " dark magenta
+hi User7 guifg=#262626 guibg=#74BAAC           " light green
+" }}}}
+
+let g:status_fileName = expand("%:~ ")
+set laststatus=2
+set statusline=
+set statusline+=%6*\ [%{g:currentmode[mode()]}]               " Current mode
+set statusline+=%4*\ [%n]:\                                 " buffer #
+set statusline+=%4*%{&modified?'':g:status_fileName}        " get file name
+set statusline+=%4*%{&modified?'':'\ '}                     " space after file
+set statusline+=%7*%{&modified?g:status_fileName:''}        " change color is modified
+set statusline+=%7*%{&modified?'\ ':''}                     " space after file
+set statusline+=%7*%m%r%w                                   " show: modified, read only, and preview flags
+set statusline+=%*
+set statusline+=%1*\ %=                                     " right justified text
+set statusline+=%1*\|\ %{&filetype}\                            " file type
+set statusline+=\|\ %{&ff}\                                 " file format
+set statusline+=\|\ %{FileSize()}\|                          " File size
+set statusline+=\ %3*%2p%%
+set statusline+=\ \|\ %2l:%-2c\                                 " line + column 
+
+" }}}
+
