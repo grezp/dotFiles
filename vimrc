@@ -1,57 +1,62 @@
-" vim:fdm=marker
 
 "---BINDINGS TO REMEMBER---"
 "--------------------------"
 """"""""""""""""""""""""""""
-
 " :set nowrap number relativenumber wildmenu foldmethod=syntax
 
-"_____________________"
-"___SCROLL/POSITION___"
+"___Scroll/Position___"
 "
-" ^C-d      half page down
-" ^C-u      half page up
-" zL        half page left
-" zH        half page right
+" ^C-d  ------- half page down
+" ^C-u  ------- half page up
+" zL  --------- half page left
+" zH  --------- half page right
 "
-" zt        move cursor - window top
-" zb        move cursor - window bottom
-" zz        move cursor - window middle
+" zt  --------- move cursor - window top
+" zb  --------- move cursor - window bottom
+" zz  --------- move cursor - window middle
 "
-" ^C-e      single line down
-" ^C-y      single line up
-" zl        single line left
-" zh        single line right
+" ^C-e  ------- single line down
+" ^C-y  ------- single line up
+" zl  --------- single line left
+" zh  --------- single line right
 
-"________________"
-"___NAVIGATION___"
+"___Navigation___"
 "
-" m(x)      [m] creates a mark
-" '(x)      ['] goes to mark
-" f(x)      [f] finds next chard [F] for backwards
+" m(x)  ------- [m] creates a mark
+" '(x)  ------- ['] goes to mark
+" f(x)  ------- [f] finds next chard [F] for backwards
 
-"__________"
-"___MISC___"
+"___Buffers___"
 "
-" ^C-6      toggle between last 2 buffers
-" ^C-r      redo prev cmd - undos undo
-" "(#)      ["] stores into reg, used with y/p
-" .         repeat prev cmd
+" :sb#  ------- open buffer horiz
+" :vert sb#  -- open buffer vertically
+" :split  ----- open new file horz
+" :vsplit  ---- open new file horz
+" <C-w>h  ----- mv buf <
+" <C-w>j  ----- mv buf v
+" <C-w>k  ----- mv buf ^
+" <C-w>l  ----- mv buf >
 
-"___________________"
-"___NERDCOMMENTER___"
-" [count]<leader>c<space>        comment toggle
-" [count]<leader>cc              comment single line
-" [count]<leader>ci              remove single line comment
-" [count]<leader>cm              comment minimal block
-" [count]<leader>cs              comment sexy block
-" <leader>ca                     comment altDelims
+"___Misc___"
+"
+" ^C-6  ------- toggle between last 2 buffers
+" ^C-r  ------- redo prev cmd - undos undo
+" "(#)  ------- ["] stores into reg, used with y/p
+" .  ---------- repeat prev cmd
+
+"___Nerdcommenter___"
+" [#]<L>c<L> -- comment toggle
+" [#]<L>cc  --- comment single line
+" [#]<L>ci  --- remove single line comment
+" [#]<L>cm  --- comment minimal block
+" [#]<L>cs  --- comment sexy block
+" <L>ca  ------ comment altDelims
 
 "---GENERAL CONFIG OPTIONS---" {{{
 "----------------------------"
 """"""""""""""""""""""""""""""
 
-"___GENERAL_SETTINGS___" {{{{
+"___General_settings___" {{{{
 "______________________"
 set nowrap                  " no wrapping to next line
 set tabstop=4               " set tab space to 4
@@ -64,13 +69,14 @@ set noswapfile              " prevent vim from creating swap files
 set showcmd                 " show keys pressed in cmd line
 set laststatus=2            " always show status bar
 set noshowmode              " hides the mode (eg. insert, visual)
+set shortmess=aWF           " cmd message: use abrevs,no write, no file text
 set path+=.,**
 set wildmenu
 set wildignore=*/build/*,*.bak
 set tags+=tags,/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
 " }}}
 
-"___COLOR_OPTIONS___" {{{
+"___Color_options___" {{{
 "___________________"
 set termguicolors                               " 24 bit colors
 syntax on                                       " Turn on syntax hilighting
@@ -83,7 +89,7 @@ hi unisonTypeDefs gui=none  guifg=#5f87d7|      " hi unison type defs
 hi unisonEnums gui=bold  guifg=#5f87d7|         " hi unison enums
 " }}}
 
-"___PATTERN SEARCH___" {{{
+"___Pattern search___" {{{
 "____________________"
 set hlsearch                " high light search patterns
 set incsearch               " find patter as you type
@@ -91,7 +97,7 @@ set ignorecase              " ignore case when searching
 set smartcase               " stop ignorecase when searching w/ caps
 " }}}
 
-""___CURSOR OPTIONS___" {{{
+""___Cursor options___" {{{
 ""____________________"
 "let &t_SI = "\<Esc>]50;CursorShape=1\x7"        " insert mode cursor
 "let &t_SR = "\<Esc>]50;CursorShape=2\x7"        " replace mode cursor
@@ -106,15 +112,16 @@ set cursorline                                  " cursor highlight on start
 "------------------"
 """"""""""""""""""""
 
-"___GENERAL___" {{{
+"___General___" {{{
 "_____________"
 map <Space> <Leader>|                       " make space leader key
 noremap <Leader>o o<Esc>|                   " enter new line below & gt normal
 noremap <Leader>O O<Esc>|                   " enter new line above & gt normal
 nnoremap <Leader>, :noh<CR>|                " stops highlight from search
+cabbrev hv vert bo h|                       " creates help buffer to right vert split
 " }}}
 
-"___WINDOWS___" {{{
+"___Windows___" {{{
 "_____________"
 map <Leader>w <C-w>|                             " window keybind
 nnoremap <Leader>w+ 10<C-w>+|                    " inc window height 
@@ -123,7 +130,7 @@ nnoremap <leader>w> 30<C-w>>|                    " inc > window height
 nnoremap <leader>w< 30<C-w><|                    " inc < window height
 " }}}
 
-"___OPENING FILES___" {{{
+"___Opening files___" {{{
 "___________________"
 noremap <Leader>f :find |                   " default find files
 " noremap <Leader>ff :find<CR>|                  " default find files
@@ -131,26 +138,17 @@ noremap <Leader>F :Files |                  " init fzf search pattern
 noremap <Leader>FF :Files<CR>|                 " init fzf search pattern
 " }}}
 
-"___BUFFERS___" {{{
+"___Buffers___" {{{
 "_____________"
+nnoremap gb :ls<CR>:buffer<Space>|          " list buffer then choose
 nnoremap <Leader>bl :ls<CR>|                " list buffers
 nnoremap <Leader>bL :Buffers<CR>|           " fzf buffer
 nnoremap <Leader>bd :bd<CR>|                " delete current buffer
-nnoremap <Leader>bk :bnext<CR>|             " move to next buffer
-nnoremap <Leader>bj :bprev<CR>|             " move to prev buffer
-nnoremap <silent> <Leader>b1 :b1<CR>|       " go to buffer #
-nnoremap <silent> <Leader>b2 :b2<CR>|       " go to buffer #
-nnoremap <silent> <Leader>b3 :b3<CR>|       " go to buffer #
-nnoremap <silent> <Leader>b4 :b4<CR>|       " go to buffer #
-nnoremap <silent> <Leader>b5 :b5<CR>|       " go to buffer #
-nnoremap <silent> <Leader>b6 :b6<CR>|       " go to buffer #
-nnoremap <silent> <Leader>b7 :b7<CR>|       " go to buffer #
-nnoremap <silent> <Leader>b8 :b8<CR>|       " go to buffer #
-nnoremap <silent> <Leader>b9 :b9<CR>|       " go to buffer #
-nnoremap <silent> <Leader>b0 :b10<CR>|      " go to buffer #
+nnoremap <C-k> :bnext<CR>|             " move to next buffer
+nnoremap <C-j> :bprev<CR>|             " move to prev buffer
 " }}}
 
-"___SYSTEM FILE___" {{{
+"___System file___" {{{
 "_________________"
 nnoremap <Leader>s :w<CR>|               " saves current file
 nnoremap <Leader>q :q<CR>|               " exit window
@@ -163,7 +161,7 @@ nnoremap <Leader>Q :q!<CR>|              " exit window w/o saving
 "-------------"
 """""""""""""""
 
-"___VIM.PLUG___"
+"___Vim_plug___"
 silent! call plug#begin()
     Plug 'preservim/nerdtree'                       " browse files/folders
     Plug 'preservim/nerdcommenter'                  " comment code easily
@@ -173,7 +171,7 @@ silent! call plug#begin()
     Plug 'ludovicchabant/vim-gutentags'             " ctag manager
 call plug#end()
 
-"___NERDTREE___" {{{
+"___Nerdtree___" {{{
 "______________"
 noremap <Leader>n :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers = 1
@@ -181,14 +179,14 @@ let g:NERDTreeDirArrowExpandable = '+'
 let g:NERDTreeDirArrowCollapsible = '~'
 " }}}
 
-"___NERDCOMMENTER___" {{{
+"___Nerdcommenter___" {{{
 "___________________"
 let g:NERDSpaceDelims = 1 |                 " adds space between comment & char
 let g:NERDDefaultAlign = 'left' |           " flush single line comments
 let g:NERDCommentEmptyLines = 1 |           " comment empty lines
 " }}}
 
-"___FUGITIVE___" {{{
+"___Fugitive___" {{{
 "______________"
 noremap <Leader>g :Git! |                   " init Git cmd
 noremap <Leader>ga :Git! add |              " init Git add cmd
@@ -276,32 +274,35 @@ endfunction
 " }}}
 
 " statusline colors {{{{
-hi User1 guifg=#b2b2b2 guibg=#262626            " white
-hi User2 guifg=#E697E6 guibg=#262626            " magenta
-hi User3 guifg=#20af81 guibg=#262626            " dark green
-hi User4 guifg=#74BAAC guibg=#262626            " light green
-hi User5 guifg=#4f97d7 guibg=#262626            " blue
-hi User6 guifg=#D881ED guibg=#262626            " dark magenta
-hi User7 guifg=#262626 guibg=#74BAAC           " light green
+hi User1 guifg=#b2b2b2 guibg=#263033            " white
+hi User2 guifg=#e697e6 guibg=#263033            " magenta
+hi User3 guifg=#20af81 guibg=#263033            " teal
+hi User4 guifg=#74baac guibg=#263033            " turtoise
+hi User5 guifg=#d881ed guibg=#263033            " dark magenta
+hi User6 guifg=#263033 guibg=#20af81            " invert teal
 " }}}}
 
 let g:status_fileName = expand("%:~ ")
 set laststatus=2
 set statusline=
-set statusline+=%6*\ [%{g:currentmode[mode()]}]               " Current mode
+set statusline+=%5*\ [%{g:currentmode[mode()]}]             " Current mode
 set statusline+=%4*\ [%n]:\                                 " buffer #
-set statusline+=%4*%{&modified?'':g:status_fileName}        " get file name
-set statusline+=%4*%{&modified?'':'\ '}                     " space after file
-set statusline+=%7*%{&modified?g:status_fileName:''}        " change color is modified
-set statusline+=%7*%{&modified?'\ ':''}                     " space after file
-set statusline+=%7*%m%r%w                                   " show: modified, read only, and preview flags
-set statusline+=%*
+set statusline+=%3*%{&modified?'':g:status_fileName}        " get file name
+set statusline+=%3*%{&modified?'':'\ '}                     " space after file
+set statusline+=%6*%{&modified?g:status_fileName:''}        " change color is modified
+set statusline+=%6*%{&modified?'\ ':''}                     " space after file
+set statusline+=%6*%m%r%w                                   " show: modified, read only, and preview flags
 set statusline+=%1*\ %=                                     " right justified text
-set statusline+=%1*\|\ %{&filetype}\                            " file type
-set statusline+=\|\ %{&ff}\                                 " file format
-set statusline+=\|\ %{FileSize()}\|                          " File size
-set statusline+=\ %3*%2p%%
-set statusline+=\ \|\ %2l:%-2c\                                 " line + column 
-
+set statusline+=%1*\|\                                      " spaces & column sep.
+set statusline+=%4*%{&filetype}                             " file type
+set statusline+=%1*\ \|\                                    " spaces & column sep.
+set statusline+=%4*%{&ff}                                   " file format
+set statusline+=%1*\ \|\                                    " spaces & column sep.
+set statusline+=%4*%{FileSize()}                            " File size
+set statusline+=%1*\|\                                      " spaces & column sep.
+set statusline+=%2*%2p%%                                    " percent
+set statusline+=%1*\ \|\                                    " spaces & column sep.
+set statusline+=%2*%2l:%-2c\                                " line + column
 " }}}
 
+" vim:fdm=marker
