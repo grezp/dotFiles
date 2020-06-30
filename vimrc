@@ -22,16 +22,17 @@
 
 "___Navigation___"
 "
-" m(x)  ------- [m] creates a mark
-" '(x)  ------- ['] goes to mark
+" m(x/X)  ------- [m] creates local/global mark
+" '(x/X)  ------- ['] goes to local/global mark
 " f(x)  ------- [f] finds next chard [F] for backwards
 
 "___Buffers___"
 "
 " :sb#  ------- open buffer horiz
 " :vert sb#  -- open buffer vertically
-" :split  ----- open new file horz
-" :vsplit  ---- open new file horz
+" :sp  -------- open new file horz
+" :vs  -------- open new file horz
+" <C-w>R ------ swap vert/horiz buffers
 " <C-w>h  ----- mv buf <
 " <C-w>j  ----- mv buf v
 " <C-w>k  ----- mv buf ^
@@ -70,8 +71,11 @@ set showcmd                 " show keys pressed in cmd line
 set laststatus=2            " always show status bar
 set noshowmode              " hides the mode (eg. insert, visual)
 set shortmess=aWF           " cmd message: use abrevs,no write, no file text
-set path+=.,**
+set splitbelow              " open horiz splits below
+set splitright              " open vert split right
+" set path+=.,**
 set wildmenu
+set wildignorecase
 set wildignore=*/build/*,*.bak
 set tags+=tags,/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
 " }}}
@@ -87,6 +91,9 @@ hi unisonClass gui=none  guifg=#bc6ec5|         " highlight unison Classes
 hi unisonDataTypes gui=none  guifg=#5f87d7|     " highlight usision data types
 hi unisonTypeDefs gui=none  guifg=#5f87d7|      " hi unison type defs
 hi unisonEnums gui=bold  guifg=#5f87d7|         " hi unison enums
+hi TabLineFill guibg=#263033|                   " tab bar empty space 
+hi TabLine guifg=#74baac guibg=#263033|         " inactive tab color -turtoise
+hi TabLineSel guifg=#d881ed guibg=#263033|      " active tab color - dark magenta
 " }}}
 
 "___Pattern search___" {{{
@@ -115,35 +122,24 @@ set cursorline                                  " cursor highlight on start
 "___General___" {{{
 "_____________"
 map <Space> <Leader>|                       " make space leader key
+map <Leader>w <C-w>|                        " window keybind
 noremap <Leader>o o<Esc>|                   " enter new line below & gt normal
 noremap <Leader>O O<Esc>|                   " enter new line above & gt normal
 nnoremap <Leader>, :noh<CR>|                " stops highlight from search
-cabbrev hv vert bo h|                       " creates help buffer to right vert split
-" }}}
-
-"___Windows___" {{{
-"_____________"
-map <Leader>w <C-w>|                             " window keybind
-nnoremap <Leader>w+ 10<C-w>+|                    " inc window height 
-nnoremap <Leader>w- 10<C-w>-|                    " dec window height
-nnoremap <leader>w> 30<C-w>>|                    " inc > window height 
-nnoremap <leader>w< 30<C-w><|                    " inc < window height
+cabbrev hv vert h|                          " creates help buffer to right vert split
 " }}}
 
 "___Opening files___" {{{
 "___________________"
-noremap <Leader>f :find |                   " default find files
-" noremap <Leader>ff :find<CR>|                  " default find files
-noremap <Leader>F :Files |                  " init fzf search pattern
-noremap <Leader>FF :Files<CR>|                 " init fzf search pattern
+noremap <Leader>f :find<Space>|        " default find files
+noremap <Leader>F :Files<Space>|       " init fzf search pattern
 " }}}
 
 "___Buffers___" {{{
 "_____________"
-nnoremap gb :ls<CR>:buffer<Space>|          " list buffer then choose
-nnoremap <Leader>bl :ls<CR>|                " list buffers
-nnoremap <Leader>bL :Buffers<CR>|           " fzf buffer
-nnoremap <Leader>bd :bd<CR>|                " delete current buffer
+nnoremap gb :ls<CR>:buffer<Space>|     " list buffer then choose
+nnoremap <Leader>bl :ls<CR>|           " list buffers
+nnoremap <Leader>bL :Buffers<CR>|      " fzf buffer
 nnoremap <C-k> :bnext<CR>|             " move to next buffer
 nnoremap <C-j> :bprev<CR>|             " move to prev buffer
 " }}}
@@ -188,12 +184,8 @@ let g:NERDCommentEmptyLines = 1 |           " comment empty lines
 
 "___Fugitive___" {{{
 "______________"
-noremap <Leader>g :Git! |                   " init Git cmd
-noremap <Leader>ga :Git! add |              " init Git add cmd
-noremap <Leader>gd :Git! diff |             " init Git diff cmd
-noremap <Leader>gs :Git! status<CR>|        " exec Git status cmd
-noremap <Leader>gc :Git commit<CR>|         " exec Git commit cmd
-noremap <Leader>gl :Git! log<CR>|           " exec Git log cmd
+cabbrev git Git|            "git shrtcut
+cabbrev vgit vert Git|      " vert git buff
 " }}}
 " }}}
 
