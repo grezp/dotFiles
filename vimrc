@@ -77,7 +77,11 @@ set splitright              " open vert split right
 set wildmenu
 set wildignorecase
 set wildignore=*/build/*,*.bak
-set tags+=tags,/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
+set tags+=tags
+" Qualcomm only:
+set tags+=/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
+" set rtp+=$VIMRUNTIME/plugin/netrwPlugin.vim
+so $VIMRUNTIME/plugin/netrwPlugin.vim
 " }}}
 
 "___Color_options___" {{{
@@ -159,7 +163,6 @@ nnoremap <Leader>Q :q!<CR>|              " exit window w/o saving
 
 "___Vim_plug___"
 silent! call plug#begin()
-    Plug 'preservim/nerdtree'                       " browse files/folders
     Plug 'preservim/nerdcommenter'                  " comment code easily
     Plug 'junegunn/fzf'                             " command line fuzzy finder
     Plug 'junegunn/fzf.vim'                         " fzf embeded into vim
@@ -295,6 +298,26 @@ set statusline+=%1*\|\                                      " spaces & column se
 set statusline+=%2*%2p%%                                    " percent
 set statusline+=%1*\ \|\                                    " spaces & column sep.
 set statusline+=%2*%2l:%-2c\                                " line + column
+" }}}
+
+"---NETRW---" {{{
+"-----------"
+"""""""""""""
+" view type: tree
+let g:netrw_liststyle=3
+" no modifiable: buffer contents can't be changed
+" no modified: fileName[+]
+" no number: don't show line number
+" no buflisted: don't show on :ls
+" ro: read only
+" relative line number
+let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
+" hide banner: 'I' to toggle
+let g:netrw_banner=0
+" open new file in prev. buffer
+let g:netrw_browse_split=4
+" set width on dir explorer
+let g:netrw_winsize=25
 " }}}
 
 " vim:fdm=marker
