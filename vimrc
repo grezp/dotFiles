@@ -80,8 +80,6 @@ set wildignore=*/build/*,*.bak
 set tags+=tags
 " Qualcomm only:
 set tags+=/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
-" set rtp+=$VIMRUNTIME/plugin/netrwPlugin.vim
-so $VIMRUNTIME/plugin/netrwPlugin.vim
 " }}}
 
 "___Color_options___" {{{
@@ -126,17 +124,10 @@ set cursorline                                  " cursor highlight on start
 "___General___" {{{
 "_____________"
 map <Space> <Leader>|                       " make space leader key
-map <Leader>w <C-w>|                        " window keybind
 noremap <Leader>o o<Esc>|                   " enter new line below & gt normal
 noremap <Leader>O O<Esc>|                   " enter new line above & gt normal
 nnoremap <Leader>, :noh<CR>|                " stops highlight from search
 cabbrev hv vert h|                          " creates help buffer to right vert split
-" }}}
-
-"___Opening files___" {{{
-"___________________"
-noremap <Leader>f :find<Space>|        " default find files
-noremap <Leader>F :Files<Space>|       " init fzf search pattern
 " }}}
 
 "___Buffers___" {{{
@@ -155,6 +146,15 @@ nnoremap <Leader>q :q<CR>|               " exit window
 nnoremap <Leader>Q :q!<CR>|              " exit window w/o saving
 " }}}
 
+"___Windows___" {{{
+"_____________"
+map <Leader>w <C-w>|                             " window keybind
+nnoremap <Leader>w+ 10<C-w>+|                    " inc window height 
+nnoremap <Leader>w- 10<C-w>-|                    " dec window height
+nnoremap <leader>w> 30<C-w>>|                    " inc > window height 
+nnoremap <leader>w< 30<C-w><|                    " inc < window height
+" }}}
+"
 " }}}
 
 "---PLUGINS---" {{{
@@ -169,14 +169,6 @@ silent! call plug#begin()
     Plug 'tpope/vim-fugitive'                       " git wrapper for vim
     Plug 'ludovicchabant/vim-gutentags'             " ctag manager
 call plug#end()
-
-"___Nerdtree___" {{{
-"______________"
-noremap <Leader>n :NERDTreeToggle<CR>
-let NERDTreeShowLineNumbers = 1
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '~'
-" }}}
 
 "___Nerdcommenter___" {{{
 "___________________"
@@ -277,16 +269,35 @@ hi User5 guifg=#d881ed guibg=#263033            " dark magenta
 hi User6 guifg=#263033 guibg=#20af81            " invert teal
 " }}}}
 
-let g:status_fileName = expand("%:~ ")
+" Check Modified File {{{
+function! FileMod()
+    if &modified
+        let l:fileName = expand("%:f")
+        return l:fileName
+    else
+        return ''
+    endif
+endfunction
+
+function! FileNotMod()
+    if &modified
+        return ''
+    else
+        let l:fileName = expand("%:f")
+        return l:fileName
+    endif
+endfunction
+" }}}
+
 set laststatus=2
 set statusline=
 set statusline+=%5*\ [%{g:currentmode[mode()]}]             " Current mode
 set statusline+=%4*\ [%n]:\                                 " buffer #
-set statusline+=%3*%{&modified?'':g:status_fileName}        " get file name
+set statusline+=%3*%{FileNotMod()}
 set statusline+=%3*%{&modified?'':'\ '}                     " space after file
-set statusline+=%6*%{&modified?g:status_fileName:''}        " change color is modified
+set statusline+=%6*%{FileMod()}
 set statusline+=%6*%{&modified?'\ ':''}                     " space after file
-set statusline+=%6*%m%r%w                                   " show: modified, read only, and preview flags
+set statusline+=%6*%m%r%w%h                                 " show: modified, read only, and preview flags
 set statusline+=%1*\ %=                                     " right justified text
 set statusline+=%1*\|\                                      " spaces & column sep.
 set statusline+=%4*%{&filetype}                             " file type
@@ -298,26 +309,6 @@ set statusline+=%1*\|\                                      " spaces & column se
 set statusline+=%2*%2p%%                                    " percent
 set statusline+=%1*\ \|\                                    " spaces & column sep.
 set statusline+=%2*%2l:%-2c\                                " line + column
-" }}}
-
-"---NETRW---" {{{
-"-----------"
-"""""""""""""
-" view type: tree
-let g:netrw_liststyle=3
-" no modifiable: buffer contents can't be changed
-" no modified: fileName[+]
-" no number: don't show line number
-" no buflisted: don't show on :ls
-" ro: read only
-" relative line number
-let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
-" hide banner: 'I' to toggle
-let g:netrw_banner=0
-" open new file in prev. buffer
-let g:netrw_browse_split=4
-" set width on dir explorer
-let g:netrw_winsize=25
 " }}}
 
 " vim:fdm=marker
