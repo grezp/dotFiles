@@ -138,8 +138,8 @@ alias lr 'ls -ltrF'
 alias inuse "ps -efw | grep -E 'cmi|Bring|utlrt|dataviewer|evtc|optool|smc|start_diag|envif|nicmon|utlmon|utlio|utlinv|unisonif' | grep -vw grep"
 
 #colors!!!!
-set  green="%{\033[0;32m%}"
-set   blue="%{\033[0;34m%}"
+set  green="%{\e[38;5;47m%}"
+set  blue="%{\e[38;5;36m%}"
 set    end="%{\033[0m%}"
 
 #configure prompt
@@ -163,22 +163,22 @@ alias vnc-start 'vncserver $1'
 alias vnc-kill 'vncserver -kill $1'
 alias vnc-find 'ps -ef | grep 'pgutierr' | grep 'vnc''
 
+# resolution shortcuts
 alias res-info 'xdpyinfo | grep dimensions'
 
 # set default editor to vim
-setenv VISUAL vim
-setenv EDITOR vim
+setenv VISUAL $HOME/local/bin/vim
+setenv EDITOR $HOME/local/bin/vim
 
 # grep inside file
 alias g-word 'grep -rnw . -e $1'
 alias g-phrase 'grep -rn . -e $1'
 
 # ssh alias
-alias ssh-c72 'ssh pgutierr@irv-vappseng1-c72'
-alias ssh-c62 'ssh pgutierr@irv-vappseng1-c62'
-alias ssh-pax 'ssh pgutierr@paxrf32'
-alias ssh-nor 'ssh pgutierr@159.75.48.213'
-alias ssh-pow 'ssh pgutierr@172.16.4.64'
+alias ssh-sim 'ssh pgutierr@unison-san101-01'
+alias ssh-thor 'ssh pgutierr@thor'
+alias ssh-hawk 'ssh pgutierr@hawkeye'
+alias ssh-stark 'ssh pgutierr@stark'
 
 # shortcuts
 alias cshell 'vim ~/.cshrc'
@@ -186,9 +186,22 @@ alias csource 'source ~/.cshrc'
 alias wifi-find 'nmap -sP "10.20.1.*"'
 alias ctagsR 'ctags --C-kinds=+p -R'
 
+# conda
+alias con-search 'conda search -c conda-forge $1'
+alias con-install 'conda install -c conda-forge $1'
+
 # Joes very long script
 # --inFile=<control file> <csv pats>
 alias di-pat './di-config.rb convert --mode=MIPI_SINGLE_BUS --conv-type=qcm --read-type=compare --read-strobe=60ns --wtset=TS52MHz_MIPI --rtset=TS26MHz_MIPI'
 
-#exports
-setenv PATH ${PATH}:$HOME/.fzf/bin
+ 
+# exports
+setenv PATH ${PATH}:$HOME/.vim/plugged/vim-superman/bin
+setenv PATH ${PATH}:$HOME/.vim/plugged/fzf/bin
+setenv PATH ${PATH}:$HOME/local/nvim-linux64/bin
+setenv PATH ${PATH}:$HOME/miniconda3/bin
+setenv PATH ${PATH}:$HOME/local/bin
+
+# alias exports
+alias vim '$HOME/local/bin/vim'
+
