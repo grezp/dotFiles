@@ -22,7 +22,7 @@ syn keyword unisonTypeDefs RFAutoCalConnectModeM RFAutoCalConnectModeM1D RFAutoC
                          \ RFNoiseCalFactorTypeS RFNoiseResultTypeM RFNoiseResultTypeM1D RFNoiseResultTypeS RFNoiseSourceM RFNoiseSourceM1D RFNoiseSourceS RFPathModeM RFPathModeM1D RFPathModeS RFPathS RFPerformanceS RFPhaseNoiseOptimizationModeM
                          \ RFPhaseNoiseOptimizationModeM1D RFPhaseNoiseOptimizationModeS RFPrecisionM RFPrecisionM1D RFPrecisionS RFResourceModeM RFResourceModeM1D RFResourceModeS RFSamplingModeM RFSamplingModeM1D RFSamplingModeS RFSequenceModeM
                          \ RFSequenceModeM1D RFSequenceModeS RFSetupModeM RFSetupModeM1D RFSetupModeS RFSetupModeS1D RFSetupModeS2D RFSetupTypeS RFSourceTypeS RFSyncModeS RFToneM RFToneM1D RFToneS RFVectorResultTypeM RFVectorResultTypeM1D RFVectorResultTypeS
-                         \ Sites SiteIter
+                         \ Sites SiteIter RunTime
                          \ PinMLIter
                          \ TMResultM TMResultM1D TMResultS TMResultS1D WordOrientationS
                          \ ThorRFPort MEASUREMENTTYPE PORTTYPE
@@ -63,6 +63,7 @@ syn keyword unisonEnums RF_AUTOCAL_DISCONNECTED RF_AUTOCAL_OPEN RF_AUTOCAL_SHORT
                       \ COLLECT_RESET COLLECT_ACCUMULATE CONNECT_OFF CONNECT_ON EDGE_RISING EDGE_FALLING MEASURE_PARALLEL MEASURE_SERIAL OPTIMIZE_FOR_SPEED OPTIMIZE_FOR_ACCURACY
                       \ TM_PASS TM_FAIL TM_NOTEST TM_PARAM_FAIL TM_REPAIRABLE TM_TIMEOUT WORD_MSB_FIRST WORD_LSB_FIRST
                       \ PORTTYPE HPRF RX TRX SCALAR PIN H2 H3
+                      \ ActiveSites EnabledSites LoadedSites SelectedSites SuspendedSites
 highlight unisonEnums term=underline ctermfg=1
 
 

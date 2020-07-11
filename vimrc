@@ -78,6 +78,8 @@ set wildmenu
 set wildignorecase
 set wildignore=*/build/*,*.bak
 set tags+=tags
+" Cohu only:
+set tags+=/u/pgutierr/Projects/Qualcomm/thor/drivers/thorTags/tags
 " Qualcomm only:
 set tags+=/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
 " }}}

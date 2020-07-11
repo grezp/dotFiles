@@ -178,7 +178,7 @@ alias ssh-c72 'ssh pgutierr@irv-vappseng1-c72'
 alias ssh-c62 'ssh pgutierr@irv-vappseng1-c62'
 alias ssh-pax 'ssh pgutierr@paxrf32'
 alias ssh-nor 'ssh pgutierr@159.75.48.213'
-alias ssh-pow 'ssh pgutierr@172.16.4.64'
+alias ssh-pow 'ssh pgutierr@172.16.22.128'
 
 # shortcuts
 alias cshell 'vim ~/.cshrc'
