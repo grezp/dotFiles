@@ -116,7 +116,7 @@ set smartcase               " stop ignorecase when searching w/ caps
 set cursorline                                  " cursor highlight on start
 "hi CursorLine ctermbg=DarkGrey cterm=bold|           " cursor highlight color
 " }}}
-
+"
 " }}}
 
 "---GENERAL MAPS---" {{{
@@ -208,6 +208,15 @@ cabbrev vgit vert Git|      " vert git buff
 :  autocmd BufLeave,FocusLost,InsertEnter   * set nocursorline              " no cursor when not focused
 :augroup END
 " }}}
+"
+""___Folding function___" {{{
+""______________________"
+
+" stops from auto unfolding while in insert mode
+autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+" }}}
+
 " }}}
 
 "---STATUSLINE---" {{{
