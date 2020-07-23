@@ -44,6 +44,7 @@
 " ^C-r  ------- redo prev cmd - undos undo
 " "(#)  ------- ["] stores into reg, used with y/p
 " .  ---------- repeat prev cmd
+" g] ---------- list all ctags matches
 
 "___Nerdcommenter___"
 " [#]<L>c<L> -- comment toggle
