@@ -74,7 +74,7 @@ set noshowmode              " hides the mode (eg. insert, visual)
 set shortmess=aWF           " cmd message: use abrevs,no write, no file text
 set splitbelow              " open horiz splits below
 set splitright              " open vert split right
-" set path+=.,**
+set formatoptions-=cro
 set wildmenu
 set wildignorecase
 set wildignore=*/build/*,*.bak
@@ -84,7 +84,6 @@ set tags+=/u/pgutierr/Projects/Qualcomm/thor/drivers/thorTags/tags
 " Qualcomm only:
 set tags+=/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
 " }}}
-
 
 "___Pattern search___" {{{
 "____________________"
