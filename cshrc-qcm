@@ -135,7 +135,7 @@ alias ls 'ls --color=auto -F'
 alias ll 'ls -lF'
 alias la 'ls -laF'
 alias lr 'ls -ltrF'
-alias inuse "ps -efw | grep -E 'cmi|Bring|utlrt|dataviewer|evtc|optool|smc|start_diag|envif|nicmon|utlmon|utlio|utlinv|unisonif' | grep -vw grep"
+alias inuse "ps -efw | grep -iE 'cmi|Bring|utlrt|dataviewer|evtc|optool|smc|start_diag|envif|nicmon|utlmon|utlio|utlinv|unisonif' | grep -vw grep"
 
 #colors!!!!
 set  green="%{\e[38;5;47m%}"
@@ -183,6 +183,7 @@ alias ssh-stark 'ssh pgutierr@stark'
 # shortcuts
 alias cshell 'vim ~/.cshrc'
 alias csource 'source ~/.cshrc'
+alias vimrc 'vim ~/.vimrc'
 alias wifi-find 'nmap -sP "10.20.1.*"'
 alias ctagsR 'ctags --C-kinds=+p -R'
 
@@ -196,11 +197,11 @@ alias di-pat './di-config.rb convert --mode=MIPI_SINGLE_BUS --conv-type=qcm --re
 
  
 # exports
-setenv PATH ${PATH}:$HOME/.vim/plugged/vim-superman/bin
-setenv PATH ${PATH}:$HOME/.vim/plugged/fzf/bin
-setenv PATH ${PATH}:$HOME/local/nvim-linux64/bin
-setenv PATH ${PATH}:$HOME/miniconda3/bin
-setenv PATH ${PATH}:$HOME/local/bin
+setenv PATH $HOME/.vim/plugged/vim-superman/bin:${PATH}
+setenv PATH $HOME/.vim/plugged/fzf/bin:${PATH}
+setenv PATH $HOME/local/nvim-linux64/bin:${PATH}
+setenv PATH $HOME/local/bin:${PATH}
+setenv PATH $HOME/.emacs.d/bin:${PATH}
 
 # alias exports
 alias vim '$HOME/local/bin/vim'

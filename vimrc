@@ -19,13 +19,13 @@
 " ^C-y  ------- single line up
 " zl  --------- single line left
 " zh  --------- single line right
-
+"
 "___Navigation___"
 "
 " m(x/X)  ------- [m] creates local/global mark
 " '(x/X)  ------- ['] goes to local/global mark
 " f(x)  ------- [f] finds next chard [F] for backwards
-
+"
 "___Buffers___"
 "
 " :sb#  ------- open buffer horiz
@@ -37,7 +37,13 @@
 " <C-w>j  ----- mv buf v
 " <C-w>k  ----- mv buf ^
 " <C-w>l  ----- mv buf >
-
+"
+"___Windows___"
+" :res +/-#
+" :vert res +/-#
+" <L>w +/-              manual window resize (horiz)
+" <L>w </>              manual window resize (vert)
+"
 "___Misc___"
 "
 " ^C-6  ------- toggle between last 2 buffers
@@ -45,7 +51,7 @@
 " "(#)  ------- ["] stores into reg, used with y/p
 " .  ---------- repeat prev cmd
 " g] ---------- list all ctags matches
-
+"
 "___Nerdcommenter___"
 " [#]<L>c<L> -- comment toggle
 " [#]<L>cc  --- comment single line
@@ -60,22 +66,22 @@
 
 "___General_settings___" {{{{
 "______________________"
-set nowrap                  " no wrapping to next line
-set tabstop=4               " set tab space to 4
-set expandtab               " expand tabs to spaces
-set foldmethod=syntax       " fold all code
-set shiftwidth=4            " shift block width
-set scrolloff=2             " leave lines above & below cursor
-set hidden                  " change buffer w/o saving
-set noswapfile              " prevent vim from creating swap files
-set showcmd                 " show keys pressed in cmd line
-set laststatus=2            " always show status bar
-set noshowmode              " hides the mode (eg. insert, visual)
-set shortmess=aWF           " cmd message: use abrevs,no write, no file text
-set splitbelow              " open horiz splits below
-set splitright              " open vert split right
-set formatoptions-=cro
-set wildmenu
+set nowrap                      " no wrapping to next line
+set tabstop=4                   " set tab space to 4
+set expandtab                   " expand tabs to spaces
+set foldmethod=syntax           " fold all code
+set shiftwidth=4                " shift block width
+set scrolloff=2                 " leave lines above & below cursor
+set hidden                      " change buffer w/o saving
+set noswapfile                  " prevent vim from creating swap files
+set showcmd                     " show keys pressed in cmd line
+set laststatus=2                " always show status bar
+set showmode                    " hides the mode (eg. insert, visual)
+set shortmess=aWF               " cmd message: use abrevs,no write, no file text
+set splitbelow                  " open horiz splits below
+set splitright                  " open vert split right
+set backspace=indent,eol,start  " allow bspc on indend, eol, & start
+set wildmenu                    " cmd line completion
 set wildignorecase
 set wildignore=*/build/*,*.bak
 set tags+=tags
@@ -83,6 +89,8 @@ set tags+=tags
 set tags+=/u/pgutierr/Projects/Qualcomm/thor/drivers/thorTags/tags
 " Qualcomm only:
 set tags+=/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
+" stop auto comments
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " }}}
 
 "___Pattern search___" {{{
