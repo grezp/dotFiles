@@ -192,3 +192,7 @@ alias di-pat './di-config.rb convert --mode=MIPI_SINGLE_BUS --conv-type=qcm --re
 
 #exports
 setenv PATH ${PATH}:$HOME/.fzf/bin
+setenv PATH $HOME/local/bin:${PATH}
+setenv PATH $HOME/bin:${PATH}
+setenv MANPATH $HOME/local/share/man:${MANPATH}
+
