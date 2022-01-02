@@ -2,7 +2,7 @@
 ########################## PROMPT ##########################
 ############################################################
 
-{
+() {
 # Enabling and setting git info var to be used in prompt config.
 autoload -Uz vcs_info
 # set formats
