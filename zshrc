@@ -76,9 +76,9 @@ alias grep='grep --color=always'
 alias ls='ls -G'
 
 # ls options
-alias ll='ls -lF'
-alias la='ls -lAF'
-alias lr='ls -ltrF'
+alias ll='ls -l'
+alias la='ls -lA'
+alias lr='ls -ltr'
 
 ############################################################
 ######################### EXPORTS ##########################
