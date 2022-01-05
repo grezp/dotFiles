@@ -1,5 +1,5 @@
 ############################################################
-########################## PROMPT ##########################
+######################## CMD PROMPT ########################
 ############################################################
 
 () {
@@ -58,11 +58,23 @@ PROMPT="╭─${user_host} ${current_dir} ${git_branch}
 }
 
 ############################################################
-######################## USER EDITS ########################
+######################## ZSH  EDITS ########################
 ############################################################
 
 # Setup vim key bindings
 bindkey -v
+
+# Incase sensitive auto complete
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# bind (up/down keys) to search history based on pattern
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
+############################################################
+######################## USER EDITS ########################
+############################################################
 
 # Shortcuts
 alias zsource='source ~/.zshrc'
