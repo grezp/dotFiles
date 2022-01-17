@@ -63,12 +63,20 @@ PROMPT="╭─${user_host} ${current_dir} ${git_branch}
 
 # Setup vim key bindings
 bindkey -v
+# fix backspace after insert mode
+bindkey -v '^?' backward-delete-char
+# fix delete key
+bindkey "^[[3~" delete-char
 
 # Incase sensitive auto complete
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # bind (up/down keys) to search history based on pattern
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
@@ -91,6 +99,9 @@ alias ls='ls -G'
 alias ll='ls -l'
 alias la='ls -lA'
 alias lr='ls -ltr'
+
+# zmk
+~/.zephyrrc
 
 ############################################################
 ######################### EXPORTS ##########################
@@ -115,3 +126,4 @@ export PATH="/Users/grezp/Library/Python/3.8/bin:$PATH"
 #     read -s -k '?Flash Device. Press any key to continue.'$'\n\n'
 #     sudo dfu-programmer atmega32u4 reset
 # }
+
