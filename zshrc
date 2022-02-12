@@ -86,7 +86,7 @@ bindkey "^[[B" history-beginning-search-forward
 
 # Shortcuts
 alias zsource='source ~/.zshrc'
-alias zshell='vim ~/.zshrc'
+alias zshell='nvim ~/.zshrc'
 
 # Keep aliases when sudo
 alias sudo='sudo '
@@ -100,6 +100,8 @@ alias ll='ls -l'
 alias la='ls -lA'
 alias lr='ls -ltr'
 
+alias nv='nvim'
+
 # zmk
 ~/.zephyrrc
 
@@ -107,11 +109,12 @@ alias lr='ls -ltr'
 ######################### EXPORTS ##########################
 ############################################################
 
-export VISUAL=vim
-export EDITOR=vim
+export VISUAL=nvim
+export EDITOR=nvim
 export PATH="$PATH:$HOME/.emacs.d/bin"
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 export PATH="/Users/grezp/Library/Python/3.8/bin:$PATH"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 ############################################################
 ######################## USER FUNCS ########################
