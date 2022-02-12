@@ -59,6 +59,7 @@
 ;; Allow tramp to read local bin @ remote
 (after! tramp
   (add-to-list 'tramp-remote-path "/u/pgutierr/local/bin")
+  (add-to-list 'tramp-remote-path "/u/pgutierr/tools/llvm/bin")
   (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
 ;; Highlight indentation
@@ -72,3 +73,24 @@
                                 "--header-insertion=never"
                                 "--header-insertion-decorators=0"))
 (after! lsp-clangd (set-lsp-priority! 'clangd 2))
+
+(with-eval-after-load 'lsp-mode
+ (lsp-register-client
+  (make-lsp-client :new-connection (lsp-tramp-connection "clangd")
+                   :major-modes '(c-mode c++-mode)
+                   :remote? t
+                   :server-id 'clangd-remote)))
+
+;; Treat underscores as part of word
+(add-hook! 'c-mode-hook (modify-syntax-entry ?_ "w"))
+(add-hook! 'c++-mode-hook (modify-syntax-entry ?_ "w"))
+(add-hook! 'python-mode-hook (modify-syntax-entry ?_ "w"))
+(add-hook! 'ruby-mode-hook (modify-syntax-entry ?_ "w"))
+
+;; (with-eval-after-load 'lsp-mode
+;;  (lsp-register-client
+;;   (make-lsp-client
+;;    :remote? t
+;;    :new-connection (lsp-tramp-connection "clangd")
+;;    :major-modes '(c-mode c++-mode)
+;;    :server-id 'clangd-remote)))
