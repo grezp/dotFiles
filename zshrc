@@ -130,3 +130,4 @@ export XDG_CONFIG_HOME="$HOME/.config"
 #     sudo dfu-programmer atmega32u4 reset
 # }
 
+git-merge-branch () { git restore -s $1 -SW -- $2 }
