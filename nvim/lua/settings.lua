@@ -61,17 +61,16 @@ vim.o.undodir = HOME .. '/.vim/tmp/undo//'      -- undo file location
 vim.o.backupdir = HOME .. '/.vim/tmp/backup//'  -- backup location
 
 -- setup global tags
--- vim.o.tags = './tags;/,tags,~/tags/tags-unison;/,~/tags/tags-methods,~/tags/tags-plugins'
 function file_exists(name)
    local f=io.open(name,"r")
    if f~=nil then io.close(f) return true else return false end
 end
 
 local l_tags = ''
-if file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. '~/tags/tags-unison,'  end
-if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. '~/tags/tags-methods,' end
-if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. '~/tags/tags-plugins,' end
-vim.cmd(string.format([[ set tags+=%s ]], l_tags))
+if file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-unison,'  end
+if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
+if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
+vim.o.tags = vim.o.tags .. l_tags
 
 -- set ruby path -> improves startup time
 -- vim.g.ruby_path = '/usr/share/gems/gems/abrt-0.0.6/lib,/usr/share/rubygems,/usr/share/ruby,/usr/lib64/ruby/'
