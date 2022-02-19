@@ -61,7 +61,7 @@ set history = 1000                 # Increase history length.
 #setenv path "$PATH:$opusPath"
 
 # General variables:
-#setenv EDITOR vim 
+#setenv EDITOR nvim 
 setenv CDPATH ".:~:${which_ltx}:/user"
 
 # This variable is needed for X application resource files.
@@ -109,7 +109,6 @@ endif
 setenv XLM_ENABLE_LM_LICENSE_FILE 1
 
 # Required for unison 
-setenv LM_LICENSE_FILE /opt/LTXflexnet/license.dat:/usr/local/flexlm/licenses/cmos_vld.lic
 setenv XUSERFILESEARCHPATH /var/home/service/app-defaults/%N
 
 # Add to PATH to get LTXC programs
@@ -119,7 +118,7 @@ setenv PATH ${PATH}:/ltx/bin:/ltx/com:/ltx/service:/ltx/scripts:/ltx/cmd:/ltx/ap
 setenv PATH ${PATH}:/usr/local/Adobe/Acrobat7.0/bin
 
 # Required for unison 
-setenv LM_LICENSE_FILE /opt/LTXflexnet/license.dat:/usr/local/flexlm/licenses/cmos_vld.lic
+setenv LM_LICENSE_FILE 1705@srv-flexlm1-mil
 
 setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/opt/ltx/Qt/v5.9.3/3.10.0_m64/gcc-4.8.5/lib/
 #setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:/opt/ltx/Qt/v5.6.0/3.10.0_m64/gcc-4.8.5/lib/
@@ -162,37 +161,77 @@ alias grep 'grep --color=auto'
 alias vnc-start 'vncserver $1'
 alias vnc-kill 'vncserver -kill $1'
 alias vnc-find 'ps -ef | grep 'pgutierr' | grep 'vnc''
+alias vnc-home 'vncserver -geometry 2240x1260 :99'
 
 alias res-info 'xdpyinfo | grep dimensions'
 
-# set default editor to vim
-setenv VISUAL vim
-setenv EDITOR vim
+# set default editor to nvim
+setenv VISUAL nvim
+setenv EDITOR nvim
 
 # grep inside file
 alias g-word 'grep -rnw . -e $1'
 alias g-phrase 'grep -rn . -e $1'
 
-# ssh alias
-alias ssh-c72 'ssh pgutierr@irv-vappseng1-c72'
-alias ssh-c62 'ssh pgutierr@irv-vappseng1-c62'
-alias ssh-pax 'ssh pgutierr@paxrf32'
-alias ssh-nor 'ssh pgutierr@159.75.48.213'
-alias ssh-pow 'ssh pgutierr@172.16.22.128'
-
 # shortcuts
-alias cshell 'vim ~/.cshrc'
+alias nv 'nvim '
+alias cshell 'nvim ~/.cshrc'
+alias nvinit 'nvim ~/masterLinks/nvim/init.vim'
 alias csource 'source ~/.cshrc'
 alias wifi-find 'nmap -sP "10.20.1.*"'
-alias ctagsR 'ctags --C-kinds=+p -R'
+alias ctagsR 'ctags -R --c++-kinds=+p --fields=+iaS --extra=+q'
+alias kill-uni '~/documents/scripts/rs.rb'
+alias vman 'man $1 | vi -'
+
+# gcc color output
+setenv GCC_COLORS 'error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # Joes very long script
 # --inFile=<control file> <csv pats>
 alias di-pat './di-config.rb convert --mode=MIPI_SINGLE_BUS --conv-type=qcm --read-type=compare --read-strobe=60ns --wtset=TS52MHz_MIPI --rtset=TS26MHz_MIPI'
 
 #exports
+setenv PATH $HOME/scripts:${PATH}
 setenv PATH ${PATH}:$HOME/.fzf/bin
 setenv PATH $HOME/local/bin:${PATH}
+setenv PATH $HOME/local/go/bin/:${PATH}
 setenv PATH $HOME/bin:${PATH}
-setenv MANPATH $HOME/local/share/man:${MANPATH}
+setenv PATH ${PATH}:/user/tools/Linux/bin
+setenv PATH /usr/local/bin:${PATH}
+setenv PATH /usr/local:${PATH}
+setenv PATH $HOME/tools/llvm/bin:${PATH}
+# setenv PATH $HOME/tools/gRPC/bin:${PATH}
+setenv PATH "/u/pgutierr/miniconda3/bin:$PATH"
 
+setenv LD_LIBRARY_PATH /usr/local/lib64:/usr/local/lib:${LD_LIBRARY_PATH}
+# setenv LD_LIBRARY_PATH $HOME/tools/gRPC/lib:$HOME/tools/gRPC/lib64:$LD_LIBRARY_PATH
+setenv LD_LIBRARY_PATH $HOME/tools/llvm/lib:${LD_LIBRARY_PATH}
+
+# setenv PKG_CONFIG_PATH $HOME/tools/gRPC/lib64/pkgconfig:$HOME/tools/gRPC/lib/pkgconfig:$PKG_CONFIG_PATH
+
+setenv MANPATH $HOME/local/share/man:${MANPATH}
+setenv MANPATH $HOME/tools/llvm/share/man:${MANPATH}
+setenv MANPATH $HOME/miniconda3/share/man:${MANPATH}
+
+
+setenv LLVM_ROOT $HOME/local/llvm
+
+setenv CC /usr/local/bin/gcc
+setenv CXX /usr/local/bin/g++
+setenv XDG_CONFIG_HOME $HOME/.config
+# evn vars
+setenv CUSTOMER_DIR /ltx/customer/
+
+# setenv LC_ALL='en_US.UTF-8'
+# setenv LANG='en_US.UTF-8'
+
+alias csf '/user/tools/LINUX/Development/CalfactorStudio/x86_64_linux_3.10.0/bin/CalfactorStudio'
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# if ( -f "/u/pgutierr/miniconda3/etc/profile.d/conda.csh" ) then
+#     source "/u/pgutierr/miniconda3/etc/profile.d/conda.csh"
+# else
+#     setenv PATH "/u/pgutierr/miniconda3/bin:$PATH"
+# endif
+# <<< conda initialize <<<
