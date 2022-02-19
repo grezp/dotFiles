@@ -27,17 +27,10 @@ vim.cmd([[
 -- vim.cmd([[
 --     augroup manAutoBrackets
 --         autocmd!
---         autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
---         autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+--         autocmd InsertEnter,WinEnter,TabEnter,BufWinEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+--         autocmd InsertLeave,WinLeave,TabLeave,BufWinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 --     augroup END
 -- ]])
-vim.cmd([[
-    augroup stopAutoFolds
-        autocmd!
-        autocmd InsertLeave,WinEnter * setlocal foldmethod=syntax
-        autocmd InsertEnter,WinLeave * setlocal foldmethod=manual
-    augroup END
-]])
 
 -- disable auto-comments on new line
-vim.cmd[[ autocmd BufEnter BufRead * setlocal formatoptions-=cro ]]
+vim.cmd[[ autocmd BufEnter,BufRead * setlocal formatoptions-=cro ]]

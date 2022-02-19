@@ -18,7 +18,8 @@ vim.o.synmaxcol = 300               -- stop syntax highlight after x lines for p
 vim.o.laststatus = 2                -- always show status line
 vim.o.foldenable = false            -- don't auto fold when file is opened
 vim.o.foldlevel = 4                 -- limit folding to 4 levels
-vim.o.foldmethod = 'syntax'         -- use language syntax to generate folds
+-- vim.o.foldmethod = 'syntax'         -- use language syntax to generate folds
+-- vim.o.foldmethod = 'indent'         -- use language syntax to generate folds
 vim.o.splitbelow = true             -- open horiz splits below
 vim.o.splitright = true             -- open vert splits to the right
 
@@ -28,7 +29,8 @@ vim.o.showcmd = true        -- show cmd on bottom line
 
 -- auto completion
 vim.o.wildmenu = true                   -- cmd line completion
-vim.o.wildignorecase = false            -- auto complete w/o case sensitivity
+vim.o.wildignorecase = true             -- auto complete w/o case sensitivity
+vim.o.wildmode = 'longest:full,full'
 vim.o.wildignore = '*/build/*,*.bak'    -- don't auto complete these patters
 
 -- mapping timeout
@@ -60,25 +62,40 @@ vim.o.backupdir = HOME .. '/.vim/tmp/backup//'  -- backup location
 
 -- tags
 -- set tags+=/u/pgutierr/Projects/Qualcomm/thor/drivers/thorTags/tags
--- vim.o.tags = '~/tags/tags-unison,'
--- vim.o.tags = vim.o.tags .. '~/tags/tags-plugins,'
--- vim.o.tags = vim.o.tags .. '~/tags/tags-methods,'
--- TODO:  figure out how to do this with lua
+-- vim.o.tags = './tags;,tags,~/tags/tags-unison,~/tags/tags-methods,~/tags/tags-plugins'
 vim.cmd[[ set tags+=~/tags/tags-unison,~/tags/tags-methods,~/tags/tags-plugins ]]
 
+-- set ruby path -> improves startup time
+-- vim.g.ruby_path = '/usr/share/gems/gems/abrt-0.0.6/lib,/usr/share/rubygems,/usr/share/ruby,/usr/lib64/ruby/'
+vim.g.ruby_path = ''
 
 -- PLUGINGS --
 
 -- lsp
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<Leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+
+--```lua
+--  Commands:
+--  - ClangdSwitchSourceHeader: Switch between source/header
+--  
+--  Default Values:
+--    capabilities = default capabilities, with offsetEncoding utf-8
+--    cmd = { "clangd" }
+--    filetypes = { "c", "cpp", "objc", "objcpp" }
+--    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
+--    single_file_support = true
+--```
+
+
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+-- local opts = { noremap=true, silent=true }
+-- vim.api.nvim_set_keymap('n', '<Leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+-- vim.api.nvim_set_keymap('n', '<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+-- 
+-- -- Use an on_attach function to only map the following keys
+-- -- after the language server attaches to the current buffer
 -- local on_attach = function(client, bufnr)
 --   -- Enable completion triggered by <c-x><c-o>
 --   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')

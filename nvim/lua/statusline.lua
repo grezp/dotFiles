@@ -21,80 +21,134 @@ M.colors = {
     file_sep      = '%#StatusSep#'
 }
 
-M.trunc_width = setmetatable({
-    mode       = 80,
-    git_status = 90,
-    filename   = 140,
-    -- line_col   = 60,
-}, {
-    __inde = function()
-        return 80
-    end
-})
+M.mode = {
+  ['n']    = 'NORMAL',
+  ['no']   = 'O-PENDING',
+  ['nov']  = 'O-PENDING',
+  ['noV']  = 'O-PENDING',
+  ['no'] = 'O-PENDING',
+  ['niI']  = 'NORMAL',
+  ['niR']  = 'NORMAL',
+  ['niV']  = 'NORMAL',
+  ['nt']   = 'NORMAL',
+  ['v']    = 'VISUAL',
+  ['vs']   = 'VISUAL',
+  ['V']    = 'V-LINE',
+  ['Vs']   = 'V-LINE',
+  ['']   = 'V-BLOCK',
+  ['s']  = 'V-BLOCK',
+  ['s']    = 'SELECT',
+  ['S']    = 'S-LINE',
+  ['']   = 'S-BLOCK',
+  ['i']    = 'INSERT',
+  ['ic']   = 'INSERT',
+  ['ix']   = 'INSERT',
+  ['R']    = 'REPLACE',
+  ['Rc']   = 'REPLACE',
+  ['Rx']   = 'REPLACE',
+  ['Rv']   = 'V-REPLACE',
+  ['Rvc']  = 'V-REPLACE',
+  ['Rvx']  = 'V-REPLACE',
+  ['c']    = 'COMMAND',
+  ['cv']   = 'EX',
+  ['ce']   = 'EX',
+  ['r']    = 'REPLACE',
+  ['rm']   = 'MORE',
+  ['r?']   = 'CONFIRM',
+  ['!']    = 'SHELL',
+  ['t']    = 'TERMINAL',
+}
 
-M.is_truncated = function(_, width)
-    local current_width = api.nvim_win_get_width(0)
-    return current_width < width
+M.path_type = { FULL = 1, TAIL = 2, NAME = 3, }
+
+-----------------------------------------
+-- Function to output status line data --
+-----------------------------------------
+
+-- determine mode type
+function M.get_current_mode()
+    local mode_code = vim.api.nvim_get_mode().mode
+    if M.mode[mode_code] == nil then
+        return mode_code
+    end
+    return  ' ' .. M.mode[mode_code] .. ' '
 end
 
-M.modes = setmetatable({
-  ['n']  = {'Normal', 'N'};
-  ['no'] = {'N·Pending', 'N·P'} ;
-  ['v']  = {'Visual', 'V' };
-  ['V']  = {'V·Line', 'V·L' };
-  -- TODO visual block doesn't work. fix later
-  ['']   = {'V·Block', 'V·B'}; -- this is not ^V, but it's , they're different
-  ['s']  = {'V·Block', 'V·B'};
-  ['s']  = {'Select', 'S'};
-  ['S']  = {'S·Line', 'S·L'};
-  ['']   = {'S·Block', 'S·B'}; -- same with this one, it's not ^S but it's
-  ['i']  = {'Insert', 'I'};
-  ['ic'] = {'Insert', 'I'};
-  ['R']  = {'Replace', 'R'};
-  ['Rv'] = {'V·Replace', 'V·R'};
-  ['c']  = {'Command', 'C'};
-  ['cv'] = {'Vim·Ex ', 'V·E'};
-  ['ce'] = {'Ex ', 'E'};
-  ['r']  = {'Prompt ', 'P'};
-  ['rm'] = {'More ', 'M'};
-  ['r?'] = {'Confirm ', 'C'};
-  ['!']  = {'Shell ', 'S'};
-  ['t']  = {'Terminal ', 'T'};
-}, {
-    __index = function()
-        return {'Unknown', 'U'} -- handle edge cases
-    end
-})
+-- global var to determine if fmt type and file size are shown
+M.show_full_rhs = true
 
-M.get_current_mode = function(self)
-    local current_mode = api.nvim_get_mode().mode
+-- detemermine file path base on str size
+M.get_file_path_type = function()
+    -- TODO: determine file patch based on max_len = buffWindow - Mode - buffNumber - gitBranch - rhs
+    --       if (file < max_len) -> return file_path_type
+    -- local max_file_len = 50
+    local max_file_len = api.nvim_win_get_width(0) - 55
+    local max_len_total = max_file_len + 13
+    local file_len_full = fn.expand('%:p'):len()
+    local file_len_part = fn.expand('%:r'):len()
 
-    if self:is_truncated(self.trunc_width.mode) then
-        return string.format(' %s ', self.modes[current_mode][2]):upper()
+    if file_len_full < max_file_len then
+        M.show_full_rhs = true
+        return M.path_type.FULL
+    elseif file_len_part < max_file_len then
+        M.show_full_rhs = true
+        return M.path_type.TAIL
+    elseif file_len_full < max_len_total then
+        M.show_full_rhs = false
+        return M.path_type.FULL
+    elseif file_len_part < max_len_total then
+        M.show_full_rhs = false
+        return M.path_type.FULL
     end
-    return string.format(' %s ', self.modes[current_mode][1]):upper()
+
+    return M.path_type.NAME
 end
 
--- M.get_git_status = function(self)
---   -- use fallback because it doesn't set this variable on the initial `BufEnter`
---   local signs = vim.b.gitsigns_status_dict or {head = '', added = 0, changed = 0, removed = 0}
---   local is_head_empty = signs.head ~= ''
---
---   if self:is_truncated(self.trunc_width.git_status) then
---     return is_head_empty and string.format('  %s ', signs.head or '') or ''
---   end
---
---   return is_head_empty and string.format(
---     ' +%s ~%s -%s |  %s ',
---     signs.added, signs.changed, signs.removed, signs.head
---   ) or ''
--- end
-
+-- output file name
 M.get_filename = function(self)
-    if self:is_truncated(self.trunc_width.filename) then return " %t " end
-    return " %F "
+    local file_path_type = self:get_file_path_type()
+
+    if file_path_type == M.path_type.FULL then
+        return " %F "
+    elseif file_path_type == M.path_type.TAIL then
+        return " %f "
+    end
+
+    return ' %t '
 end
 
+-- output buffer number
+M.get_buf_number = function()
+    return '[%n] '
+end
+
+-- output format string for mod files, readonly, preview, and help flag
+M.get_file_mods = function()
+    return '%m%r%w%h'
+end
+
+-- output percentage of file
+M.get_file_percent = function()
+    return ' %2p%% '
+end
+
+-- output row & column str
+M.get_line_col = function()
+    return ' %2l:%2c '
+end
+
+-- output git active branch
+M.get_git_branch = function()
+--    local branch = vim.fn['fugitive#head']()
+--
+--    if branch ~= nil and branch:len() > 0 then
+--        return '<' .. branch .. '>'
+--    end
+ 
+    return ''
+end
+
+-- output file type e.g lua, cpp
 M.get_filetype = function()
     local filetype = vim.bo.filetype
 
@@ -102,37 +156,12 @@ M.get_filetype = function()
     return string.format(' %s ', filetype):lower()
 end
 
-M.get_buf_number = function()
-    return '[%n] '
-end
-
-M.get_file_mods = function()
-    return '%m%r%w%h'
-end
-
-M.get_file_percent = function()
-    return ' %2p%% '
-end
-
-M.get_line_col = function()
-    return ' %2l:%2c '
-end
-
-M.get_git_branch = function()
-    local branch = vim.fn['fugitive#head']()
-
-    if branch ~= nil and branch:len() > 0 then
-        return '<' .. branch .. '>'
-    end
- 
-    return ''
-end
-
+-- output file format e.g. unix
 M.get_file_fmt = function()
-    -- return ' %{%ff} '
     return string.format(' %s ', vim.bo.fileformat)
 end
 
+-- output file size
 M.get_filesize = function()
     local bytes = fn.getfsize(fn.expand('%:p'))
     local kbytes = 0
@@ -157,11 +186,16 @@ M.get_filesize = function()
     end
 end
 
+-- check if file is modified
 M.check_file_ch = function()
     if vim.bo.modified then return true end
     return false
 end
 
+-- Build Status Line --
+-----------------------
+
+-- construct active status line
 M.set_active = function(self)
     local colors = self.colors
 
@@ -174,10 +208,10 @@ M.set_active = function(self)
     local filemods_sep = colors.file_sep   .. self.separators.blank
     local filetype     = colors.rhs_st     .. self:get_filetype()
     local filetype_sep = colors.file_sep   .. self.separators.pipe
-    local filesize     = colors.rhs_st     .. self:get_filesize()
-    local filesize_sep = colors.file_sep   .. self.separators.pipe
     local filefmt      = colors.rhs_st     .. self:get_file_fmt()
     local filefmt_sep  = colors.file_sep   .. self.separators.pipe
+    local filesize     = colors.rhs_st     .. self:get_filesize()
+    local filesize_sep = colors.file_sep   .. self.separators.pipe
     local percent      = colors.rhs_st_alt .. self:get_file_percent()
     local percent_sep  = colors.file_sep   .. self.separators.pipe
     local line_col     = colors.rhs_st_alt .. self:get_line_col()
@@ -189,13 +223,22 @@ M.set_active = function(self)
         -- middle
         "%=", self:check_file_ch() and filename_ch or filename, filemods, filemods_sep, "%=",
         -- rsh
-        filetype, filetype_sep, filefmt, filefmt_sep, filesize, filesize_sep,
+        filetype, filetype_sep,
+        M.show_full_rhs and  filefmt .. filefmt_sep .. filesize ..  filesize_sep or '',
         percent, percent_sep, line_col, line_col_sep
+        -- filetype, filetype_sep, filefmt, filefmt_sep, filesize, filesize_sep,
+        -- percent, percent_sep, line_col, line_col_sep
     })
 end
 
+-- construct inactive status line
 M.set_inactive = function(self)
-    return self.colors.inactive .. '%= %F %='
+    local filemods     = self.colors.file_mods  .. self:get_file_mods()
+    local filemods_sep = self.colors.file_sep   .. self.separators.blank
+
+    return table.concat({
+        self.colors.inactive .. "%=", ' %t ', filemods, filemods_sep, "%=",
+    })
 end
 
 -- M.set_explorer = function(self)
@@ -205,6 +248,7 @@ end
 --   return table.concat({ self.colors.active, title, title_alt })
 -- end
 
+-- define status line
 Statusline = setmetatable(M, {
     __call = function(statusline, mode)
         if mode == "active" then return statusline:set_active() end
@@ -214,13 +258,12 @@ Statusline = setmetatable(M, {
 })
 
 -- set statusline
--- TODO: replace this once we can define autocmd using lua
 api.nvim_exec([[
     augroup Statusline
     au!
     au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline('active')
     au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline('inactive')
-    au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline('explorer')
+    " au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline('explorer')
     augroup END
 ]], false)
 
