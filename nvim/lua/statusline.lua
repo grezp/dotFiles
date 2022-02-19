@@ -139,11 +139,11 @@ end
 
 -- output git active branch
 M.get_git_branch = function()
---    local branch = vim.fn['fugitive#head']()
---
---    if branch ~= nil and branch:len() > 0 then
---        return '<' .. branch .. '>'
---    end
+   local branch = vim.fn['fugitive#head']()
+
+   if branch ~= nil and branch:len() > 0 then
+       return '<' .. branch .. '>'
+   end
  
     return ''
 end
