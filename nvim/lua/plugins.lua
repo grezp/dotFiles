@@ -6,15 +6,14 @@ return require('packer').startup(function()
     use 'junegunn/fzf.vim'                      -- fzf embeded into vim
     use 'tpope/vim-fugitive'                    -- git wrapper for vim
     use 'lukas-reineke/indent-blankline.nvim'   -- create indent line for spaces
-    -- use {
-    --     'nvim-treesitter/nvim-treesitter',
-    --     run = ':TSUpdate'
-    -- }
+
+    use {                                       -- nvim hl based on syntax
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+    use 'neovim/nvim-lspconfig'                 -- Collection of configurations for the built-in LSP client
 
     use 'nathom/filetype.nvim'                  -- improves filetype startup time
     -- use 'chrisbra/NrrwRgn'                      -- narrow code snippets like emacs
-    -- use 'neovim/nvim-lspconfig'                 -- Collection of configurations for the built-in LSP client
-    -- use 'vim-ruby/vim-ruby'
-
 end)
 

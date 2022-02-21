@@ -16,10 +16,6 @@ vim.o.wrap = false                  -- do not wrap long lines onto next
 vim.o.scrolloff = 2                 -- leave lines above & below cursor
 vim.o.synmaxcol = 300               -- stop syntax highlight after x lines for performance
 vim.o.laststatus = 2                -- always show status line
-vim.o.foldenable = false            -- don't auto fold when file is opened
-vim.o.foldlevel = 4                 -- limit folding to 4 levels
--- vim.o.foldmethod = 'syntax'         -- use language syntax to generate folds
--- vim.o.foldmethod = 'indent'         -- use language syntax to generate folds
 vim.o.splitbelow = true             -- open horiz splits below
 vim.o.splitright = true             -- open vert splits to the right
 
@@ -60,69 +56,54 @@ vim.o.swapfile = false                          -- no swap files created
 vim.o.undodir = HOME .. '/.vim/tmp/undo//'      -- undo file location
 vim.o.backupdir = HOME .. '/.vim/tmp/backup//'  -- backup location
 
--- setup global tags
-function file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
-end
+-- folding
+vim.o.foldenable = false            -- don't auto fold when file is opened
+vim.o.foldlevel = 4                 -- limit folding to 4 levels
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.o.fillchars = 'fold:-'
+vim.o.foldnestmax = 5
+vim.o.foldminlines = 1
 
-local l_tags = ''
-if file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-unison,'  end
-if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
-if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
-vim.o.tags = vim.o.tags .. l_tags
+function _G.custom_fold_text()
+    local line_count = vim.v.foldend - vim.v.foldstart + 1
+    local line = vim.fn.getline(vim.v.foldstart)
+
+    -- trim trailing white space
+    local i = 1
+    while i < string.len(line) do
+        if line:sub(-1) == ' ' then
+            line = line:sub(1, -2)
+        else break
+        end
+        i = i + 1
+    end
+    -- append curly bracket if last char
+    if line:sub(-1) ~= '{' then
+        line = line .. ' {'
+    end
+
+    return line .. "...} : " .. line_count .. " lines "
+end
+vim.o.foldtext = 'v:lua.custom_fold_text()'
+
+-- -- setup global tags
+-- function file_exists(name)
+--    local f=io.open(name,"r")
+--    if f~=nil then io.close(f) return true else return false end
+-- end
+--
+-- local l_tags = ''
+-- if file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-unison,'  end
+-- if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
+-- if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
+-- vim.o.tags = vim.o.tags .. l_tags
 
 -- set ruby path -> improves startup time
 -- vim.g.ruby_path = '/usr/share/gems/gems/abrt-0.0.6/lib,/usr/share/rubygems,/usr/share/ruby,/usr/lib64/ruby/'
 vim.g.ruby_path = ''
 
 -- PLUGINGS --
-
--- lsp
-
-
---```lua
---  Commands:
---  - ClangdSwitchSourceHeader: Switch between source/header
---  
---  Default Values:
---    capabilities = default capabilities, with offsetEncoding utf-8
---    cmd = { "clangd" }
---    filetypes = { "c", "cpp", "objc", "objcpp" }
---    root_dir = root_pattern("compile_commands.json", "compile_flags.txt", ".git") or dirname
---    single_file_support = true
---```
-
-
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
--- local opts = { noremap=true, silent=true }
--- vim.api.nvim_set_keymap('n', '<Leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
--- vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
--- vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
--- vim.api.nvim_set_keymap('n', '<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
--- 
--- -- Use an on_attach function to only map the following keys
--- -- after the language server attaches to the current buffer
--- local on_attach = function(client, bufnr)
---   -- Enable completion triggered by <c-x><c-o>
---   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
--- 
---   -- Mappings.
---   -- See `:help vim.lsp.*` for documentation on any of the below functions
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
---   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
--- end
 
 -- nerd commenter
 vim.g.NERDSpaceDelims = 1           -- adds space between comment & char
