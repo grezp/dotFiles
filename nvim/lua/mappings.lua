@@ -1,30 +1,14 @@
 
-function map_generic(mode, shortcut, command)
+local function map_generic(mode, shortcut, command)
   vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
-function map(shortcut, command)
+local function map(shortcut, command)
   map_generic('', shortcut, command)
 end
 
-function nmap(shortcut, command)
+local function nmap(shortcut, command)
   map_generic('n', shortcut, command)
-end
-
-function imap(shortcut, command)
-  map_generic('i', shortcut, command)
-end
-
-function vmap(shortcut, command)
-  map_generic('v', shortcut, command)
-end
-
-function cmap(shortcut, command)
-  map_generic('c', shortcut, command)
-end
-
-function tmap(shortcut, command)
-  map_generic('t', shortcut, command)
 end
 
 -- general
@@ -43,9 +27,9 @@ nmap('<Leader>bl', ':ls<CR>')           -- list buffers
 
 -- windows
 map('<Leader>w', '<C-w>')           -- window keybind
-nmap('<Leader>w+', '10<C-w>+')      -- inc window height 
+nmap('<Leader>w+', '10<C-w>+')      -- inc window height
 nmap('<Leader>w-', '10<C-w>-')      -- dec window height
-nmap('<leader>w>', '30<C-w>>')      -- inc > window height 
+nmap('<leader>w>', '30<C-w>>')      -- inc > window height
 nmap('<leader>w<', '30<C-w><')      -- inc < window height
 
 -- plugin maps
