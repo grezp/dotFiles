@@ -4,7 +4,6 @@ vim.o.hidden = true                         -- change buffer w/o saving
 vim.o.mouse = 'a'                           -- enable mouse
 vim.o.history = 1000                        -- save cmd history
 vim.o.backspace = "indent,eol,start"        -- backspace works on every char in insert mode
-vim.o.completeopt = 'menuone,noselect'      -- insert mode completion list options
 vim.o.dictionary = '/usr/share/dict/words'  -- dictionary file
 vim.o.shortmess = 'aWF'
 
@@ -23,8 +22,9 @@ vim.o.showcmd = true        -- show cmd on bottom line
 -- auto completion
 vim.o.wildmenu = true                   -- cmd line completion
 vim.o.wildignorecase = true             -- auto complete w/o case sensitivity
-vim.o.wildmode = 'longest:full,full'
+vim.o.wildmode = 'longest:full'         -- complete longest string, then start wildmenu
 vim.o.wildignore = '*/build/*,*.bak'    -- don't auto complete these patters
+vim.o.completeopt = 'menu,menuone,noselect' -- use popup menu, use popup for 1 match, don't select match in menu
 
 -- mapping timeout
 vim.o.timeout = false
