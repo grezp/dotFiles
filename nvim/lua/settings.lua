@@ -101,10 +101,8 @@ vim.g.ruby_path = ''
 
 -- PLUGINGS --
 
--- nerd commenter
-vim.g.NERDSpaceDelims = 1           -- adds space between comment & char
-vim.g.NERDDefaultAlign = 'left'     -- flush single line comments
-vim.g.NERDCommentEmptyLines = 1     -- comment empty lines
+-- Comment.nvim setup
+require('Comment').setup()
 
 -- indent blankline
 vim.g.indent_blankline_char = '┊'
