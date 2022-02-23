@@ -1,20 +1,41 @@
-return require('packer').startup(function()
-
+return require('packer').startup{
+  function(use)
     use 'wbthomason/packer.nvim'                -- Packer can manage itself
-    use 'preservim/nerdcommenter'               -- comment code easily
+
+    -- utility
+    use 'tpope/vim-fugitive'                    -- git wrapper for vim
+    use 'chrisbra/NrrwRgn'                      -- narrow code snippets like emacs
+    use 'numToStr/Comment.nvim'                 -- comment code w/ vi movements
+
+    -- searching
     use 'junegunn/fzf'                          -- command line fuzzy finder
     use 'junegunn/fzf.vim'                      -- fzf embeded into vim
-    use 'tpope/vim-fugitive'                    -- git wrapper for vim
-    use 'lukas-reineke/indent-blankline.nvim'   -- create indent line for spaces
-    -- use {
-    --     'nvim-treesitter/nvim-treesitter',
-    --     run = ':TSUpdate'
-    -- }
 
+    -- performance
     use 'nathom/filetype.nvim'                  -- improves filetype startup time
-    -- use 'chrisbra/NrrwRgn'                      -- narrow code snippets like emacs
-    -- use 'neovim/nvim-lspconfig'                 -- Collection of configurations for the built-in LSP client
-    -- use 'vim-ruby/vim-ruby'
 
-end)
+    -- nvim native
+    use 'neovim/nvim-lspconfig'                 -- Collection of configurations for the built-in LSP client
+    use {                                       -- nvim hl based on syntax
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate'
+    }
 
+    use 'L3MON4D3/LuaSnip'
+
+    -- completion
+    use "hrsh7th/nvim-cmp"                      -- autocompletion engine
+    use "hrsh7th/cmp-buffer"                    -- autocomplete from buffer & enable '/' search
+    use "hrsh7th/cmp-path"                      -- autocomplete directory path
+    use "hrsh7th/cmp-nvim-lua"                  -- autocomplete Lua API
+    use "hrsh7th/cmp-nvim-lsp"                  -- autocomplete from LSP
+    use "hrsh7th/cmp-cmdline"                   -- autocomplete from cmd mode
+    use "hrsh7th/cmp-nvim-lsp-document-symbol"  -- allow '/@' to search for func defs
+    use "saadparwaiz1/cmp_luasnip"              -- enable luasnip as cmp snippet engine
+    use "onsails/lspkind-nvim"                  -- display group tags on cmp (e.g. LSP, buffer, etc.)
+
+    -- aesthesics
+    use 'lukas-reineke/indent-blankline.nvim'   -- create indent line for spaces
+    -- use "kyazdani42/nvim-web-devicons"
+  end
+}
