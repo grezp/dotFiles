@@ -29,8 +29,6 @@ cmp.setup {
   formatting = {
     format = lspkind.cmp_format {
       with_text = true,
-      -- TODO: installs icon fonts
-      mode = 'text',
 
       menu = {
         buffer = "[buf]",
@@ -79,23 +77,6 @@ cmp.setup {
     ghost_text = true,
   },
 }
-
--- command line setup
--- TODO: figure out why C-Y is not working
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' },
-  },
-  {
-    { name = 'cmdline', keyword_pattern=[=[[^[:blank:]\!]*]=]}
-  })
-})
-
--- require'cmp'.setup.cmdline('/', {
---   sources = {
---     { name = 'buffer' }
---   }
--- })
 
 -- search setup
 -- /@ look for function and var defs

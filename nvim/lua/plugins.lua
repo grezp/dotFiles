@@ -29,7 +29,6 @@ return require('packer').startup{
     use "hrsh7th/cmp-path"                      -- autocomplete directory path
     use "hrsh7th/cmp-nvim-lua"                  -- autocomplete Lua API
     use "hrsh7th/cmp-nvim-lsp"                  -- autocomplete from LSP
-    use "hrsh7th/cmp-cmdline"                   -- autocomplete from cmd mode
     use "hrsh7th/cmp-nvim-lsp-document-symbol"  -- allow '/@' to search for func defs
     use "saadparwaiz1/cmp_luasnip"              -- enable luasnip as cmp snippet engine
     use "onsails/lspkind-nvim"                  -- display group tags on cmp (e.g. LSP, buffer, etc.)

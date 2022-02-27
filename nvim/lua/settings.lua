@@ -55,12 +55,10 @@ vim.o.backupdir = HOME .. '/.vim/tmp/backup//'  -- backup location
 
 -- folding
 vim.o.foldenable = false            -- don't auto fold when file is opened
-vim.o.foldlevel = 4                 -- limit folding to 4 levels
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.o.fillchars = 'fold:-'
-vim.o.foldnestmax = 5
-vim.o.foldminlines = 1
+vim.o.foldnestmax = 10
 
 function _G.custom_fold_text()
   local line_count = vim.v.foldend - vim.v.foldstart + 1
@@ -106,7 +104,6 @@ require('Comment').setup()
 
 -- indent blankline
 vim.g.indent_blankline_char = '┊'
-
--- AutoPairs
--- let g:AutoPairsShortcutToggle = '<another key>'
--- vim.g.AutoPairsShortcutToggle = '<Leader>pp'
+require("indent_blankline").setup {
+  show_current_context = true,
+}

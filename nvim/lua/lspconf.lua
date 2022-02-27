@@ -1,3 +1,4 @@
+vim.diagnostic.config( { virtual_text = false })
 
 local toggle = true
 function _G.toggle_diags()
@@ -24,7 +25,6 @@ local on_attach = function(bufnr)
   print('LSP has Started')
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -100,3 +100,13 @@ require'lspconfig'.sumneko_lua.setup {
     },
   }
 }
+
+-- ignore INFO warning on ruby
+vim.cmd([[
+  augroup rubyDiags
+    autocmd!
+    autocmd FileType ruby :lua vim.diagnostic.config({underline = { severity = vim.diagnostic.severity.WARN },
+                                                    \ signs = { severity = vim.diagnostic.severity.WARN }})
+  augroup END
+]])
+
