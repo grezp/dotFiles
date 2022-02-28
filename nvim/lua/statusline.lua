@@ -129,16 +129,16 @@ end
 -- detemermine file path base on str size + show/hide rhs status
 M.get_file_path_type = function()
   local max_file_len = api.nvim_win_get_width(0) - 55
-  local max_len_total = max_file_len + 20
+  -- local max_len_total = max_file_len + 20
   local file_len = fn.fnamemodify(fn.expand("%"), ":~:."):len()
   local data = {}
 
   if file_len < max_file_len then
     data.type = M.path_type.TAIL
     data.show = true
-  elseif file_len < max_len_total then
-    data.type = M.path_type.TAIL
-    data.show = false
+  -- elseif file_len < max_len_total then
+  --   data.type = M.path_type.TAIL
+  --   data.show = false
   else
     data.type = M.path_type.NAME
     data.show = true
