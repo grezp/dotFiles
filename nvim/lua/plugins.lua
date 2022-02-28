@@ -34,7 +34,8 @@ return require('packer').startup{
     use "onsails/lspkind-nvim"                  -- display group tags on cmp (e.g. LSP, buffer, etc.)
 
     -- aesthesics
+    use 'NTBBloodbath/doom-one.nvim'
     use 'lukas-reineke/indent-blankline.nvim'   -- create indent line for spaces
-    -- use "kyazdani42/nvim-web-devicons"
+
   end
 }

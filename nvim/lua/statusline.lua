@@ -5,20 +5,41 @@ local M = {}
 -- change them if you want to different separator
 M.separators = {
   blank = '',
-  pipe = '|'
+  pipe = '|',
+  rh_arrow = '',
+  lh_arrow = '',
+  rs_arrow = '',
+  ls_arrow = '',
 }
 
 -- highlight groups
 M.colors = {
   active        = '%#StatusLine#',
   inactive      = '%#StatuslineNC#',
-  mode          = '%#Mode#',
-  mode_alt      = '%#ModeAlt#',
-  bufnum        = '%#BufferNumber#',
+  inactive_alt  = '%#StatuslineNCAlt#',
+  active_alt    = '%#StatusLineAlt#',
   file_mods     = '%#FileMods#',
-  rhs_st        = '%#RhsStatus#',
-  rhs_st_alt    = '%#RhsStatusAlt#',
-  file_sep      = '%#StatusSep#'
+  file_mods_inv = '%#FileModsInv#',
+  alt_bg        = '%#AltToBg#',
+  alt_ch        = '%#AltToCh#',
+
+  normal        = '%#NormalModeStatus#',
+  insert        = '%#InsertModeStatus#',
+  visual        = '%#VisualModeStatus#',
+  replace       = '%#ReplaceModeStatus#',
+  other         = '%#OtherModeStatus#',
+
+  normal_inv    = '%#NormalModeInvStatus#',
+  insert_inv    = '%#InsertModeInvStatus#',
+  visual_inv    = '%#VisualModeInvStatus#',
+  replace_inv   = '%#ReplaceModeInvStatus#',
+  other_inv     = '%#OtherModeInvStatus#',
+
+  normal_alt    = '%#NormalModeAltStatus#',
+  insert_alt    = '%#InsertModeAltStatus#',
+  visual_alt    = '%#VisualModeAltStatus#',
+  replace_alt   = '%#ReplaceModeAltStatus#',
+  other_alt     = '%#OtherModeAltStatus#',
 }
 
 M.mode = {
@@ -67,53 +88,91 @@ M.path_type = { FULL = 1, TAIL = 2, NAME = 3, }
 
 -- determine mode type
 function M.get_current_mode()
-  local mode_code = vim.api.nvim_get_mode().mode
-  if M.mode[mode_code] == nil then
-    return mode_code
+  local mode_code = api.nvim_get_mode().mode
+  local mode_str = M.mode[mode_code]
+  local data = {}
+
+  if mode_str == nil then
+    data.mode = mode_code
+    data.color = M.colors.other
+    data.color_inv = M.colors.other_inv
+    return data
   end
-  return  ' ' .. M.mode[mode_code] .. ' '
+
+  if mode_str == 'NORMAL' then
+    data.color = M.colors.normal
+    data.color_inv = M.colors.normal_inv
+    data.color_alt = M.colors.normal_alt
+  elseif mode_str == 'VISUAL' or mode_str == 'V-LINE' or mode_str == 'V-BLOCK' then
+    data.color = M.colors.visual
+    data.color_inv = M.colors.visual_inv
+    data.color_alt = M.colors.visual_alt
+  elseif mode_str == 'INSERT' then
+    data.color = M.colors.insert
+    data.color_inv = M.colors.insert_inv
+    data.color_alt = M.colors.insert_alt
+  elseif mode_str == 'REPLACE' or mode_str == 'V-REPLACE' then
+    data.color = M.colors.replace
+    data.color_inv = M.colors.replace_inv
+    data.color_alt = M.colors.replace_alt
+  else
+    data.color = M.colors.other
+    data.color_inv = M.colors.other_inv
+    data.color_alt = M.colors.other_alt
+  end
+
+  data.mode = ' ' .. M.mode[mode_code] .. ' '
+
+  return  data
 end
 
--- global var to determine if fmt type and file size are shown
-M.show_full_rhs = true
-
--- detemermine file path base on str size
+-- detemermine file path base on str size + show/hide rhs status
 M.get_file_path_type = function()
-  -- TODO: determine file patch based on max_len = buffWindow - Mode - buffNumber - gitBranch - rhs
-  --       if (file < max_len) -> return file_path_type
-  -- local max_file_len = 50
   local max_file_len = api.nvim_win_get_width(0) - 55
-  local max_len_total = max_file_len + 15
+  local max_len_total = max_file_len + 20
   local file_len = fn.fnamemodify(fn.expand("%"), ":~:."):len()
+  local data = {}
 
   if file_len < max_file_len then
-    M.show_full_rhs = true
-    return M.path_type.TAIL
+    data.type = M.path_type.TAIL
+    data.show = true
   elseif file_len < max_len_total then
-    M.show_full_rhs = false
-    return M.path_type.TAIL
+    data.type = M.path_type.TAIL
+    data.show = false
+  else
+    data.type = M.path_type.NAME
+    data.show = true
   end
 
-  return M.path_type.NAME
+  return data
 end
 
--- output file name
+-- output file name + show/hide rhs boolean
 M.get_filename = function(self)
-  if self:get_file_path_type() == M.path_type.TAIL then
-    return " %f "
+  local type = self:get_file_path_type()
+  local data = {}
+
+  if  type.type == M.path_type.TAIL then
+    data.type = ' %f '
+  else
+    data.type = ' %t '
   end
 
-  return ' %t '
+  data.show = type.show
+
+  return data
 end
 
 -- output buffer number
 M.get_buf_number = function()
-  return '[%n] '
+  return ' %n '
 end
 
--- output format string for mod files, readonly, preview, and help flag
-M.get_file_mods = function()
-  return '%m%r%w%h'
+-- output readonly flag
+M.get_readonly = function()
+  if vim.o.readonly then return ' RO ' end
+
+  return ''
 end
 
 -- output percentage of file
@@ -131,7 +190,7 @@ M.get_git_branch = function()
   local branch = vim.fn['fugitive#head']()
 
   if branch ~= nil and branch:len() > 0 then
-    return '<' .. branch .. '>'
+    return ' ' .. branch .. ' '
   end
 
   return ''
@@ -187,46 +246,65 @@ end
 -- construct active status line
 M.set_active = function(self)
   local colors = self.colors
+  local curr_mode = self:get_current_mode()
+  local file_ch = self:check_file_ch()
+  local file = self:get_filename()
 
-  local mode         = colors.mode       .. self:get_current_mode()
-  local bufnum       = colors.bufnum     .. self:get_buf_number()
-  local gitbranch    = colors.mode       .. self:get_git_branch()
-  local filename     = colors.active     .. self:get_filename()
-  local filename_ch  = colors.file_mods  .. self:get_filename()
-  local filemods     = colors.file_mods  .. self:get_file_mods()
-  local filemods_sep = colors.file_sep   .. self.separators.blank
-  local filetype     = colors.rhs_st     .. self:get_filetype()
-  local filetype_sep = colors.file_sep   .. self.separators.pipe
-  local filefmt      = colors.rhs_st     .. self:get_file_fmt()
-  local filefmt_sep  = colors.file_sep   .. self.separators.pipe
-  local filesize     = colors.rhs_st     .. self:get_filesize()
-  local filesize_sep = colors.file_sep   .. self.separators.pipe
-  local percent      = colors.rhs_st_alt .. self:get_file_percent()
-  local percent_sep  = colors.file_sep   .. self.separators.pipe
-  local line_col     = colors.rhs_st_alt .. self:get_line_col()
-  local line_col_sep = colors.file_sep   .. self.separators.pipe
+  local mode         = curr_mode.color_inv  .. curr_mode.mode
+  local bufnum       = colors.active_alt    .. self:get_buf_number()
+  local gitbranch    = colors.active_alt    .. self:get_git_branch()
+  local filename     = colors.active        .. file.type
+  local filename_ch  = colors.file_mods     .. file.type
+  local readonly     = colors.file_mods     .. self:get_readonly()
+  local filetype     = colors.active_alt    .. self:get_filetype()
+  local filefmt      = colors.active_alt    .. self:get_file_fmt()
+  local filesize     = colors.active_alt    .. self:get_filesize()
+  local percent      = curr_mode.color_inv  .. self:get_file_percent()
+  local line_col     = curr_mode.color_inv  .. self:get_line_col()
+
+  local blank_sep_m  = curr_mode.color_inv  .. self.separators.blank
+  local blank_sep    = colors.active        .. self.separators.blank
+
+  local rs_arrow_m2a = curr_mode.color_alt  .. self.separators.rs_arrow
+  local rs_arrow_a2b = colors.alt_bg        .. self.separators.rs_arrow
+  local rs_arrow_a2f = colors.alt_ch        .. self.separators.rs_arrow
+
+  local lh_arrow_m   = curr_mode.color_inv  .. self.separators.lh_arrow
+  local lh_arrow_a   = colors.active_alt    .. self.separators.lh_arrow
+  local ls_arrow_m2a = curr_mode.color_alt  .. self.separators.ls_arrow
+  local ls_arrow_m2b = curr_mode.color      .. self.separators.ls_arrow
+  local ls_arrow_a2b = colors.alt_bg        .. self.separators.ls_arrow
+
+  local rh_arrow_f   = colors.file_mods     .. self.separators.rh_arrow
+  local rs_arrow_f2b = colors.file_mods_inv .. self.separators.rs_arrow
+  local rs_arrow_b2f = colors.file_mods     .. self.separators.rs_arrow
 
   return table.concat{
     -- lhs
-    colors.active, mode, bufnum, gitbranch,
+    blank_sep_m, mode, rs_arrow_m2a, gitbranch, bufnum,
+    file_ch and rs_arrow_a2f or rs_arrow_a2b,
+
     -- middle
-    "%=", self:check_file_ch() and filename_ch or filename, filemods, filemods_sep, "%=",
+    file_ch and filename_ch .. rh_arrow_f .. ' + ' .. rs_arrow_f2b or filename,
+    string.find(readonly, ' RO ') and rs_arrow_b2f .. readonly .. rs_arrow_f2b or '',
+    blank_sep, "%=",
+
     -- rsh
-    filetype, filetype_sep,
-    M.show_full_rhs and  filefmt .. filefmt_sep .. filesize ..  filesize_sep or '',
-    percent, percent_sep, line_col, line_col_sep
-    -- filetype, filetype_sep, filefmt, filefmt_sep, filesize, filesize_sep,
-    -- percent, percent_sep, line_col, line_col_sep
+    file.show and ls_arrow_a2b .. filetype .. lh_arrow_a ..  filefmt .. lh_arrow_a .. filesize or '',
+    file.show and ls_arrow_m2a, percent, lh_arrow_m, line_col or ls_arrow_m2b,
   }
 end
 
 -- construct inactive status line
 M.set_inactive = function(self)
-  local filemods     = self.colors.file_mods  .. self:get_file_mods()
-  local filemods_sep = self.colors.file_sep   .. self.separators.blank
+  local colors = self.colors
+
+  local filename     = colors.inactive      .. ' %t '
+  local ls_arrow_a2b = colors.inactive_alt  .. self.separators.lh_arrow
+  local rs_arrow_a2b = colors.inactive_alt  .. self.separators.rh_arrow
 
   return table.concat{
-    self.colors.inactive .. "%=", ' %t ', filemods, filemods_sep, "%=",
+    '%=', ls_arrow_a2b, ls_arrow_a2b, filename, rs_arrow_a2b, rs_arrow_a2b, '%=',
     }
 end
 
