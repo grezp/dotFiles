@@ -28,7 +28,7 @@ vim.o.completeopt = 'menu,menuone,noselect' -- use popup menu, use popup for 1 m
 
 -- mapping timeout
 vim.o.timeout = false
-vim.o.ttimeout = true
+vim.o.ttimeout = false
 vim.o.ttimeoutlen = 100
 
 -- searching
@@ -107,3 +107,15 @@ vim.g.indent_blankline_char = '┊'
 require("indent_blankline").setup {
   show_current_context = true,
 }
+
+-- nvim treesitter
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  sync_install = false,
+
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+}
+

@@ -2,7 +2,7 @@ vim.o.termguicolors = true              -- 24 bit colors
 
 require('doom-one').setup({
     cursor_coloring = true,
-    terminal_colors = false,
+    terminal_colors = true,
     italic_comments = true,
     enable_treesitter = true,
     transparent_background = false,
@@ -29,13 +29,17 @@ require('doom-one').setup({
 })
 
 local M = {}
+local utils = require('doom-one.utils')
+
+local fg_def = '#bbc2cf'
+-- local bg_def = '#282c34'
 -- local base0 = '#1B2229'
 -- local base1 = '#1c1f24'
 -- local base2 = '#202328'
 local base3 = '#23272e'
 local base4 = '#3f444a'
 -- local base5 = '#5B6268'
--- local base6 = '#73797e'
+local base6 = '#73797e'
 local base7 = '#9ca0a4'
 -- local base8 = '#DFDFDF'
 -- local base9 = '#E6E6E6'
@@ -43,16 +47,18 @@ local base7 = '#9ca0a4'
 
 -- local grey = base4
 local red = '#ff6c6b'
+local dark_red = utils.Darken(red, 0.3)
 local orange = '#da8548'
 local green = '#98be65'
 -- local yellow = '#ECBE7B'
 local blue = '#51afef'
 -- local dark_blue = '#2257A0'
 local magenta = '#c678dd'
+-- local light_magenta = utils.Lighten(magenta, 0.4)
 local violet = '#a9a1e1'
--- local dark_violet = '#4e4f67'
+local dark_violet = '#4e4f67'
 -- local cyan = '#46D9FF'
--- local white = '#efefef'
+local white = '#efefef'
 
 function M.highlight(group, styles)
 	local bg = styles.bg and 'guibg=' .. styles.bg or 'guibg=NONE'
@@ -72,6 +78,8 @@ function M.apply_highlight(groups)
 end
 
 M.custom_hl_groups = {
+  Cursor = { fg = 'NONE', bg = 'NONE', gui = 'reverse' },
+
   -- status line
   StatusLineNC    = { fg = base7, bg = base3 },
   AltToBg         = { fg = base4, bg = base3 },
@@ -83,9 +91,9 @@ M.custom_hl_groups = {
 
   -- mode colors
   NormalModeStatus  = { fg = violet, bg = base3 },
-  InsertModeStatus  = { fg = green, bg = base3 },
-  VisualModeStatus  = { fg = blue, bg = base3 },
-  ReplaceModeStatus = { fg = red, bg = base3 },
+  InsertModeStatus  = { fg = green,  bg = base3 },
+  VisualModeStatus  = { fg = blue,   bg = base3 },
+  ReplaceModeStatus = { fg = red,    bg = base3 },
   OtherModeStatus   = { fg = orange, bg = base3 },
 
   -- inverted mode colors
@@ -97,10 +105,25 @@ M.custom_hl_groups = {
 
   -- mode colors
   NormalModeAltStatus  = { fg = violet, bg = base4 },
-  InsertModeAltStatus  = { fg = green, bg = base4 },
-  VisualModeAltStatus  = { fg = blue, bg = base4 },
-  ReplaceModeAltStatus = { fg = red, bg = base4 },
+  InsertModeAltStatus  = { fg = green,  bg = base4 },
+  VisualModeAltStatus  = { fg = blue,   bg = base4 },
+  ReplaceModeAltStatus = { fg = red,    bg = base4 },
   OtherModeAltStatus   = { fg = orange, bg = base4 },
+
+  -- stock comments are too dark
+  Comment = { fg = base6, gui = 'italic' },
+
+  -- change search colors to differ from visual select
+  Search    = { fg = fg_def, bg = dark_violet, gui = 'bold' },
+  IncSearch = { fg = fg_def, bg = dark_violet, gui = 'bold' },
+
+  WhichKeyValue = { fg = violet },
+
+  LightspeedLabel                  = { fg = red,       gui = 'bold,underline' },
+  LightspeedLabelDistant           = { fg = blue,      gui = 'bold' },
+  LightspeedLabelDistantOverlapped = { fg = violet,    gui = 'bold' },
+  LightspeedShortcut               = { fg = white,     gui = 'bold', bg = dark_red },
+  LightspeedOneCharMatch           = { fg = white,     gui = 'bold', bg = dark_red },
 }
 
 M.apply_highlight(M.custom_hl_groups)

@@ -81,21 +81,11 @@ cmp.setup {
 -- search setup
 -- /@ look for function and var defs
 require'cmp'.setup.cmdline('/', {
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp_document_symbol' }
-  }, {
-    { name = 'buffer' }
-  })
+  sources = cmp.config.sources(
+  { name = 'nvim_lsp_document_symbol' },
+  {{
+    name = 'buffer',
+    max_item_count = 20,
+    keyword_length = 3,
+  }})
 })
-
--- TODO: color groups
--- nvim-cmp highlight groups.
--- local Group = require("colorbuddy.group").Group
--- local g = require("colorbuddy.group").groups
--- local s = require("colorbuddy.style").styles
---
--- Group.new("CmpItemAbbr", g.Comment)
--- Group.new("CmpItemAbbrDeprecated", g.Error)
--- Group.new("CmpItemAbbrMatchFuzzy", g.CmpItemAbbr.fg:dark(), nil, s.italic)
--- Group.new("CmpItemKind", g.Special)
--- Group.new("CmpItemMenu", g.NonText)
