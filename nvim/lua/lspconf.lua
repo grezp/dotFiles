@@ -1,5 +1,9 @@
+local utils = require('utils')
+
+-- diable inline diagnostic errors
 vim.diagnostic.config( { virtual_text = false })
 
+-- toggles diags with same key map
 local toggle = true
 function _G.toggle_diags()
   if toggle then
@@ -12,11 +16,11 @@ end
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<Leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>ek', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>ej', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>et', '<cmd>lua _G.toggle_diags()<CR>', opts)
+utils.Nmap('<Leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>')
+utils.Nmap('<Leader>ek', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+utils.Nmap('<Leader>ej', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+utils.Nmap('<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+utils.Nmap('<Leader>et', '<cmd>lua _G.toggle_diags()<CR>')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer

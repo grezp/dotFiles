@@ -60,6 +60,7 @@ vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.o.fillchars = 'fold:-'
 vim.o.foldnestmax = 10
 
+-- reformats folds to be fix indentation + {...}
 function _G.custom_fold_text()
   local line_count = vim.v.foldend - vim.v.foldstart + 1
   local line = vim.fn.getline(vim.v.foldstart)
@@ -81,6 +82,10 @@ function _G.custom_fold_text()
 end
 vim.o.foldtext = 'v:lua.custom_fold_text()'
 
+-- set ruby path -> improves startup time
+-- vim.g.ruby_path = '/usr/share/gems/gems/abrt-0.0.6/lib,/usr/share/rubygems,/usr/share/ruby,/usr/lib64/ruby/'
+vim.g.ruby_path = ''
+
 -- -- setup global tags
 -- function file_exists(name)
 --    local f=io.open(name,"r")
@@ -92,30 +97,4 @@ vim.o.foldtext = 'v:lua.custom_fold_text()'
 -- if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
 -- if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
 -- vim.o.tags = vim.o.tags .. l_tags
-
--- set ruby path -> improves startup time
--- vim.g.ruby_path = '/usr/share/gems/gems/abrt-0.0.6/lib,/usr/share/rubygems,/usr/share/ruby,/usr/lib64/ruby/'
-vim.g.ruby_path = ''
-
--- PLUGINGS --
-
--- Comment.nvim setup
-require('Comment').setup()
-
--- indent blankline
-vim.g.indent_blankline_char = '┊'
-require("indent_blankline").setup {
-  show_current_context = true,
-}
-
--- nvim treesitter
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  sync_install = false,
-
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-}
 

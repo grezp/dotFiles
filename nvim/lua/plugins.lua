@@ -6,7 +6,9 @@ return require('packer').startup{
     use 'tpope/vim-fugitive'                    -- git wrapper for vim
     use 'chrisbra/NrrwRgn'                      -- narrow code snippets like emacs
     use 'numToStr/Comment.nvim'                 -- comment code w/ vi movements
+    use "folke/which-key.nvim"                  -- shows what keys do + auto show buffers/registers
     use 'ggandor/lightspeed.nvim'               -- jump to text quickly
+    use 'L3MON4D3/LuaSnip'
 
     -- searching
     use 'junegunn/fzf'                          -- command line fuzzy finder
@@ -22,8 +24,6 @@ return require('packer').startup{
       run = ':TSUpdate'
     }
 
-    use 'L3MON4D3/LuaSnip'
-
     -- completion
     use "hrsh7th/nvim-cmp"                      -- autocompletion engine
     use "hrsh7th/cmp-buffer"                    -- autocomplete from buffer & enable '/' search
@@ -37,11 +37,6 @@ return require('packer').startup{
     -- aesthesics
     use 'NTBBloodbath/doom-one.nvim'
     use 'lukas-reineke/indent-blankline.nvim'   -- create indent line for spaces
-    use {                                       -- shows what keys do + auto show buffers/registers
-      "folke/which-key.nvim",
-      config = function()
-        require("which-key").setup{}
-      end
-    }
+
   end
 }
