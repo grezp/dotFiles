@@ -9,6 +9,7 @@ return require('packer').startup{
     use 'folke/which-key.nvim'                  -- shows what keys do + auto show buffers/registers
     use 'ggandor/lightspeed.nvim'               -- jump to text quickly by matching 2 chars
     use 'kevinhwang91/nvim-hlslens'             -- improves search by placing tags to jump to
+    use 'famiu/bufdelete.nvim'
     use 'L3MON4D3/LuaSnip'
 
     -- searching

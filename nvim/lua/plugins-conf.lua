@@ -1,6 +1,8 @@
 local utils = require('utils')
 
+--------------
 -- SETTINGS --
+--------------
 
 -- telescope
 require('telescope').load_extension('fzf')
@@ -29,7 +31,9 @@ require'nvim-treesitter.configs'.setup {
 require('which-key').setup()
 
 
+--------------
 -- MAPPINGS --
+--------------
 
 -- telescope
 utils.Map('<leader>ff', '<cmd>Telescope find_files<cr>')
@@ -56,4 +60,7 @@ utils.Xmap('*', [[*<Cmd>lua require('hlslens').start()<CR>]])
 utils.Xmap('#', [[#<Cmd>lua require('hlslens').start()<CR>]])
 utils.Xmap('g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
 utils.Xmap('g#', [[g#<Cmd>lua require('hlslens').start()<CR>]])
+
+-- bufdelete
+utils.Nmap('<Leader>bd', ':lua require("bufdelete").bufdelete(0, true)<CR>')
 
