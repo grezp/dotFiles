@@ -63,22 +63,22 @@ end
 
 -- lua LSP config
 
-local sumneko_root_path = ""
-local sumneko_binary = ""
+local sumneko_root_path = ''
+local sumneko_binary = ''
 
-if vim.fn.has("mac") == 1 then
-  sumneko_root_path = HOME .. "/.config/nvim/lua-language-server"
-  sumneko_binary = HOME .. "/.config/nvim/lua-language-server/bin/macOS/lua-language-server"
-elseif vim.fn.has("unix") == 1 then
-  sumneko_root_path = HOME .. "/packages/lua/bin/"
-  sumneko_binary = sumneko_root_path .. "lua-language-server"
+if vim.fn.has('mac') == 1 then
+  sumneko_root_path = HOME .. '/.config/nvim/lua-language-server'
+  sumneko_binary = HOME .. '/.config/nvim/lua-language-server/bin/macOS/lua-language-server'
+elseif vim.fn.has('unix') == 1 then
+  sumneko_root_path = HOME .. '/packages/lua/bin/'
+  sumneko_binary = sumneko_root_path .. 'lua-language-server'
 else
-  print("Unsupported system for sumneko")
+  print('Unsupported system for sumneko')
 end
 
 require'lspconfig'.sumneko_lua.setup {
   on_attach = on_attach,
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "main.lua"},
+  cmd = {sumneko_binary, '-E', sumneko_root_path .. 'main.lua'},
   settings = {
     Lua = {
       runtime = {
@@ -94,7 +94,7 @@ require'lspconfig'.sumneko_lua.setup {
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        -- library = vim.api.nvim_get_runtime_file("", true),
+        -- library = vim.api.nvim_get_runtime_file('', true),
         library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
       },
       -- Do not send telemetry data containing a randomized but unique identifier

@@ -1,9 +1,9 @@
 -- basic/misc settings
-vim.o.encoding = "utf-8"
+vim.o.encoding = 'utf-8'
 vim.o.hidden = true                         -- change buffer w/o saving
 vim.o.mouse = 'a'                           -- enable mouse
 vim.o.history = 1000                        -- save cmd history
-vim.o.backspace = "indent,eol,start"        -- backspace works on every char in insert mode
+vim.o.backspace = 'indent,eol,start'        -- backspace works on every char in insert mode
 vim.o.dictionary = '/usr/share/dict/words'  -- dictionary file
 vim.o.shortmess = 'aWF'
 
@@ -78,7 +78,7 @@ function _G.custom_fold_text()
     line = line .. ' {'
   end
 
-  return line .. "...} : " .. line_count .. " lines "
+  return line .. '...} : ' .. line_count .. ' lines '
 end
 vim.o.foldtext = 'v:lua.custom_fold_text()'
 
@@ -88,7 +88,7 @@ vim.g.ruby_path = ''
 
 -- -- setup global tags
 -- function file_exists(name)
---    local f=io.open(name,"r")
+--    local f=io.open(name,'r')
 --    if f~=nil then io.close(f) return true else return false end
 -- end
 --

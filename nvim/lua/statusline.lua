@@ -130,7 +130,7 @@ end
 M.get_file_path_type = function()
   local max_file_len = api.nvim_win_get_width(0) - 55
   -- local max_len_total = max_file_len + 20
-  local file_len = fn.fnamemodify(fn.expand("%"), ":~:."):len()
+  local file_len = fn.fnamemodify(fn.expand('%'), ':~:.'):len()
   local data = {}
 
   if file_len < max_file_len then
@@ -287,7 +287,7 @@ M.set_active = function(self)
     -- middle
     file_ch and filename_ch .. rh_arrow_f .. ' + ' .. rs_arrow_f2b or filename,
     string.find(readonly, ' RO ') and rs_arrow_b2f .. readonly .. rs_arrow_f2b or '',
-    blank_sep, "%=",
+    blank_sep, '%=',
 
     -- rsh
     file.show and ls_arrow_a2b .. filetype .. lh_arrow_a ..  filefmt .. lh_arrow_a .. filesize or '',
@@ -318,9 +318,9 @@ end
 -- define status line
 Statusline = setmetatable(M, {
   __call = function(statusline, mode)
-    if mode == "active" then return statusline:set_active() end
-    if mode == "inactive" then return statusline:set_inactive() end
-    -- if mode == "explorer" then return statusline:set_explorer() end
+    if mode == 'active' then return statusline:set_active() end
+    if mode == 'inactive' then return statusline:set_inactive() end
+    -- if mode == 'explorer' then return statusline:set_explorer() end
   end
 })
 

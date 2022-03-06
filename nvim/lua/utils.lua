@@ -22,9 +22,9 @@ end
 
 M.Ex = setmetatable({}, {
   __index = function(t, k)
-    local command = k:gsub("_$", "!")
+    local command = k:gsub('_$', '!')
     local f = function(...)
-      return vim.api.nvim_command(table.concat(vim.tbl_flatten {command, ...}, " "))
+      return vim.api.nvim_command(table.concat(vim.tbl_flatten {command, ...}, ' '))
     end
     rawset(t, k, f)
     return f

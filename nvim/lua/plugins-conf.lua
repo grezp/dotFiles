@@ -7,13 +7,13 @@ require('Comment').setup()
 
 -- indent blankline
 vim.g.indent_blankline_char = '┊'
-require("indent_blankline").setup {
+require('indent_blankline').setup {
   show_current_context = true,
 }
 
 -- nvim treesitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  ensure_installed = 'maintained',
   sync_install = false,
 
   highlight = {
@@ -23,7 +23,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- WhichKey
-require("which-key").setup()
+require('which-key').setup()
 
 -- MAPPINGS --
 
