@@ -27,9 +27,8 @@ vim.o.wildignore = '*/build/*,*.bak'    -- don't auto complete these patters
 vim.o.completeopt = 'menu,menuone,noselect' -- use popup menu, use popup for 1 match, don't select match in menu
 
 -- mapping timeout
-vim.o.timeout = false
-vim.o.ttimeout = false
-vim.o.ttimeoutlen = 100
+vim.o.timeout = true
+vim.o.timeoutlen = 500
 
 -- searching
 vim.o.incsearch = true      -- find pattern as you type

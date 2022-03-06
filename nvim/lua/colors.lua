@@ -35,7 +35,7 @@ local fg_def = '#bbc2cf'
 -- local bg_def = '#282c34'
 -- local base0 = '#1B2229'
 -- local base1 = '#1c1f24'
--- local base2 = '#202328'
+local base2 = '#202328'
 local base3 = '#23272e'
 local base4 = '#3f444a'
 -- local base5 = '#5B6268'
@@ -118,7 +118,12 @@ M.custom_hl_groups = {
   IncSearch = { fg = fg_def, bg = dark_magenta, gui = 'bold' },
   Search    = { fg = white, bg = dark_violet,  gui = 'bold' },
 
-  WhichKeyValue = { fg = violet },
+  WhichKey          = { fg = blue },
+  WhichKeyGroup     = { fg = red },
+  WhichKeySeparator = { fg = base6 },
+  WhichKeyDesc      = { fg = violet },
+  WhichKeyValue     = { fg = green },
+  WhichKeyFloat     = { bg = base2 },
 
   LightspeedLabel                  = { fg = red,       gui = 'bold,underline' },
   LightspeedLabelDistant           = { fg = blue,      gui = 'bold' },
@@ -126,9 +131,9 @@ M.custom_hl_groups = {
   LightspeedShortcut               = { fg = white,     gui = 'bold', bg = dark_red },
   LightspeedOneCharMatch           = { fg = white,     gui = 'bold', bg = dark_red },
 
-  HlSearchNear = { fg = white, bg = dark_magenta, gui = 'bold' },
+  HlSearchNear     = { fg = white, bg = dark_magenta, gui = 'bold' },
   HlSearchLensNear = { fg = base3, bg = dark_magenta, gui = 'bold' },
-  HlSearchLens = { fg = base3, bg = dark_violet,  gui = 'bold'},
+  HlSearchLens     = { fg = base3, bg = dark_violet,  gui = 'bold' },
 }
 
 M.apply_highlight(M.custom_hl_groups)

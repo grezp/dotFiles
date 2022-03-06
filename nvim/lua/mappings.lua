@@ -13,6 +13,9 @@ utils.Nmap('<Leader>Q', ':q!<CR>')    -- exit window w/o saving
 -- buffers
 utils.Nmap('<Leader>bb', ':ls<CR>:buffer<Space>')     -- list buffers, then select
 utils.Nmap('<Leader>bl', ':ls<CR>')                   -- list buffers
+utils.Nmap('<Leader>bn', ':bnext<CR>')                -- next buffer
+utils.Nmap('<Leader>bp', ':bprev<CR>')                -- prev buffer
+utils.Nmap('<Leader>bd', ':bdelete<CR>')              -- delete buffer
 
 -- windows
 utils.Map('<Leader>w', '<C-w>')           -- window keybind
