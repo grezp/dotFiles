@@ -12,8 +12,14 @@ return require('packer').startup{
     use 'L3MON4D3/LuaSnip'
 
     -- searching
-    use 'junegunn/fzf'                          -- command line fuzzy finder
-    use 'junegunn/fzf.vim'                      -- fzf embeded into vim
+    use {
+      'nvim-telescope/telescope.nvim',          -- fuzzy finder
+      requires = {
+        { 'nvim-lua/plenary.nvim' },                                  -- additional neovim APIs
+        { 'kyazdani42/nvim-web-devicons' },                           -- icons
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }, -- FZF
+      }
+    }
 
     -- performance
     use 'nathom/filetype.nvim'                  -- improves filetype startup time
@@ -26,14 +32,18 @@ return require('packer').startup{
     }
 
     -- completion
-    use 'hrsh7th/nvim-cmp'                      -- autocompletion engine
-    use 'hrsh7th/cmp-buffer'                    -- autocomplete from buffer & enable '/' search
-    use 'hrsh7th/cmp-path'                      -- autocomplete directory path
-    use 'hrsh7th/cmp-nvim-lua'                  -- autocomplete Lua API
-    use 'hrsh7th/cmp-nvim-lsp'                  -- autocomplete from LSP
-    use 'hrsh7th/cmp-nvim-lsp-document-symbol'  -- allow '/@' to search for func defs
-    use 'saadparwaiz1/cmp_luasnip'              -- enable luasnip as cmp snippet engine
-    use 'onsails/lspkind-nvim'                  -- display group tags on cmp (e.g. LSP, buffer, etc.)
+    use {
+      'hrsh7th/nvim-cmp',                             -- autocompletion engine
+      requires = {
+        { 'hrsh7th/cmp-buffer' },                     -- autocomplete from buffer & enable '/' search
+        { 'hrsh7th/cmp-path' },                       -- autocomplete directory path
+        { 'hrsh7th/cmp-nvim-lua' },                   -- autocomplete Lua API
+        { 'hrsh7th/cmp-nvim-lsp' },                   -- autocomplete from LSP
+        { 'hrsh7th/cmp-nvim-lsp-document-symbol' },   -- allow '/@' to search for func defs
+        { 'saadparwaiz1/cmp_luasnip' },               -- enable luasnip as cmp snippet engine
+        { 'onsails/lspkind-nvim' },                   -- display group tags on cmp (e.g. LSP, buffer, etc.)
+      }
+    }
 
     -- aesthesics
     use 'NTBBloodbath/doom-one.nvim'

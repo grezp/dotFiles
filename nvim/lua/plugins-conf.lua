@@ -2,6 +2,9 @@ local utils = require('utils')
 
 -- SETTINGS --
 
+-- telescope
+require('telescope').load_extension('fzf')
+
 -- Comment.nvim setup
 require('Comment').setup()
 
@@ -25,12 +28,14 @@ require'nvim-treesitter.configs'.setup {
 -- WhichKey
 require('which-key').setup()
 
+
 -- MAPPINGS --
 
--- FZF
-utils.Map('<Leader>ff', ':FZF<CR>')
-utils.Map('<Leader>fb', ':Buffers<CR>')    -- fzf buffer
-utils.Map('<Leader>fr', ':Rg<CR>')         -- fzf ripgrep search
+-- telescope
+utils.Map('<leader>ff', '<cmd>Telescope find_files<cr>')
+utils.Map('<leader>fg', '<cmd>Telescope live_grep<cr>')
+utils.Map('<leader>fb', '<cmd>Telescope buffers<cr>')
+utils.Map('<leader>fh', '<cmd>Telescope help_tags<cr>')
 
 -- NrwwRgn
 utils.Map('<Leader>nn', ':NR!<CR>')

@@ -16,7 +16,7 @@ require('doom-one').setup({
         bufferline = false,
         gitgutter = false,
         gitsigns = false,
-        telescope = false,
+        telescope = true,
         neogit = false,
         nvim_tree = false,
         dashboard = false,
@@ -118,6 +118,9 @@ M.custom_hl_groups = {
   IncSearch = { fg = fg_def, bg = dark_magenta, gui = 'bold' },
   Search    = { fg = white, bg = dark_violet,  gui = 'bold' },
 
+  -- plugins --
+
+  -- WhichKey
   WhichKey          = { fg = blue },
   WhichKeyGroup     = { fg = red },
   WhichKeySeparator = { fg = base6 },
@@ -125,12 +128,14 @@ M.custom_hl_groups = {
   WhichKeyValue     = { fg = green },
   WhichKeyFloat     = { bg = base2 },
 
+  -- lightspeed
   LightspeedLabel                  = { fg = red,       gui = 'bold,underline' },
   LightspeedLabelDistant           = { fg = blue,      gui = 'bold' },
   LightspeedLabelDistantOverlapped = { fg = violet,    gui = 'bold' },
   LightspeedShortcut               = { fg = white,     gui = 'bold', bg = dark_red },
   LightspeedOneCharMatch           = { fg = white,     gui = 'bold', bg = dark_red },
 
+  -- hlslens
   HlSearchNear     = { fg = white, bg = dark_magenta, gui = 'bold' },
   HlSearchLensNear = { fg = base3, bg = dark_magenta, gui = 'bold' },
   HlSearchLens     = { fg = base3, bg = dark_violet,  gui = 'bold' },
