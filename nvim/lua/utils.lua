@@ -15,6 +15,11 @@ M.Nmap = function(shortcut, command, opts)
   map_generic('n', shortcut, command, opts)
 end
 
+-- map in normal mode
+M.Xmap = function(shortcut, command, opts)
+  map_generic('x', shortcut, command, opts)
+end
+
 -- map in terminal mode
 M.Tmap = function(shortcut, command, opts)
   map_generic('t', shortcut, command, opts)

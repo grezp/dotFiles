@@ -54,6 +54,7 @@ local green = '#98be65'
 local blue = '#51afef'
 -- local dark_blue = '#2257A0'
 local magenta = '#c678dd'
+local dark_magenta = utils.Darken(magenta, 0.3)
 -- local light_magenta = utils.Lighten(magenta, 0.4)
 local violet = '#a9a1e1'
 local dark_violet = '#4e4f67'
@@ -114,8 +115,8 @@ M.custom_hl_groups = {
   Comment = { fg = base6, gui = 'italic' },
 
   -- change search colors to differ from visual select
-  Search    = { fg = fg_def, bg = dark_violet, gui = 'bold' },
-  IncSearch = { fg = fg_def, bg = dark_violet, gui = 'bold' },
+  IncSearch = { fg = fg_def, bg = dark_magenta, gui = 'bold' },
+  Search    = { fg = white, bg = dark_violet,  gui = 'bold' },
 
   WhichKeyValue = { fg = violet },
 
@@ -124,6 +125,10 @@ M.custom_hl_groups = {
   LightspeedLabelDistantOverlapped = { fg = violet,    gui = 'bold' },
   LightspeedShortcut               = { fg = white,     gui = 'bold', bg = dark_red },
   LightspeedOneCharMatch           = { fg = white,     gui = 'bold', bg = dark_red },
+
+  HlSearchNear = { fg = white, bg = dark_magenta, gui = 'bold' },
+  HlSearchLensNear = { fg = base3, bg = dark_magenta, gui = 'bold' },
+  HlSearchLens = { fg = base3, bg = dark_violet,  gui = 'bold'},
 }
 
 M.apply_highlight(M.custom_hl_groups)

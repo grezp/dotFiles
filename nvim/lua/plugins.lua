@@ -7,8 +7,8 @@ return require('packer').startup{
     use 'chrisbra/NrrwRgn'                      -- narrow code snippets like emacs
     use 'numToStr/Comment.nvim'                 -- comment code w/ vi movements
     use 'folke/which-key.nvim'                  -- shows what keys do + auto show buffers/registers
-    use 'ggandor/lightspeed.nvim'               -- jump to text quickly
-    use 'kevinhwang91/nvim-hlslens'
+    use 'ggandor/lightspeed.nvim'               -- jump to text quickly by matching 2 chars
+    use 'kevinhwang91/nvim-hlslens'             -- improves search by placing tags to jump to
     use 'L3MON4D3/LuaSnip'
 
     -- searching

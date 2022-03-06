@@ -38,3 +38,17 @@ utils.Map('<Leader>ns', ':WR<CR>:bdelete!<CR>')
 
 -- WhichKey
 utils.Ex.cabbrev('W', 'WhichKey')
+
+-- hlslens
+utils.Nmap('n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]])
+utils.Nmap('N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]])
+utils.Nmap('*', [[*<Cmd>lua require('hlslens').start()<CR>]])
+utils.Nmap('#', [[#<Cmd>lua require('hlslens').start()<CR>]])
+utils.Nmap('g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
+utils.Nmap('g#', [[g#<Cmd>lua require('hlslens').start()<CR>]])
+
+utils.Xmap('*', [[*<Cmd>lua require('hlslens').start()<CR>]])
+utils.Xmap('#', [[#<Cmd>lua require('hlslens').start()<CR>]])
+utils.Xmap('g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
+utils.Xmap('g#', [[g#<Cmd>lua require('hlslens').start()<CR>]])
+
