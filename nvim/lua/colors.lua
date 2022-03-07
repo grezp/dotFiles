@@ -17,7 +17,7 @@ require('doom-one').setup({
         gitgutter = false,
         gitsigns = false,
         telescope = true,
-        neogit = false,
+        neogit = true,
         nvim_tree = false,
         dashboard = false,
         startify = false,

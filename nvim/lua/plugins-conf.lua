@@ -9,6 +9,7 @@ require('telescope').load_extension('fzf')
 require('Comment').setup()
 require('which-key').setup()
 require('mkdir')
+require('neogit').setup()
 
 -- indent blankline
 vim.g.indent_blankline_char = '┊'
