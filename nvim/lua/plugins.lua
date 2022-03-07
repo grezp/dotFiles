@@ -3,14 +3,15 @@ return require('packer').startup{
     use 'wbthomason/packer.nvim'                -- Packer can manage itself
 
     -- utility
-    use 'tpope/vim-fugitive'                    -- git wrapper for vim
-    use 'chrisbra/NrrwRgn'                      -- narrow code snippets like emacs
-    use 'numToStr/Comment.nvim'                 -- comment code w/ vi movements
-    use 'folke/which-key.nvim'                  -- shows what keys do + auto show buffers/registers
-    use 'ggandor/lightspeed.nvim'               -- jump to text quickly by matching 2 chars
-    use 'kevinhwang91/nvim-hlslens'             -- improves search by placing tags to jump to
-    use 'famiu/bufdelete.nvim'
-    use 'L3MON4D3/LuaSnip'
+    use 'tpope/vim-fugitive'              -- git wrapper for vim
+    use 'chrisbra/NrrwRgn'                -- narrow code snippets like emacs
+    use 'numToStr/Comment.nvim'           -- comment code w/ vi movements
+    use 'folke/which-key.nvim'            -- shows what keys do + auto show buffers/registers
+    use 'ggandor/lightspeed.nvim'         -- jump to text quickly by matching 2 chars
+    use 'kevinhwang91/nvim-hlslens'       -- improves search by placing tags to jump to
+    use 'famiu/bufdelete.nvim'            -- deletes buffer w/o closing/changing panes
+    use 'jghauser/mkdir.nvim'             -- create missing dir(s) like 'mkdir -p'
+    use 'L3MON4D3/LuaSnip'                -- create custom snippets
 
     -- searching
     use {

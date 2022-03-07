@@ -32,18 +32,19 @@ local M = {}
 local utils = require('doom-one.utils')
 
 local fg_def = '#bbc2cf'
--- local bg_def = '#282c34'
+local bg_def = '#282c34'
 -- local base0 = '#1B2229'
 -- local base1 = '#1c1f24'
 local base2 = '#202328'
 local base3 = '#23272e'
 local base4 = '#3f444a'
--- local base5 = '#5B6268'
+local base5 = '#5B6268'
 local base6 = '#73797e'
 local base7 = '#9ca0a4'
 -- local base8 = '#DFDFDF'
 -- local base9 = '#E6E6E6'
 -- local bg_popup = '#3E4556'
+local bg_highlight = '#21252a'
 
 -- local grey = base4
 local red = '#ff6c6b'
@@ -117,6 +118,10 @@ M.custom_hl_groups = {
   -- change search colors to differ from visual select
   IncSearch = { fg = fg_def, bg = dark_magenta, gui = 'bold' },
   Search    = { fg = white, bg = dark_violet,  gui = 'bold' },
+
+  -- brighten number line, def are too dark
+  LineNr       = { fg = base5, bg = bg_def },
+  CursorLineNr = { fg = blue,  bg = bg_highlight },
 
   -- plugins --
 

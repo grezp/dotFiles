@@ -4,6 +4,7 @@ local utils = require('utils')
 utils.Map('<Leader>o', 'o<Esc>k')         -- enter new line below & goto normal mode
 utils.Map('<Leader>O', 'O<Esc>j')         -- enter new line above & goto normal mode
 utils.Nmap('<Leader>,', ':noh<CR>')       -- stop search highlight
+utils.Nmap('<Leader>rr', [[<cmd>source %<CR>]])
 
 -- system file
 utils.Nmap('<Leader>s', ':w<CR>')     -- saves current file
@@ -26,4 +27,9 @@ utils.Nmap('<leader>w<', '30<C-w><')      -- inc < window height
 
 -- terminal
 utils.Tmap('<Leader><Esc>', '<C-\\><C-n>')
+
+-- misc.
+utils.Nmap('<Leader>cd', 'cd %:p:h<CR>')        -- change neovim directory to current file
+utils.Nmap('<Leader>*', [[<Cmd>let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>]]) -- highlight word w/o moving
+
 
