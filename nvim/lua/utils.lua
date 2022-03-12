@@ -16,6 +16,7 @@ M.Nmap = function(shortcut, command, opts)
 end
 
 -- map in normal mode
+-- map in X mode
 M.Xmap = function(shortcut, command, opts)
   map_generic('x', shortcut, command, opts)
 end

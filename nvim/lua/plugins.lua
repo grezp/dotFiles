@@ -13,10 +13,13 @@ return require('packer').startup{
     use 'L3MON4D3/LuaSnip'                -- create custom snippets
 
     -- git
-    use 'tpope/vim-fugitive'                -- git wrapper for vim
-    use {
-      'TimUntersberger/neogit',             -- magit clone
-      requires = 'nvim-lua/plenary.nvim'
+    use 'tpope/vim-fugitive'              -- git wrapper for vim
+    use 'sindrets/diffview.nvim'          -- provides inline diffs
+    use {                                 -- displays inline git changes + blame
+      'lewis6991/gitsigns.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim'
+      }
     }
 
     -- searching

@@ -1,4 +1,5 @@
 vim.o.termguicolors = true              -- 24 bit colors
+-- vim.g.fugitive_dynamic_colors = 1
 
 require('doom-one').setup({
     cursor_coloring = true,
@@ -15,7 +16,7 @@ require('doom-one').setup({
         barbar = false,
         bufferline = false,
         gitgutter = false,
-        gitsigns = false,
+        gitsigns = true,
         telescope = true,
         neogit = true,
         nvim_tree = false,
@@ -124,6 +125,10 @@ M.custom_hl_groups = {
   CursorLineNr = { fg = blue,  bg = bg_highlight },
 
   -- plugins --
+
+  -- fugitive
+  diffAdded     = { fg = green },
+  diffRemoved   = { fg = red },
 
   -- WhichKey
   WhichKey          = { fg = blue },
