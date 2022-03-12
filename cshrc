@@ -199,29 +199,21 @@ setenv PATH $HOME/bin:${PATH}
 setenv PATH ${PATH}:/user/tools/Linux/bin
 setenv PATH /usr/local/bin:${PATH}
 setenv PATH /usr/local:${PATH}
-setenv PATH $HOME/tools/llvm/bin:${PATH}
-# setenv PATH $HOME/tools/gRPC/bin:${PATH}
-setenv PATH "/u/pgutierr/miniconda3/bin:$PATH"
+setenv PATH "$HOME/miniconda3/bin:$PATH"
+setenv PATH "$HOME/packages/lua/bin:$PATH"
+setenv PATH "$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
-setenv LD_LIBRARY_PATH /usr/local/lib64:/usr/local/lib:${LD_LIBRARY_PATH}
-# setenv LD_LIBRARY_PATH $HOME/tools/gRPC/lib:$HOME/tools/gRPC/lib64:$LD_LIBRARY_PATH
-setenv LD_LIBRARY_PATH $HOME/tools/llvm/lib:${LD_LIBRARY_PATH}
-
-# setenv PKG_CONFIG_PATH $HOME/tools/gRPC/lib64/pkgconfig:$HOME/tools/gRPC/lib/pkgconfig:$PKG_CONFIG_PATH
+setenv LD_LIBRARY_PATH $HOME/miniconda3/lib:${LD_LIBRARY_PATH}
 
 setenv MANPATH $HOME/local/share/man:${MANPATH}
 setenv MANPATH $HOME/tools/llvm/share/man:${MANPATH}
 setenv MANPATH $HOME/miniconda3/share/man:${MANPATH}
-
-
-setenv LLVM_ROOT $HOME/local/llvm
+setenv MANPATH $HOME/.fzf/man:${MANPATH}
 
 setenv CC /usr/local/bin/gcc
 setenv CXX /usr/local/bin/g++
 setenv XDG_CONFIG_HOME $HOME/.config
-# evn vars
 setenv CUSTOMER_DIR /ltx/customer/
-
 # setenv LC_ALL='en_US.UTF-8'
 # setenv LANG='en_US.UTF-8'
 
