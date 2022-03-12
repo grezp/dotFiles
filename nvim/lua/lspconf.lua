@@ -1,4 +1,9 @@
+local utils = require('utils')
 
+-- diable inline diagnostic errors
+vim.diagnostic.config( { virtual_text = false })
+
+-- toggles diags with same key map
 local toggle = true
 function _G.toggle_diags()
   if toggle then
@@ -11,11 +16,11 @@ end
 
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<Leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>ek', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>ej', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-vim.api.nvim_set_keymap('n', '<Leader>et', '<cmd>lua _G.toggle_diags()<CR>', opts)
+utils.Nmap('<Leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>')
+utils.Nmap('<Leader>ek', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+utils.Nmap('<Leader>ej', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+utils.Nmap('<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+utils.Nmap('<Leader>et', '<cmd>lua _G.toggle_diags()<CR>')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -24,7 +29,6 @@ local on_attach = function(bufnr)
   print('LSP has Started')
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -59,22 +63,22 @@ end
 
 -- lua LSP config
 
-local sumneko_root_path = ""
-local sumneko_binary = ""
+local sumneko_root_path = ''
+local sumneko_binary = ''
 
-if vim.fn.has("mac") == 1 then
-  sumneko_root_path = HOME .. "/.config/nvim/lua-language-server"
-  sumneko_binary = HOME .. "/.config/nvim/lua-language-server/bin/macOS/lua-language-server"
-elseif vim.fn.has("unix") == 1 then
-  sumneko_root_path = HOME .. "/packages/lua/bin/"
-  sumneko_binary = sumneko_root_path .. "lua-language-server"
+if vim.fn.has('mac') == 1 then
+  sumneko_root_path = HOME .. '/.config/nvim/lua-language-server'
+  sumneko_binary = HOME .. '/.config/nvim/lua-language-server/bin/macOS/lua-language-server'
+elseif vim.fn.has('unix') == 1 then
+  sumneko_root_path = HOME .. '/packages/lua/bin/'
+  sumneko_binary = sumneko_root_path .. 'lua-language-server'
 else
-  print("Unsupported system for sumneko")
+  print('Unsupported system for sumneko')
 end
 
 require'lspconfig'.sumneko_lua.setup {
   on_attach = on_attach,
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "main.lua"},
+  cmd = {sumneko_binary, '-E', sumneko_root_path .. 'main.lua'},
   settings = {
     Lua = {
       runtime = {
@@ -90,7 +94,7 @@ require'lspconfig'.sumneko_lua.setup {
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        -- library = vim.api.nvim_get_runtime_file("", true),
+        -- library = vim.api.nvim_get_runtime_file('', true),
         library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
       },
       -- Do not send telemetry data containing a randomized but unique identifier
@@ -100,3 +104,13 @@ require'lspconfig'.sumneko_lua.setup {
     },
   }
 }
+
+-- ignore INFO warning on ruby
+vim.cmd([[
+  augroup rubyDiags
+    autocmd!
+    autocmd FileType ruby :lua vim.diagnostic.config({underline = { severity = vim.diagnostic.severity.WARN },
+                                                    \ signs = { severity = vim.diagnostic.severity.WARN }})
+  augroup END
+]])
+

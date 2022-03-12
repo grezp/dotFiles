@@ -1,5 +1,5 @@
-local lspkind = require "lspkind"
-local cmp = require "cmp"
+local lspkind = require 'lspkind'
+local cmp = require 'cmp'
 
 cmp.setup {
   -- configure mappings
@@ -18,26 +18,24 @@ cmp.setup {
   -- these are like cmp 'plugins'
   -- order signifies which completions are shown first
   sources = {
-    { name = "nvim_lua" },
-    { name = "nvim_lsp" },
-    { name = "path" },
-    { name = "luasnip" },
-    { name = "buffer", keyword_length = 5 },
+    { name = 'nvim_lua' },
+    { name = 'nvim_lsp' },
+    { name = 'path' },
+    { name = 'luasnip' },
+    { name = 'buffer', keyword_length = 5 },
   },
 
   -- shows where autocomplete is comming from
   formatting = {
     format = lspkind.cmp_format {
       with_text = true,
-      -- TODO: installs icon fonts
-      mode = 'text',
 
       menu = {
-        buffer = "[buf]",
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[api]",
-        path = "[path]",
-        luasnip = "[snip]",
+        buffer = '[buf]',
+        nvim_lsp = '[LSP]',
+        nvim_lua = '[api]',
+        path = '[path]',
+        luasnip = '[snip]',
       },
     },
   },
@@ -51,8 +49,8 @@ cmp.setup {
 
       -- copied from cmp-under, but I don't think I need the plugin for this.
       function(entry1, entry2)
-        local _, entry1_under = entry1.completion_item.label:find "^_+"
-        local _, entry2_under = entry2.completion_item.label:find "^_+"
+        local _, entry1_under = entry1.completion_item.label:find '^_+'
+        local _, entry2_under = entry2.completion_item.label:find '^_+'
         entry1_under = entry1_under or 0
         entry2_under = entry2_under or 0
         if entry1_under > entry2_under then
@@ -71,7 +69,7 @@ cmp.setup {
 
   snippet = {
     expand = function(args)
-      require("luasnip").lsp_expand(args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
 
@@ -80,41 +78,14 @@ cmp.setup {
   },
 }
 
--- command line setup
--- TODO: figure out why C-Y is not working
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' },
-  },
-  {
-    { name = 'cmdline', keyword_pattern=[=[[^[:blank:]\!]*]=]}
-  })
-})
-
--- require'cmp'.setup.cmdline('/', {
---   sources = {
---     { name = 'buffer' }
---   }
--- })
-
 -- search setup
 -- /@ look for function and var defs
 require'cmp'.setup.cmdline('/', {
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp_document_symbol' }
-  }, {
-    { name = 'buffer' }
-  })
+  sources = cmp.config.sources(
+  { name = 'nvim_lsp_document_symbol' },
+  {{
+    name = 'buffer',
+    max_item_count = 20,
+    keyword_length = 3,
+  }})
 })
-
--- TODO: color groups
--- nvim-cmp highlight groups.
--- local Group = require("colorbuddy.group").Group
--- local g = require("colorbuddy.group").groups
--- local s = require("colorbuddy.style").styles
---
--- Group.new("CmpItemAbbr", g.Comment)
--- Group.new("CmpItemAbbrDeprecated", g.Error)
--- Group.new("CmpItemAbbrMatchFuzzy", g.CmpItemAbbr.fg:dark(), nil, s.italic)
--- Group.new("CmpItemKind", g.Special)
--- Group.new("CmpItemMenu", g.NonText)

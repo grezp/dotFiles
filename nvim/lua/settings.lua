@@ -1,9 +1,9 @@
 -- basic/misc settings
-vim.o.encoding = "utf-8"
+vim.o.encoding = 'utf-8'
 vim.o.hidden = true                         -- change buffer w/o saving
 vim.o.mouse = 'a'                           -- enable mouse
 vim.o.history = 1000                        -- save cmd history
-vim.o.backspace = "indent,eol,start"        -- backspace works on every char in insert mode
+vim.o.backspace = 'indent,eol,start'        -- backspace works on every char in insert mode
 vim.o.dictionary = '/usr/share/dict/words'  -- dictionary file
 vim.o.shortmess = 'aWF'
 
@@ -27,9 +27,8 @@ vim.o.wildignore = '*/build/*,*.bak'    -- don't auto complete these patters
 vim.o.completeopt = 'menu,menuone,noselect' -- use popup menu, use popup for 1 match, don't select match in menu
 
 -- mapping timeout
-vim.o.timeout = false
-vim.o.ttimeout = true
-vim.o.ttimeoutlen = 100
+vim.o.timeout = true
+vim.o.timeoutlen = 500
 
 -- searching
 vim.o.incsearch = true      -- find pattern as you type
@@ -55,13 +54,12 @@ vim.o.backupdir = HOME .. '/.vim/tmp/backup//'  -- backup location
 
 -- folding
 vim.o.foldenable = false            -- don't auto fold when file is opened
-vim.o.foldlevel = 4                 -- limit folding to 4 levels
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.o.fillchars = 'fold:-'
-vim.o.foldnestmax = 5
-vim.o.foldminlines = 1
+vim.o.foldnestmax = 10
 
+-- reformats folds to be fix indentation + {...}
 function _G.custom_fold_text()
   local line_count = vim.v.foldend - vim.v.foldstart + 1
   local line = vim.fn.getline(vim.v.foldstart)
@@ -79,34 +77,23 @@ function _G.custom_fold_text()
     line = line .. ' {'
   end
 
-  return line .. "...} : " .. line_count .. " lines "
+  return line .. '...} : ' .. line_count .. ' lines '
 end
 vim.o.foldtext = 'v:lua.custom_fold_text()'
-
--- -- setup global tags
--- function file_exists(name)
---    local f=io.open(name,"r")
---    if f~=nil then io.close(f) return true else return false end
--- end
---
--- local l_tags = ''
--- if file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-unison,'  end
--- if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
--- if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
--- vim.o.tags = vim.o.tags .. l_tags
 
 -- set ruby path -> improves startup time
 -- vim.g.ruby_path = '/usr/share/gems/gems/abrt-0.0.6/lib,/usr/share/rubygems,/usr/share/ruby,/usr/lib64/ruby/'
 vim.g.ruby_path = ''
 
--- PLUGINGS --
+-- -- setup global tags
+local file_exists = function (name)
+   local f=io.open(name,'r')
+   if f~=nil then io.close(f) return true else return false end
+end
 
--- Comment.nvim setup
-require('Comment').setup()
+local l_tags = ''
+if file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-unison,'  end
+if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
+if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
+vim.o.tags = vim.o.tags .. l_tags
 
--- indent blankline
-vim.g.indent_blankline_char = '┊'
-
--- AutoPairs
--- let g:AutoPairsShortcutToggle = '<another key>'
--- vim.g.AutoPairsShortcutToggle = '<Leader>pp'
