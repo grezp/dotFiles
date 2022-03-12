@@ -63,22 +63,21 @@ end
 
 -- lua LSP config
 
-local sumneko_root_path = ''
+local sumneko_main = ''
 local sumneko_binary = ''
-
 if vim.fn.has('mac') == 1 then
-  sumneko_root_path = HOME .. '/.config/nvim/lua-language-server'
-  sumneko_binary = HOME .. '/.config/nvim/lua-language-server/bin/macOS/lua-language-server'
+  sumneko_main = '/opt/homebrew/opt/lua-language-server/libexec/main.lua'
+  sumneko_binary = '/opt/homebrew/bin/lua-language-server'
 elseif vim.fn.has('unix') == 1 then
-  sumneko_root_path = HOME .. '/packages/lua/bin/'
-  sumneko_binary = sumneko_root_path .. 'lua-language-server'
+  sumneko_main = HOME .. '/packages/lua/bin/main.lua'
+  sumneko_binary = HOME .. '/packages/lua/bin/lua-language-server'
 else
   print('Unsupported system for sumneko')
 end
 
 require'lspconfig'.sumneko_lua.setup {
   on_attach = on_attach,
-  cmd = {sumneko_binary, '-E', sumneko_root_path .. 'main.lua'},
+  cmd = {sumneko_binary, '-E', sumneko_main},
   settings = {
     Lua = {
       runtime = {
