@@ -70,7 +70,7 @@ utils.Nmap('<Leader>bd', [[:lua require('bufdelete').bufdelete(0, true)<CR>]])
 
 -- fugitive
 utils.Nmap('<Leader>gg', '<cmd>Git<CR>')
-utils.Nmap('<Leader>gl', '<cmd>GcLog<CW>')
+utils.Nmap('<Leader>gl', '<cmd>GcLog<CR>')
 
 -- gitsigns --
 utils.Nmap(']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})

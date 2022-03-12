@@ -86,14 +86,14 @@ vim.o.foldtext = 'v:lua.custom_fold_text()'
 vim.g.ruby_path = ''
 
 -- -- setup global tags
--- function file_exists(name)
---    local f=io.open(name,'r')
---    if f~=nil then io.close(f) return true else return false end
--- end
---
--- local l_tags = ''
--- if file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-unison,'  end
--- if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
--- if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
--- vim.o.tags = vim.o.tags .. l_tags
+local file_exists = function (name)
+   local f=io.open(name,'r')
+   if f~=nil then io.close(f) return true else return false end
+end
+
+local l_tags = ''
+if file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-unison,'  end
+if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
+if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
+vim.o.tags = vim.o.tags .. l_tags
 
