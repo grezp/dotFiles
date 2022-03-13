@@ -1,29 +1,15 @@
 local M = {}
 
-local map_generic = function(mode, shortcut, command, opts)
+-- generic keymaps --
+M.keymap = function(mode, shortcut, command, opts)
   opts = opts or { noremap = true, silent = true }
   vim.api.nvim_set_keymap(mode, shortcut, command, opts)
 end
 
--- map to any mone
-M.Map = function(shortcut, command, opts)
-  map_generic('', shortcut, command, opts)
-end
-
--- map in normal mode
-M.Nmap = function(shortcut, command, opts)
-  map_generic('n', shortcut, command, opts)
-end
-
--- map in normal mode
--- map in X mode
-M.Xmap = function(shortcut, command, opts)
-  map_generic('x', shortcut, command, opts)
-end
-
--- map in terminal mode
-M.Tmap = function(shortcut, command, opts)
-  map_generic('t', shortcut, command, opts)
+-- generic buffer keymaps --
+M.buf_keymap = function(bufnr, mode, shortcut, command, opts)
+  opts = opts or { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(bufnr, mode, shortcut, command, opts)
 end
 
 M.Ex = setmetatable({}, {

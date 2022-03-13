@@ -1,35 +1,34 @@
-local utils = require('utils')
+local ut = require('utils')
 
 -- general
-utils.Map('<Leader>o', 'o<Esc>k')         -- enter new line below & goto normal mode
-utils.Map('<Leader>O', 'O<Esc>j')         -- enter new line above & goto normal mode
-utils.Nmap('<Leader>,', ':noh<CR>')       -- stop search highlight
-utils.Nmap('<Leader>rr', [[<cmd>source %<CR>]])
+ut.keymap('',  '<Leader>o', 'o<Esc>k')         -- enter new line below & goto normal mode
+ut.keymap('',  '<Leader>O', 'O<Esc>j')         -- enter new line above & goto normal mode
+ut.keymap('n', '<Leader>,', ':noh<CR>')       -- stop search highlight
+ut.keymap('n', '<Leader>rr', [[<cmd>source %<CR>]])
 
 -- system file
-utils.Nmap('<Leader>s', ':w<CR>')     -- saves current file
-utils.Nmap('<Leader>q', ':q<CR>')     -- exit window
-utils.Nmap('<Leader>Q', ':q!<CR>')    -- exit window w/o saving
+ut.keymap('n', '<Leader>s', ':w<CR>')     -- saves current file
+ut.keymap('n', '<Leader>q', ':q<CR>')     -- exit window
+ut.keymap('n', '<Leader>Q', ':q!<CR>')    -- exit window w/o saving
 
 -- buffers
-utils.Nmap('<Leader>bb', ':ls<CR>:buffer<Space>')     -- list buffers, then select
-utils.Nmap('<Leader>bl', ':ls<CR>')                   -- list buffers
-utils.Nmap('<Leader>bn', ':bnext<CR>')                -- next buffer
-utils.Nmap('<Leader>bp', ':bprev<CR>')                -- prev buffer
-utils.Nmap('<Leader>bD', ':bdelete<CR>')              -- delete buffer
+ut.keymap('n', '<Leader>bb', ':ls<CR>:buffer<Space>')     -- list buffers, then select
+ut.keymap('n', '<Leader>bl', ':ls<CR>')                   -- list buffers
+ut.keymap('n', '<Leader>bn', ':bnext<CR>')                -- next buffer
+ut.keymap('n', '<Leader>bp', ':bprev<CR>')                -- prev buffer
+ut.keymap('n', '<Leader>bD', ':bdelete<CR>')              -- delete buffer
 
 -- windows
-utils.Map('<Leader>w', '<C-w>')           -- window keybind
-utils.Nmap('<Leader>w+', '10<C-w>+')      -- inc window height
-utils.Nmap('<Leader>w-', '10<C-w>-')      -- dec window height
-utils.Nmap('<leader>w>', '30<C-w>>')      -- inc > window height
-utils.Nmap('<leader>w<', '30<C-w><')      -- inc < window height
+ut.keymap('',  '<Leader>w', '<C-w>')           -- window keybind
+ut.keymap('n', '<Leader>w+', '10<C-w>+')      -- inc window height
+ut.keymap('n', '<Leader>w-', '10<C-w>-')      -- dec window height
+ut.keymap('n', '<leader>w>', '30<C-w>>')      -- inc > window height
+ut.keymap('n', '<leader>w<', '30<C-w><')      -- inc < window height
 
 -- terminal
-utils.Tmap('<Leader><Esc>', '<C-\\><C-n>')
+ut.keymap('t', '<Leader><Esc>', '<C-\\><C-n>')
 
 -- misc.
-utils.Nmap('<Leader>cd', 'cd %:p:h<CR>')        -- change neovim directory to current file
-utils.Nmap('<Leader>*', [[<Cmd>let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>]]) -- highlight word w/o moving
-
+ut.keymap('n', '<Leader>cd', 'cd %:p:h<CR>')        -- change neovim directory to current file
+ut.keymap('n', '<Leader>*', [[<Cmd>let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>]]) -- highlight word w/o moving
 

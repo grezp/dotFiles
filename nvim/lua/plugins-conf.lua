@@ -1,4 +1,4 @@
-local utils = require('utils')
+local ut = require('utils')
 
 --------------
 -- SETTINGS --
@@ -9,7 +9,17 @@ require('telescope').load_extension('fzf')
 require('Comment').setup()
 require('which-key').setup()
 require('mkdir')
-require('gitsigns').setup()
+
+-- gitsigns --
+require('gitsigns').setup {
+  signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  },
+}
 
 -- indent blankline --
 vim.g.indent_blankline_char = '┊'
@@ -34,57 +44,57 @@ require'nvim-treesitter.configs'.setup {
 --------------
 
 -- telescope --
-utils.Map([[<leader>ff]], [[<cmd>lua require('telescope.builtin').find_files()<cr>]])
-utils.Map([[<leader>fg]], [[<cmd>lua require('telescope.builtin').live_grep()<cr>]])
-utils.Map([[<leader>fb]], [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
-utils.Map([[<leader>fh]], [[<cmd>lua require('telescope.builtin').help_tags()<cr>]])
-utils.Map([[<leader>f/]], [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]])
-utils.Map([[<leader>fc]], [[<cmd>lua require('telescope.builtin').command_history()<cr>]])
-utils.Map([[<leader>fo]], [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]])
-utils.Map([[<leader>fm]], [[<cmd>lua require('telescope.builtin').man_pages()<cr>]])
-utils.Map([[<leader>f']], [[<cmd>lua require('telescope.builtin').marks()<cr>]])
-utils.Map([[<leader>f"]], [[<cmd>lua require('telescope.builtin').registers()<cr>]])
+ut.keymap('', [[<leader>ff]], [[<cmd>lua require('telescope.builtin').find_files()<cr>]])
+ut.keymap('', [[<leader>fg]], [[<cmd>lua require('telescope.builtin').live_grep()<cr>]])
+ut.keymap('', [[<leader>fb]], [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
+ut.keymap('', [[<leader>fh]], [[<cmd>lua require('telescope.builtin').help_tags()<cr>]])
+ut.keymap('', [[<leader>f/]], [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]])
+ut.keymap('', [[<leader>fc]], [[<cmd>lua require('telescope.builtin').command_history()<cr>]])
+ut.keymap('', [[<leader>fo]], [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]])
+ut.keymap('', [[<leader>fm]], [[<cmd>lua require('telescope.builtin').man_pages()<cr>]])
+ut.keymap('', [[<leader>f']], [[<cmd>lua require('telescope.builtin').marks()<cr>]])
+ut.keymap('', [[<leader>f"]], [[<cmd>lua require('telescope.builtin').registers()<cr>]])
 
 -- NrwwRgn --
-utils.Map('<Leader>nn', ':NR!<CR>')
-utils.Map('<Leader>ns', ':WR<CR>:bdelete!<CR>')
+ut.keymap('', '<Leader>nn', ':NR!<CR>')
+ut.keymap('', '<Leader>ns', ':WR<CR>:bdelete!<CR>')
 
 -- WhichKey --
-utils.Ex.cabbrev('W', 'WhichKey')
+ut.Ex.cabbrev('W', 'WhichKey')
 
 -- hlslens --
-utils.Nmap('n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]])
-utils.Nmap('N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]])
-utils.Nmap('*', [[*<Cmd>lua require('hlslens').start()<CR>]])
-utils.Nmap('#', [[#<Cmd>lua require('hlslens').start()<CR>]])
-utils.Nmap('g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
-utils.Nmap('g#', [[g#<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]])
 
-utils.Xmap('*', [[*<Cmd>lua require('hlslens').start()<CR>]])
-utils.Xmap('#', [[#<Cmd>lua require('hlslens').start()<CR>]])
-utils.Xmap('g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
-utils.Xmap('g#', [[g#<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('x', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('x', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('x', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap('x', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]])
 
 -- bufdelete --
-utils.Nmap('<Leader>bd', [[:lua require('bufdelete').bufdelete(0, true)<CR>]])
+ut.keymap('n', '<Leader>bd', [[:lua require('bufdelete').bufdelete(0, true)<CR>]])
 
 -- fugitive
-utils.Nmap('<Leader>gg', '<cmd>Git<CR>')
-utils.Nmap('<Leader>gl', '<cmd>GcLog<CR>')
+ut.keymap('n', '<Leader>gg', '<cmd>Git<CR>')
+ut.keymap('n', '<Leader>gl', '<cmd>GcLog<CR>')
 
 -- gitsigns --
-utils.Nmap(']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
-utils.Nmap('[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
+ut.keymap('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
+ut.keymap('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
 
-utils.Map('<leader>hs', ':Gitsigns stage_hunk<CR>')
-utils.Map('<leader>hu', ':Gitsigns undo_stage_hunk<CR>')
-utils.Map('<leader>hr', ':Gitsigns reset_hunk<CR>')
-utils.Nmap('<leader>hS', '<cmd>Gitsigns stage_buffer<CR>')
-utils.Nmap('<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
-utils.Nmap('<leader>hp', '<cmd>Gitsigns preview_hunk<CR>')
-utils.Nmap('<leader>hb', '<cmd>lua require"gitsigns".blame_line {full=true, ignore_whitespace=true}<CR>')
-utils.Nmap('<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
-utils.Nmap('<leader>hd', '<cmd>Gitsigns diffthis<CR>')
-utils.Nmap('<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
-utils.Nmap('<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
- 
+ut.keymap('',  '<leader>hs', ':Gitsigns stage_hunk<CR>')
+ut.keymap('',  '<leader>hu', ':Gitsigns undo_stage_hunk<CR>')
+ut.keymap('',  '<leader>hr', ':Gitsigns reset_hunk<CR>')
+ut.keymap('n', '<leader>hS', '<cmd>Gitsigns stage_buffer<CR>')
+ut.keymap('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
+ut.keymap('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>')
+ut.keymap('n', '<leader>hb', '<cmd>lua require"gitsigns".blame_line {full=true, ignore_whitespace=true}<CR>')
+ut.keymap('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
+ut.keymap('n', '<leader>hd', '<cmd>Gitsigns diffthis<CR>')
+ut.keymap('n', '<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
+ut.keymap('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
+

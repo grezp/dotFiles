@@ -54,7 +54,6 @@ return require('packer').startup{
         { 'hrsh7th/cmp-nvim-lua' },                   -- autocomplete Lua API
         { 'hrsh7th/cmp-nvim-lsp' },                   -- autocomplete from LSP
         { 'hrsh7th/cmp-nvim-lsp-document-symbol' },   -- allow '/@' to search for func defs
-        -- { 'hrsh7th/cmp-nvim-lsp-signature-help' },
         { 'saadparwaiz1/cmp_luasnip' },               -- enable luasnip as cmp snippet engine
       }
     }
