@@ -86,11 +86,10 @@ set wildignorecase
 set wildignore=*/build/*,*.bak
 set tags+=tags
 " Cohu only:
-set tags+=/u/pgutierr/Projects/Qualcomm/thor/drivers/thorTags/tags
+set tags+=/u/pgutierr/projects/qualcomm/thor/drivers/thorTags/tags
 " Qualcomm only:
 set tags+=/prj/vlsi/pete/qat3518_cohu/.tmp/.pgutierr/ltx_include/tags;
-" stop auto comments
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+set background=dark
 " }}}
 
 "___Pattern search___" {{{
@@ -142,9 +141,9 @@ nnoremap <Leader>Q :q!<CR>|              " exit window w/o saving
 "___Windows___" {{{
 "_____________"
 map <Leader>w <C-w>|                             " window keybind
-nnoremap <Leader>w+ 10<C-w>+|                    " inc window height 
+nnoremap <Leader>w+ 10<C-w>+|                    " inc window height
 nnoremap <Leader>w- 10<C-w>-|                    " dec window height
-nnoremap <leader>w> 30<C-w>>|                    " inc > window height 
+nnoremap <leader>w> 30<C-w>>|                    " inc > window height
 nnoremap <leader>w< 30<C-w><|                    " inc < window height
 " }}}
 "
@@ -161,14 +160,14 @@ syntax on                                       " Turn on syntax hilighting
 colorscheme space-vim-dark                      " http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
 
 " general
-" so /usr/local/share/vim/vim82/syntax/hitest.vim 
+" so /usr/local/share/vim/vim82/syntax/hitest.vim
 hi Folded gui=none guibg=#262626 guifg=#005f5f| " change folding fg & bg color
-hi TabLineFill guibg=#263033|                   " tab bar empty space 
+hi TabLineFill guibg=#263033|                   " tab bar empty space
 hi TabLine guifg=#74baac guibg=#263033|         " inactive tab color -turtoise
 hi TabLineSel guifg=#d881ed guibg=#263033|      " active tab color - dark magenta
 
 " cpp
-hi Float gui=none guifg=#d787d7|                " change floats to match int 
+hi Float gui=none guifg=#d787d7|                " change floats to match int
 hi def link cppSTLnamespace TabLine
 
 
@@ -190,7 +189,11 @@ silent! call plug#begin()
     Plug 'preservim/nerdcommenter'                  " comment code easily
     Plug 'junegunn/fzf'                             " command line fuzzy finder
     Plug 'junegunn/fzf.vim'                         " fzf embeded into vim
+<<<<<<< HEAD
     Plug 'ludovicchabant/vim-gutentags'             " ctag manager
+=======
+    Plug 'tpope/vim-fugitive'                       " git wrapper for vim
+>>>>>>> origin/cohu
 call plug#end()
 
 "___Nerdcommenter___" {{{
@@ -344,3 +347,8 @@ set statusline+=%2*%2l:%-2c\                                " line + column
 " }}}
 
 " vim:fdm=marker
+
+"---EOF OVERWRITES---" {{{
+"------------ -------"
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" }}}
