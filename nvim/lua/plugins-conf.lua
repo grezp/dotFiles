@@ -87,3 +87,4 @@ utils.Nmap('<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
 utils.Nmap('<leader>hd', '<cmd>Gitsigns diffthis<CR>')
 utils.Nmap('<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
 utils.Nmap('<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
+ 
