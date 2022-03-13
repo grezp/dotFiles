@@ -33,10 +33,13 @@ return require('packer').startup{
     }
 
     -- performance
-    use 'nathom/filetype.nvim'                  -- improves filetype startup time
+    use 'nathom/filetype.nvim'        -- improves filetype startup time
 
-    -- nvim native
-    use 'neovim/nvim-lspconfig'                 -- Collection of configurations for the built-in LSP client
+    -- lsp
+    use 'neovim/nvim-lspconfig'       -- Collection of configurations for the built-in LSP client
+    use 'onsails/lspkind-nvim'        -- display group tags on cmp (e.g. LSP, buffer, etc.)
+
+
     use {                                       -- nvim hl based on syntax
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate'
@@ -51,8 +54,8 @@ return require('packer').startup{
         { 'hrsh7th/cmp-nvim-lua' },                   -- autocomplete Lua API
         { 'hrsh7th/cmp-nvim-lsp' },                   -- autocomplete from LSP
         { 'hrsh7th/cmp-nvim-lsp-document-symbol' },   -- allow '/@' to search for func defs
+        -- { 'hrsh7th/cmp-nvim-lsp-signature-help' },
         { 'saadparwaiz1/cmp_luasnip' },               -- enable luasnip as cmp snippet engine
-        { 'onsails/lspkind-nvim' },                   -- display group tags on cmp (e.g. LSP, buffer, etc.)
       }
     }
 
