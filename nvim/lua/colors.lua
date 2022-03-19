@@ -46,13 +46,14 @@ local base7 = '#9ca0a4'
 -- local base9 = '#E6E6E6'
 -- local bg_popup = '#3E4556'
 local bg_highlight = '#21252a'
+local base4_darken = utils.Darken(base4, 0.1)
 
 -- local grey = base4
 local red = '#ff6c6b'
 local dark_red = utils.Darken(red, 0.3)
 local orange = '#da8548'
 local green = '#98be65'
--- local yellow = '#ECBE7B'
+local yellow = '#ECBE7B'
 local blue = '#51afef'
 -- local dark_blue = '#2257A0'
 local magenta = '#c678dd'
@@ -129,6 +130,10 @@ M.custom_hl_groups = {
   -- fugitive
   diffAdded     = { fg = green },
   diffRemoved   = { fg = red },
+  DiffAdd       = { fg = green,  bg = base4_darken, gui = 'bold' },
+  DiffDelete    = { fg = red,    bg = base4_darken, gui = 'bold' },
+  DiffChange    = { fg = fg_def, bg = base4_darken, gui = 'bold' },
+  DiffText      = { fg = yellow, bg = base4_darken, gui = 'bold' },
 
   -- WhichKey
   WhichKey          = { fg = blue },
