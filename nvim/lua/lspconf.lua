@@ -1,7 +1,7 @@
 local ut = require('utils')
 
 -- diable inline diagnostic errors
-vim.diagnostic.config( { virtual_text = false })
+vim.diagnostic.config({ virtual_text = false })
 
 -- toggles diags with same key map
 local toggle = true
@@ -16,9 +16,8 @@ end
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
--- local on_attach = function(client, bufnr)
-local on_attach = function(bufnr)
-  print('LSP has Started')
+local lsp_attach = function(client, bufnr)
+  print('LSP attached '..client.name..' to buffer '..bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -48,7 +47,7 @@ end
 local servers = { 'clangd', 'solargraph' } -- 'pyright'
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
+    on_attach = lsp_attach,
 
     -- clangd logs: ~/.cache/nvim/lsp.log
     -- cmd = { 'clangd', '--background-index', '--log=verbose' },
@@ -75,7 +74,7 @@ else
 end
 
 require'lspconfig'.sumneko_lua.setup {
-  on_attach = on_attach,
+  on_attach = lsp_attach,
   cmd = {sumneko_binary, '-E', sumneko_main},
   settings = {
     Lua = {
