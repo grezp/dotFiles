@@ -129,19 +129,13 @@ end
 -- detemermine file path base on str size + show/hide rhs status
 M.get_file_path_type = function()
   local max_file_len = api.nvim_win_get_width(0) - 55
-  -- local max_len_total = max_file_len + 20
   local file_len = fn.fnamemodify(fn.expand('%'), ':~:.'):len()
   local data = {}
 
   if file_len < max_file_len then
     data.type = M.path_type.TAIL
-    data.show = true
-  -- elseif file_len < max_len_total then
-  --   data.type = M.path_type.TAIL
-  --   data.show = false
   else
     data.type = M.path_type.NAME
-    data.show = true
   end
 
   return data
@@ -157,8 +151,6 @@ M.get_filename = function(self)
   else
     data.type = ' %t '
   end
-
-  data.show = type.show
 
   return data
 end
@@ -198,15 +190,22 @@ end
 
 -- output file type e.g lua, cpp
 M.get_filetype = function()
-  local filetype = vim.bo.filetype
+  local d = {}
+  d.data = vim.bo.filetype
+  d.show = true
 
-  if filetype == '' then return '' end
-  return string.format(' %s ', filetype):lower()
+  if d.data == '' or d.data == nil then
+    d.show = false
+  else
+    d.data = ' ' .. d.data .. ' '
+  end
+
+  return d
 end
 
 -- output file format e.g. unix
 M.get_file_fmt = function()
-  return string.format(' %s ', vim.bo.fileformat)
+  return ' ' .. vim.bo.fileformat .. ' '
 end
 
 -- output file size
@@ -214,6 +213,8 @@ M.get_filesize = function()
   local bytes = fn.getfsize(fn.expand('%:p'))
   local kbytes = 0
   local mbytes = 0
+  local d = {}
+  d.show = true
 
   if bytes >= 1024 then
       kbytes = bytes/1024
@@ -223,15 +224,18 @@ M.get_filesize = function()
       mbytes = kbytes/1024
   end
 
-  if bytes <= 0 then return '0' end
-
   if mbytes > 0 then
-      return string.format(' %dMB ', mbytes)
+    d.data = string.format(' %dMB ', mbytes)
   elseif kbytes > 0 then
-      return string.format(' %dKB ', kbytes)
+    d.data = string.format(' %dKB ', kbytes)
+  elseif bytes > 0 then
+    d.data = string.format(' %dB ', bytes)
   else
-      return string.format(' %dB ', bytes)
+    d.data = 0
+    d.show = false
   end
+
+  return d
 end
 
 -- check if file is modified
@@ -249,6 +253,8 @@ M.set_active = function(self)
   local curr_mode = self:get_current_mode()
   local file_ch = self:check_file_ch()
   local file = self:get_filename()
+  local filesize = self:get_filesize()
+  local filetype = self:get_filetype()
 
   local mode         = curr_mode.color_inv  .. curr_mode.mode
   local bufnum       = colors.active_alt    .. self:get_buf_number()
@@ -256,9 +262,9 @@ M.set_active = function(self)
   local filename     = colors.active        .. file.type
   local filename_ch  = colors.file_mods     .. file.type
   local readonly     = colors.file_mods     .. self:get_readonly()
-  local filetype     = colors.active_alt    .. self:get_filetype()
+  local filetype_d   = colors.active_alt    .. filetype.data
   local filefmt      = colors.active_alt    .. self:get_file_fmt()
-  local filesize     = colors.active_alt    .. self:get_filesize()
+  local filesize_d   = colors.active_alt    .. filesize.data
   local percent      = curr_mode.color_inv  .. self:get_file_percent()
   local line_col     = curr_mode.color_inv  .. self:get_line_col()
 
@@ -272,7 +278,6 @@ M.set_active = function(self)
   local lh_arrow_m   = curr_mode.color_inv  .. self.separators.lh_arrow
   local lh_arrow_a   = colors.active_alt    .. self.separators.lh_arrow
   local ls_arrow_m2a = curr_mode.color_alt  .. self.separators.ls_arrow
-  local ls_arrow_m2b = curr_mode.color      .. self.separators.ls_arrow
   local ls_arrow_a2b = colors.alt_bg        .. self.separators.ls_arrow
 
   local rh_arrow_f   = colors.file_mods     .. self.separators.rh_arrow
@@ -290,8 +295,11 @@ M.set_active = function(self)
     blank_sep, '%=',
 
     -- rsh
-    file.show and ls_arrow_a2b .. filetype .. lh_arrow_a ..  filefmt .. lh_arrow_a .. filesize or '',
-    file.show and ls_arrow_m2a, percent, lh_arrow_m, line_col or ls_arrow_m2b,
+    ls_arrow_a2b,
+    filetype.show and filetype_d .. lh_arrow_a or '',
+    filefmt,
+    filesize.show and lh_arrow_a .. filesize_d or '',
+    ls_arrow_m2a, percent, lh_arrow_m, line_col,
   }
 end
 
@@ -308,19 +316,11 @@ M.set_inactive = function(self)
     }
 end
 
--- M.set_explorer = function(self)
---   local title = self.colors.mode .. '    '
---   local title_alt = self.colors.mode_alt .. self.separators[active_sep][2]
---
---   return table.concat({ self.colors.active, title, title_alt })
--- end
-
 -- define status line
 Statusline = setmetatable(M, {
   __call = function(statusline, mode)
     if mode == 'active' then return statusline:set_active() end
     if mode == 'inactive' then return statusline:set_inactive() end
-    -- if mode == 'explorer' then return statusline:set_explorer() end
   end
 })
 
@@ -330,7 +330,6 @@ api.nvim_exec([[
   au!
   au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline('active')
   au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline('inactive')
-  " au WinEnter,BufEnter,FileType NvimTree setlocal statusline=%!v:lua.Statusline('explorer')
   augroup END
 ]], false)
 
