@@ -189,11 +189,7 @@ silent! call plug#begin()
     Plug 'preservim/nerdcommenter'                  " comment code easily
     Plug 'junegunn/fzf'                             " command line fuzzy finder
     Plug 'junegunn/fzf.vim'                         " fzf embeded into vim
-<<<<<<< HEAD
-    Plug 'ludovicchabant/vim-gutentags'             " ctag manager
-=======
     Plug 'tpope/vim-fugitive'                       " git wrapper for vim
->>>>>>> origin/cohu
 call plug#end()
 
 "___Nerdcommenter___" {{{
