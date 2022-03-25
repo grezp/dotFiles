@@ -2,7 +2,7 @@ return require('packer').startup{
   function(use)
     use 'wbthomason/packer.nvim'                -- Packer can manage itself
 
-    -- utility
+    -- utility --
     use 'chrisbra/NrrwRgn'                -- narrow code snippets like emacs
     use 'numToStr/Comment.nvim'           -- comment code w/ vi movements
     use 'folke/which-key.nvim'            -- shows what keys do + auto show buffers/registers
@@ -10,9 +10,16 @@ return require('packer').startup{
     use 'kevinhwang91/nvim-hlslens'       -- improves search by placing tags to jump to
     use 'famiu/bufdelete.nvim'            -- deletes buffer w/o closing/changing panes
     use 'jghauser/mkdir.nvim'             -- create missing dir(s) like 'mkdir -p'
-    use 'L3MON4D3/LuaSnip'                -- create custom snippets
 
-    -- git
+    -- snippets --
+    use {
+      'L3MON4D3/LuaSnip',                     -- snippet engine
+      requires = {
+        { "rafamadriz/friendly-snippets" },   -- collection of snippets for several langs
+      }
+    }
+
+    -- git --
     use 'tpope/vim-fugitive'              -- git wrapper for vim
     use 'sindrets/diffview.nvim'          -- provides inline diffs
     use {                                 -- displays inline git changes + blame
@@ -22,7 +29,7 @@ return require('packer').startup{
       }
     }
 
-    -- searching
+    -- searching --
     use {
       'nvim-telescope/telescope.nvim',          -- fuzzy finder
       requires = {
@@ -32,10 +39,10 @@ return require('packer').startup{
       }
     }
 
-    -- performance
+    -- performance --
     use 'nathom/filetype.nvim'        -- improves filetype startup time
 
-    -- lsp
+    -- lsp --
     use 'neovim/nvim-lspconfig'       -- Collection of configurations for the built-in LSP client
     use 'onsails/lspkind-nvim'        -- display group tags on cmp (e.g. LSP, buffer, etc.)
 
@@ -45,7 +52,7 @@ return require('packer').startup{
       run = ':TSUpdate'
     }
 
-    -- completion
+    -- completion --
     use {
       'hrsh7th/nvim-cmp',                             -- autocompletion engine
       requires = {
@@ -58,7 +65,7 @@ return require('packer').startup{
       }
     }
 
-    -- aesthesics
+    -- aesthesics --
     use 'NTBBloodbath/doom-one.nvim'
     use 'lukas-reineke/indent-blankline.nvim'   -- create indent line for spaces
 

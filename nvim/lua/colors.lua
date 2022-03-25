@@ -82,8 +82,6 @@ function M.apply_highlight(groups)
 end
 
 M.custom_hl_groups = {
-  Cursor = { fg = 'NONE', bg = 'NONE', gui = 'reverse' },
-
   -- status line
   StatusLineNC    = { fg = base7, bg = base3 },
   AltToBg         = { fg = base4, bg = base3 },
