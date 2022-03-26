@@ -21,14 +21,6 @@ vim.cmd([[
   augroup END
 ]])
 
--- change tabs to 2 spaces
-vim.cmd([[
-  augroup tabs2
-      autocmd!
-      autocmd FileType lua setlocal tabstop=2 shiftwidth=2
-  augroup END
-]])
-
 -- disable auto-comments on new line
 vim.cmd[[
   augroup noComments
