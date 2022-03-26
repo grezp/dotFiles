@@ -16,14 +16,27 @@ ut.keymap('n', '<Leader>bb', ':ls<CR>:buffer<Space>')     -- list buffers, then 
 ut.keymap('n', '<Leader>bl', ':ls<CR>')                   -- list buffers
 ut.keymap('n', '<Leader>bn', ':bnext<CR>')                -- next buffer
 ut.keymap('n', '<Leader>bp', ':bprev<CR>')                -- prev buffer
+ut.keymap('n', '<Leader>bd', ':Bdelete<CR>')              -- delete buffer
 ut.keymap('n', '<Leader>bD', ':bdelete<CR>')              -- delete buffer
 
 -- windows
-ut.keymap('',  '<Leader>w', '<C-w>')           -- window keybind
-ut.keymap('n', '<Leader>w+', '10<C-w>+')      -- inc window height
-ut.keymap('n', '<Leader>w-', '10<C-w>-')      -- dec window height
-ut.keymap('n', '<leader>w>', '30<C-w>>')      -- inc > window height
-ut.keymap('n', '<leader>w<', '30<C-w><')      -- inc < window height
+ut.keymap('',  '<Leader>w', '<C-w>')                    -- window keybind
+ut.keymap("n", "<C-Up>",    ":resize +2<CR>")           -- inc ^ window height
+ut.keymap("n", "<C-Down>",  ":resize -2<CR>")           -- dec v window height
+ut.keymap("n", "<C-Left>",  ":vertical resize -2<CR>")  -- inc > window height
+ut.keymap("n", "<C-Right>", ":vertical resize +2<CR>")  -- inc < window height
+
+-- text manipulation
+ut.keymap("v", "J", ":move .+1<CR>==")        -- move selected text ^ cursor
+ut.keymap("v", "K", ":move .-2<CR>==")        -- move selected text v cursor
+ut.keymap("x", "J", ":move '>+1<CR>gv-gv")    -- move selected text ^ cursor
+ut.keymap("x", "K", ":move '<-2<CR>gv-gv")    -- move selected text v cursor
+
+-- keep prev copy in buffer 0
+ut.keymap("v", "p", '"_dP')
+
+-- file explorer
+ut.keymap('n', '<Leader>te', ':Lex 30<CR>')   -- toggles netrw as left vert split
 
 -- terminal
 ut.keymap('t', '<Leader><Esc>', '<C-\\><C-n>')

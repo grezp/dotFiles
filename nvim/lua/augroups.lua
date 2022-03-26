@@ -28,3 +28,11 @@ vim.cmd[[
       autocmd BufEnter,BufRead * setlocal formatoptions-=cro
   augroup END
   ]]
+
+-- reloads neovim whenever plugins.lua file is saved
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]]

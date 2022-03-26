@@ -38,7 +38,7 @@ local options = {
 -- basic/misc settings
 encoding = 'utf-8',
 hidden = true,                         -- change buffer w/o saving
-mouse = 'a',                           -- enable mouse
+mouse = 'n',                           -- enable mouse
 history = 1000,                        -- save cmd history
 backspace = 'indent,eol,start',        -- backspace works on every char in insert mode
 dictionary = '/usr/share/dict/words',  -- dictionary file
