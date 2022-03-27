@@ -8,18 +8,8 @@ local ut = require('utils')
 require('telescope').load_extension('fzf')
 require('Comment').setup()
 require('which-key').setup()
+require('gitsigns').setup()
 require('mkdir')
-
--- gitsigns --
-require('gitsigns').setup {
-  signs = {
-    add = { text = '+' },
-    change = { text = '~' },
-    delete = { text = '_' },
-    topdelete = { text = '‾' },
-    changedelete = { text = '~' },
-  },
-}
 
 -- indent blankline --
 vim.g.indent_blankline_char = '┊'

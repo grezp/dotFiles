@@ -29,12 +29,6 @@ M.colors = {
   replace       = '%#ReplaceModeStatus#',
   other         = '%#OtherModeStatus#',
 
-  normal_inv    = '%#NormalModeInvStatus#',
-  insert_inv    = '%#InsertModeInvStatus#',
-  visual_inv    = '%#VisualModeInvStatus#',
-  replace_inv   = '%#ReplaceModeInvStatus#',
-  other_inv     = '%#OtherModeInvStatus#',
-
   normal_alt    = '%#NormalModeAltStatus#',
   insert_alt    = '%#InsertModeAltStatus#',
   visual_alt    = '%#VisualModeAltStatus#',
@@ -95,29 +89,23 @@ function M.get_current_mode()
   if mode_str == nil then
     data.mode = mode_code
     data.color = M.colors.other
-    data.color_inv = M.colors.other_inv
     return data
   end
 
   if mode_str == 'NORMAL' then
     data.color = M.colors.normal
-    data.color_inv = M.colors.normal_inv
     data.color_alt = M.colors.normal_alt
   elseif mode_str == 'VISUAL' or mode_str == 'V-LINE' or mode_str == 'V-BLOCK' then
     data.color = M.colors.visual
-    data.color_inv = M.colors.visual_inv
     data.color_alt = M.colors.visual_alt
   elseif mode_str == 'INSERT' then
     data.color = M.colors.insert
-    data.color_inv = M.colors.insert_inv
     data.color_alt = M.colors.insert_alt
   elseif mode_str == 'REPLACE' or mode_str == 'V-REPLACE' then
     data.color = M.colors.replace
-    data.color_inv = M.colors.replace_inv
     data.color_alt = M.colors.replace_alt
   else
     data.color = M.colors.other
-    data.color_inv = M.colors.other_inv
     data.color_alt = M.colors.other_alt
   end
 
@@ -256,7 +244,7 @@ M.set_active = function(self)
   local filesize = self:get_filesize()
   local filetype = self:get_filetype()
 
-  local mode         = curr_mode.color_inv  .. curr_mode.mode
+  local mode         = curr_mode.color      .. curr_mode.mode
   local bufnum       = colors.active_alt    .. self:get_buf_number()
   local gitbranch    = colors.active_alt    .. self:get_git_branch()
   local filename     = colors.active        .. file.type
@@ -265,17 +253,17 @@ M.set_active = function(self)
   local filetype_d   = colors.active_alt    .. filetype.data
   local filefmt      = colors.active_alt    .. self:get_file_fmt()
   local filesize_d   = colors.active_alt    .. filesize.data
-  local percent      = curr_mode.color_inv  .. self:get_file_percent()
-  local line_col     = curr_mode.color_inv  .. self:get_line_col()
+  local percent      = curr_mode.color      .. self:get_file_percent()
+  local line_col     = curr_mode.color      .. self:get_line_col()
 
-  local blank_sep_m  = curr_mode.color_inv  .. self.separators.blank
+  local blank_sep_m  = curr_mode.color      .. self.separators.blank
   local blank_sep    = colors.active        .. self.separators.blank
 
   local rs_arrow_m2a = curr_mode.color_alt  .. self.separators.rs_arrow
   local rs_arrow_a2b = colors.alt_bg        .. self.separators.rs_arrow
   local rs_arrow_a2f = colors.alt_ch        .. self.separators.rs_arrow
 
-  local lh_arrow_m   = curr_mode.color_inv  .. self.separators.lh_arrow
+  local lh_arrow_m   = curr_mode.color      .. self.separators.lh_arrow
   local lh_arrow_a   = colors.active_alt    .. self.separators.lh_arrow
   local ls_arrow_m2a = curr_mode.color_alt  .. self.separators.ls_arrow
   local ls_arrow_a2b = colors.alt_bg        .. self.separators.ls_arrow

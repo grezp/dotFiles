@@ -1,6 +1,6 @@
 
 -- reformats folds to be fix indentation + {...}
-local custom_fold_text = function()
+function _G.custom_fold_text()
   local line_count = vim.v.foldend - vim.v.foldstart + 1
   local line = vim.fn.getline(vim.v.foldstart)
 
@@ -20,7 +20,7 @@ local custom_fold_text = function()
   return line .. '...} : ' .. line_count .. ' lines '
 end
 
--- -- setup global tags
+-- setup global tags
 local file_exists = function (name)
    local f=io.open(name,'r')
    if f~=nil then io.close(f) return true else return false end

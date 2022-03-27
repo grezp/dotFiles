@@ -99,7 +99,7 @@ return packer.startup {
     }
 
     -- aesthesics --
-    use 'NTBBloodbath/doom-one.nvim'
+    use 'folke/tokyonight.nvim'
     use 'lukas-reineke/indent-blankline.nvim'   -- create indent line for spaces
 
     -- Automatically set up your configuration after cloning packer.nvim
