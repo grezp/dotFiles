@@ -1,4 +1,4 @@
-local ut = require('utils')
+local ut = require('user.utils')
 
 -- general
 ut.keymap('',  '<Leader>o', 'o<Esc>k')         -- enter new line below & goto normal mode

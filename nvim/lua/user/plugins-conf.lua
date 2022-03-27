@@ -1,4 +1,4 @@
-local ut = require('utils')
+local ut = require('user.utils')
 
 --------------
 -- SETTINGS --

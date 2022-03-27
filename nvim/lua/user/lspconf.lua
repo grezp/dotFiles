@@ -1,4 +1,4 @@
-local ut = require('utils')
+local ut = require('user.utils')
 
 -- diable inline diagnostic errors
 vim.diagnostic.config({ virtual_text = false })
