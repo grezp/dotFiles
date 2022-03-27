@@ -51,6 +51,7 @@ synmaxcol = 300,          -- stop syntax highlight after x lines for performance
 laststatus = 2,           -- always show status line
 splitbelow = true,        -- open horiz splits below
 splitright = true,        -- open vert splits to the right
+termguicolors = true,     -- 24 bit colors
 
 -- status line
 showmode = false,      -- always display mode (insert, visual, etc.)
