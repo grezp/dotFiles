@@ -61,6 +61,12 @@ return packer.startup {
         'nvim-lua/plenary.nvim'
       }
     }
+    use {                                 -- magit clone
+      'TimUntersberger/neogit',
+      requires = {
+        'nvim-lua/plenary.nvim'
+      }
+    }
 
     -- searching --
     use {

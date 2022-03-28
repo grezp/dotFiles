@@ -1,4 +1,4 @@
-local ut = require('user.utils')
+local utils_status_ok, ut = pcall(require, 'user.utils')
 
 -- diable inline diagnostic errors
 vim.diagnostic.config({ virtual_text = false })
@@ -22,24 +22,28 @@ local lsp_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-  ut.keymap('n', '<Leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>')
-  ut.keymap('n', '<Leader>ek', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-  ut.keymap('n', '<Leader>ej', '<cmd>lua vim.diagnostic.goto_next()<CR>')
-  ut.keymap('n', '<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>')
-  ut.keymap('n', '<Leader>et', '<cmd>lua _G.toggle_diags()<CR>')
+  if utils_status_ok then
+    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+    ut.keymap('n', '<Leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>')
+    ut.keymap('n', '<Leader>ek', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+    ut.keymap('n', '<Leader>ej', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+    ut.keymap('n', '<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+    ut.keymap('n', '<Leader>et', '<cmd>lua _G.toggle_diags()<CR>')
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  ut.buf_keymap(bufnr, 'n', '<Leader>lD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-  ut.buf_keymap(bufnr, 'n', '<Leader>ld', '<cmd>lua vim.lsp.buf.definition()<CR>')
-  ut.buf_keymap(bufnr, 'n', '<Leader>lr', '<cmd>lua vim.lsp.buf.references()<CR>')
-  ut.buf_keymap(bufnr, 'n', '<Leader>lk', '<cmd>lua vim.lsp.buf.hover()<CR>')
-  ut.buf_keymap(bufnr, 'n', '<Leader>lK', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-  ut.buf_keymap(bufnr, 'n', '<Leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-  ut.buf_keymap(bufnr, 'n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-  ut.buf_keymap(bufnr, 'n', '<Leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
-  ut.buf_keymap(bufnr, 'n', '<Leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
-  ut.buf_keymap(bufnr, 'n', '<Leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    ut.buf_keymap(bufnr, 'n', '<Leader>lD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+    ut.buf_keymap(bufnr, 'n', '<Leader>ld', '<cmd>lua vim.lsp.buf.definition()<CR>')
+    ut.buf_keymap(bufnr, 'n', '<Leader>lr', '<cmd>lua vim.lsp.buf.references()<CR>')
+    ut.buf_keymap(bufnr, 'n', '<Leader>lk', '<cmd>lua vim.lsp.buf.hover()<CR>')
+    ut.buf_keymap(bufnr, 'n', '<Leader>lK', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+    ut.buf_keymap(bufnr, 'n', '<Leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+    ut.buf_keymap(bufnr, 'n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+    ut.buf_keymap(bufnr, 'n', '<Leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
+    ut.buf_keymap(bufnr, 'n', '<Leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
+    ut.buf_keymap(bufnr, 'n', '<Leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
+  else
+    vim.notify('user.utils not found')
+  end
 
 end
 

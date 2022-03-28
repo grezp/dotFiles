@@ -1,6 +1,7 @@
 local fn = vim.fn
 local api = vim.api
 local M = {}
+local status_ok, _ = pcall(require, 'tokyonight')
 
 -- change them if you want to different separator
 M.separators = {
@@ -244,6 +245,14 @@ M.set_active = function(self)
   local filesize = self:get_filesize()
   local filetype = self:get_filetype()
 
+  -- only load solid arrows if colorscheme is detected
+  local rs_arrow = self.separators.rs_arrow
+  local ls_arrow = self.separators.ls_arrow
+  if not status_ok then
+    rs_arrow = self.separators.rh_arrow
+    ls_arrow = self.separators.lh_arrow
+  end
+
   local mode         = curr_mode.color      .. curr_mode.mode
   local bufnum       = colors.active_alt    .. self:get_buf_number()
   local gitbranch    = colors.active_alt    .. self:get_git_branch()
@@ -259,18 +268,18 @@ M.set_active = function(self)
   local blank_sep_m  = curr_mode.color      .. self.separators.blank
   local blank_sep    = colors.active        .. self.separators.blank
 
-  local rs_arrow_m2a = curr_mode.color_alt  .. self.separators.rs_arrow
-  local rs_arrow_a2b = colors.alt_bg        .. self.separators.rs_arrow
-  local rs_arrow_a2f = colors.alt_ch        .. self.separators.rs_arrow
+  local rs_arrow_m2a = curr_mode.color_alt  .. rs_arrow
+  local rs_arrow_a2b = colors.alt_bg        .. rs_arrow
+  local rs_arrow_a2f = colors.alt_ch        .. rs_arrow
 
   local lh_arrow_m   = curr_mode.color      .. self.separators.lh_arrow
   local lh_arrow_a   = colors.active_alt    .. self.separators.lh_arrow
-  local ls_arrow_m2a = curr_mode.color_alt  .. self.separators.ls_arrow
-  local ls_arrow_a2b = colors.alt_bg        .. self.separators.ls_arrow
+  local ls_arrow_m2a = curr_mode.color_alt  .. ls_arrow
+  local ls_arrow_a2b = colors.alt_bg        .. ls_arrow
 
   local rh_arrow_f   = colors.file_mods     .. self.separators.rh_arrow
-  local rs_arrow_f2b = colors.file_mods_inv .. self.separators.rs_arrow
-  local rs_arrow_b2f = colors.file_mods     .. self.separators.rs_arrow
+  local rs_arrow_f2b = colors.file_mods_inv .. rs_arrow
+  local rs_arrow_b2f = colors.file_mods     .. rs_arrow
 
   return table.concat{
     -- lhs

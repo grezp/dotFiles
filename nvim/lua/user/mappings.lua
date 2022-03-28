@@ -1,4 +1,8 @@
-local ut = require('user.utils')
+local status_ok, ut = pcall(require, 'user.utils')
+if not status_ok then
+  vim.notify('user.utils not found')
+  return
+end
 
 -- general
 ut.keymap('',  '<Leader>o', 'o<Esc>k')         -- enter new line below & goto normal mode
