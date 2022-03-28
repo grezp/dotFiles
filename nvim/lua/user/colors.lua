@@ -1,9 +1,9 @@
-local colorscheme = "tokyonight"
-
-local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+local colorscheme = 'tokyonight'
+local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 
 if not status_ok then
-  vim.notify("colorscheme " .. colorscheme .. " not found!")
+  vim.notify('colorscheme ' .. colorscheme .. ' not found!')
+  vim.cmd('colorscheme desert')
   return
 
 else
@@ -13,10 +13,10 @@ else
   local util   = require('tokyonight.util')
   local c = colors.setup(config)
 
-  local fg_def = c.fg_dark
-  local fg_dark = c.dark3
+  local dark3   = c.dark3
+  local blue55 = util.darken(c.blue, 0.55)
   local status  = c.bg_statusline
-  local status2 = util.lighten(c.bg_statusline, 0.9)
+  local status2 = util.darken(c.dark3, 0.2)
 
   local purple = c.purple
   local green  = c.green2
@@ -25,6 +25,8 @@ else
   local orange = c.orange
   local green2 = c.green1
 
+  local cursor_bg = '#bb9af7'
+  local cursor_fg = '#1f2335'
 
   function M.highlight(group, styles)
     local bg = styles.bg and 'guibg=' .. styles.bg or 'guibg=NONE'
@@ -45,10 +47,10 @@ else
 
   M.custom_hl_groups = {
     -- status line
-    StatuslineNC    = { fg = fg_dark, bg = status },
+    StatuslineNC    = { fg = dark3,   bg = status },
     AltToBg         = { fg = status2, bg = status },
     AltToCh         = { fg = status2, bg = green2 },
-    StatusLineAlt   = { fg = fg_def,  bg = status2 },
+    StatusLineAlt   = { fg = blue55,  bg = status2 },
     StatusLineNCAlt = { fg = status2, bg = status },
     FileMods        = { fg = status,  bg = green2,  gui = 'bold' },
     FileModsInv     = { fg = green2,  bg = status },
@@ -66,6 +68,10 @@ else
     VisualModeAltStatus  = { fg = blue,   bg = status2 },
     ReplaceModeAltStatus = { fg = red,    bg = status2 },
     OtherModeAltStatus   = { fg = orange, bg = status2 },
+
+    -- change cursor to terminal color
+    Cursor  = { fg = cursor_fg, bg = cursor_bg },
+    lCursor = { fg = cursor_fg, bg = cursor_bg },
 
     -- plugins --
 

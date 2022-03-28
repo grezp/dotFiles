@@ -53,6 +53,9 @@ splitbelow = true,        -- open horiz splits below
 splitright = true,        -- open vert splits to the right
 termguicolors = true,     -- 24 bit colors
 
+-- setup cursor
+guicursor = 'n-v-c:block,i-ci-ve:ver35,r-cr-o:hor35,i-ci-ve-r-cr-o:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor',
+
 -- status line
 showmode = false,      -- always display mode (insert, visual, etc.)
 showcmd = true,        -- show cmd on bottom line
