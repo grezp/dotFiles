@@ -18,6 +18,7 @@ end
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
 if not status_ok then
+  vim.notify('packer not found!')
   return
 end
 
@@ -82,10 +83,12 @@ return packer.startup {
     use 'nathom/filetype.nvim'        -- improves filetype startup time
 
     -- lsp --
-    use 'neovim/nvim-lspconfig'       -- Collection of configurations for the built-in LSP client
-    use 'onsails/lspkind-nvim'        -- display group tags on cmp (e.g. LSP, buffer, etc.)
+    use 'neovim/nvim-lspconfig'           -- Collection of configurations for the built-in LSP client
+    use 'williamboman/nvim-lsp-installer' -- install lang servers in ~/.local/share/nvim/lsp_servers
+    use 'onsails/lspkind-nvim'            -- display group tags on cmp (e.g. LSP, buffer, etc.)
 
 
+    -- treesitter
     use {                                       -- nvim hl based on syntax
       'nvim-treesitter/nvim-treesitter',
       run = ':TSUpdate'
