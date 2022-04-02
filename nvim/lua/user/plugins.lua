@@ -85,8 +85,6 @@ return packer.startup {
     -- lsp --
     use 'neovim/nvim-lspconfig'           -- Collection of configurations for the built-in LSP client
     use 'williamboman/nvim-lsp-installer' -- install lang servers in ~/.local/share/nvim/lsp_servers
-    use 'onsails/lspkind-nvim'            -- display group tags on cmp (e.g. LSP, buffer, etc.)
-
 
     -- treesitter
     use {                                       -- nvim hl based on syntax
@@ -97,6 +95,7 @@ return packer.startup {
     -- completion --
     use {
       'hrsh7th/nvim-cmp',                             -- autocompletion engine
+      branch = 'dev',
       requires = {
         { 'hrsh7th/cmp-buffer' },                     -- autocomplete from buffer & enable '/' search
         { 'hrsh7th/cmp-path' },                       -- autocomplete directory path

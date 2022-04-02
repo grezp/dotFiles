@@ -14,7 +14,7 @@ local util   = require('tokyonight.util')
 local c = colors.setup(config)
 
 local dark3   = c.dark3
-local blue55 = util.darken(c.blue, 0.55)
+local blue55  = util.darken(c.blue, 0.55)
 local status  = c.bg_statusline
 local status2 = util.darken(c.dark3, 0.2)
 

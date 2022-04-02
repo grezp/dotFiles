@@ -4,11 +4,35 @@ if not cmp_status_ok then
   return
 end
 
-local lspkind_status_ok, lspkind = pcall(require, "lspkind")
-if not lspkind_status_ok then
-  vim.notify('lspkind not found!')
-  return
-end
+-- nerdfond icons
+-- more here: https://www.nerdfonts.com/cheat-sheet
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "ﰠ",
+  Variable = "",
+  Class = "ﴯ",
+  Interface = "",
+  Module = "",
+  Property = "ﰠ",
+  Unit = "塞",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "פּ",
+  Event = "",
+  Operator = "",
+  TypeParameter = ""
+}
 
 cmp.setup {
   -- configure mappings
@@ -36,50 +60,64 @@ cmp.setup {
 
   -- shows where autocomplete is comming from
   formatting = {
-    format = lspkind.cmp_format {
-      with_text = true,
-
-      menu = {
-        buffer = '[buf]',
-        nvim_lsp = '[LSP]',
-        nvim_lua = '[api]',
-        path = '[path]',
-        luasnip = '[snip]',
-      },
-    },
+    fields = { "abbr", "kind", "menu" },
+    format = function(entry, vim_item)
+      -- Kind icons
+      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+      vim_item.menu = ({
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Lua]",
+        luasnip = "[Snipet]",
+        buffer = "[Buffer]",
+        path = "[Path]",
+      })[entry.source.name]
+      return vim_item
+    end,
   },
 
-  sorting = {
-    comparators = {
-      cmp.config.compare.offset,
-      cmp.config.compare.exact,
-      cmp.config.compare.score,
-      cmp.recently_used,
-
-      -- copied from cmp-under, but I don't think I need the plugin for this.
-      function(entry1, entry2)
-        local _, entry1_under = entry1.completion_item.label:find '^_+'
-        local _, entry2_under = entry2.completion_item.label:find '^_+'
-        entry1_under = entry1_under or 0
-        entry2_under = entry2_under or 0
-        if entry1_under > entry2_under then
-          return false
-        elseif entry1_under < entry2_under then
-          return true
-        end
-      end,
-
-      cmp.config.compare.kind,
-      cmp.config.compare.sort_text,
-      cmp.config.compare.length,
-      cmp.config.compare.order,
-    },
-  },
+  -- sorting = {
+  --   comparators = {
+  --     cmp.config.compare.offset,
+  --     cmp.config.compare.exact,
+  --     cmp.config.compare.score,
+  --     cmp.recently_used,
+  --
+  --     -- copied from cmp-under, but I don't think I need the plugin for this.
+  --     function(entry1, entry2)
+  --       local _, entry1_under = entry1.completion_item.label:find '^_+'
+  --       local _, entry2_under = entry2.completion_item.label:find '^_+'
+  --       entry1_under = entry1_under or 0
+  --       entry2_under = entry2_under or 0
+  --       if entry1_under > entry2_under then
+  --         return false
+  --       elseif entry1_under < entry2_under then
+  --         return true
+  --       end
+  --     end,
+  --
+  --     cmp.config.compare.kind,
+  --     cmp.config.compare.sort_text,
+  --     cmp.config.compare.length,
+  --     cmp.config.compare.order,
+  --   },
+  -- },
 
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
     end,
+  },
+
+  window = {
+    completion = {
+      border = 'rounded',
+      -- scrollbar = '║',
+      scrollbar = 'x',
+    },
+
+    documentation = {
+      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    },
   },
 
   experimental = {
@@ -89,7 +127,7 @@ cmp.setup {
 
 -- search setup
 -- /@ look for function and var defs
-require'cmp'.setup.cmdline('/', {
+cmp.setup.cmdline('/', {
   sources = cmp.config.sources(
   { name = 'nvim_lsp_document_symbol' },
   {{
