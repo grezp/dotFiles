@@ -193,8 +193,6 @@ setenv PATH ${PATH}:/user/tools/Linux/bin
 setenv PATH /usr/local/bin:${PATH}
 setenv PATH /usr/local:${PATH}
 setenv PATH "$HOME/miniconda3/bin:$PATH"
-setenv PATH "$HOME/packages/lua/bin:$PATH"
-setenv PATH "$HOME/.gem/ruby/2.7.0/bin:$PATH"
 
 setenv LD_LIBRARY_PATH $HOME/miniconda3/lib:${LD_LIBRARY_PATH}
 
