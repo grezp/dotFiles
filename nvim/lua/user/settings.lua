@@ -1,3 +1,4 @@
+local ut = require('user.utils')
 
 -- reformats folds to be fix indentation + {...}
 function _G.custom_fold_text()
@@ -21,15 +22,10 @@ function _G.custom_fold_text()
 end
 
 -- setup global tags
-local file_exists = function (name)
-   local f=io.open(name,'r')
-   if f~=nil then io.close(f) return true else return false end
-end
-
 local l_tags = ''
-if file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-unison,'  end
-if file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
-if file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
+if ut.file_exists(HOME .. '/tags/tags-unison')  then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-unison,'  end
+if ut.file_exists(HOME .. '/tags/tags-methods') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-methods,' end
+if ut.file_exists(HOME .. '/tags/tags-plugins') then l_tags = l_tags .. ',' .. HOME .. '/tags/tags-plugins,' end
 
 -- Neovim options --
 --------------------

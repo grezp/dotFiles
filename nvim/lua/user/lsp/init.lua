@@ -5,4 +5,5 @@ if not status_ok then
 end
 
 require('user.lsp.lsp-installer')
+require('user.lsp.centos-lsp')
 require('user.lsp.handlers').setup()
