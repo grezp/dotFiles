@@ -1,4 +1,4 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
+local cmp_status_ok, cmp = pcall(require, 'cmp')
 if not cmp_status_ok then
   vim.notify('cmp not found!')
   return
@@ -7,31 +7,31 @@ end
 -- nerdfond icons
 -- more here: https://www.nerdfonts.com/cheat-sheet
 local kind_icons = {
-  Text = "",
-  Method = "",
-  Function = "",
-  Constructor = "",
-  Field = "ﰠ",
-  Variable = "",
-  Class = "ﴯ",
-  Interface = "",
-  Module = "",
-  Property = "ﰠ",
-  Unit = "塞",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "פּ",
-  Event = "",
-  Operator = "",
-  TypeParameter = ""
+  Text = '',
+  Method = '',
+  Function = '',
+  Constructor = '',
+  Field = 'ﰠ',
+  Variable = '',
+  Class = 'ﴯ',
+  Interface = '',
+  Module = '',
+  Property = 'ﰠ',
+  Unit = '塞',
+  Value = '',
+  Enum = '',
+  Keyword = '',
+  Snippet = '',
+  Color = '',
+  File = '',
+  Reference = '',
+  Folder = '',
+  EnumMember = '',
+  Constant = '',
+  Struct = 'פּ',
+  Event = '',
+  Operator = '',
+  TypeParameter = ''
 }
 
 cmp.setup {
@@ -60,16 +60,16 @@ cmp.setup {
 
   -- shows where autocomplete is comming from
   formatting = {
-    fields = { "abbr", "kind", "menu" },
+    fields = { 'abbr', 'kind', 'menu' },
     format = function(entry, vim_item)
       -- Kind icons
       vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
       vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        nvim_lua = "[Lua]",
-        luasnip = "[Snipet]",
-        buffer = "[Buffer]",
-        path = "[Path]",
+        nvim_lsp = '[LSP]',
+        nvim_lua = '[Lua]',
+        luasnip = '[Snipet]',
+        buffer = '[Buffer]',
+        path = '[Path]',
       })[entry.source.name]
       return vim_item
     end,
@@ -116,7 +116,7 @@ cmp.setup {
     },
 
     documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
     },
   },
 

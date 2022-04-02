@@ -103,8 +103,8 @@ if utils_status_ok then
 
   -- gitsigns --
   if gitsigns_status_ok then
-    ut.keymap('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
-    ut.keymap('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
+    ut.keymap('n', ']c', [[&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>']], {expr=true})
+    ut.keymap('n', '[c', [[&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>']], {expr=true})
 
     ut.keymap('',  '<leader>hs', ':Gitsigns stage_hunk<CR>')
     ut.keymap('',  '<leader>hu', ':Gitsigns undo_stage_hunk<CR>')
