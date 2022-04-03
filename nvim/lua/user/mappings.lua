@@ -47,20 +47,12 @@ ut.keymap('t', '<Leader><Esc>', '<C-\\><C-n>')
 
 -- misc.
 ut.keymap('n', '<Leader>cd', 'cd %:p:h<CR>')        -- change neovim directory to current file
-ut.keymap('n', '<Leader>*', [[<Cmd>let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>]]) -- highlight word w/o moving
+ut.keymap('n', '<Leader>*', [[<Cmd>let @/=''.expand('<cword>').''<bar>set hlsearch<CR>]]) -- highlight word w/o moving
 
 -------------
 -- Plugins --
 -------------
 
--- telescope
-ut.keymap('', [[<leader>ff]], [[<cmd>lua require('telescope.builtin').find_files()<cr>]])
-ut.keymap('', [[<leader>fg]], [[<cmd>lua require('telescope.builtin').live_grep()<cr>]])
-ut.keymap('', [[<leader>fb]], [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
-ut.keymap('', [[<leader>fh]], [[<cmd>lua require('telescope.builtin').help_tags()<cr>]])
-ut.keymap('', [[<leader>f/]], [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]])
-ut.keymap('', [[<leader>fc]], [[<cmd>lua require('telescope.builtin').command_history()<cr>]])
-ut.keymap('', [[<leader>fo]], [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]])
-ut.keymap('', [[<leader>fm]], [[<cmd>lua require('telescope.builtin').man_pages()<cr>]])
-ut.keymap('', [[<leader>f']], [[<cmd>lua require('telescope.builtin').marks()<cr>]])
-ut.keymap('', [[<leader>f"]], [[<cmd>lua require('telescope.builtin').registers()<cr>]])
+--indent-blankline
+ut.keymap('n', '<leader>ti', '<cmd>IndentBlanklineToggle!<CR>')
+

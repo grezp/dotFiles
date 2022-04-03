@@ -77,6 +77,7 @@ return packer.startup {
         { 'nvim-lua/plenary.nvim' },                                  -- additional neovim APIs
         { 'kyazdani42/nvim-web-devicons' },                           -- icons
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }, -- FZF
+        { 'dhruvmanila/telescope-bookmarks.nvim' },
       }
     }
 

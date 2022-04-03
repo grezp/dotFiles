@@ -1,5 +1,4 @@
 local utils_status_ok,      ut          = pcall(require, 'user.utils')
-local telescope_status_ok,  telescope   = pcall(require, 'telescope')
 local comment_status_ok,    comment     = pcall(require, 'Comment')
 local which_key_status_ok,  which_key   = pcall(require, 'which-key')
 local gitsigns_status_ok,   gitsigns    = pcall(require, 'gitsigns')
@@ -12,12 +11,6 @@ local neogit_status_ok,     neogit      = pcall(require, 'neogit')
 --------------
 
 -- simple setups --
-if telescope_status_ok  then
-  telescope.load_extension('fzf')
-else
-  vim.notify('telescope not found!')
-end
-
 if comment_status_ok then
   comment.setup()
 else
@@ -81,20 +74,6 @@ end
 -- MAPPINGS --
 --------------
 if utils_status_ok then
-
-  -- telescope --
-  if telescope_status_ok then
-    ut.keymap('', [[<leader>ff]], [[<cmd>lua require('telescope.builtin').find_files()<cr>]])
-    ut.keymap('', [[<leader>fg]], [[<cmd>lua require('telescope.builtin').live_grep()<cr>]])
-    ut.keymap('', [[<leader>fb]], [[<cmd>lua require('telescope.builtin').buffers()<cr>]])
-    ut.keymap('', [[<leader>fh]], [[<cmd>lua require('telescope.builtin').help_tags()<cr>]])
-    ut.keymap('', [[<leader>f/]], [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>]])
-    ut.keymap('', [[<leader>fc]], [[<cmd>lua require('telescope.builtin').command_history()<cr>]])
-    ut.keymap('', [[<leader>fo]], [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]])
-    ut.keymap('', [[<leader>fm]], [[<cmd>lua require('telescope.builtin').man_pages()<cr>]])
-    ut.keymap('', [[<leader>f']], [[<cmd>lua require('telescope.builtin').marks()<cr>]])
-    ut.keymap('', [[<leader>f"]], [[<cmd>lua require('telescope.builtin').registers()<cr>]])
-  end
 
   -- WhichKey --
   if which_key_status_ok then
