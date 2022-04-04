@@ -7,11 +7,26 @@
 local M = {}
 local telescope = require('telescope')
 local a = require('telescope.actions')
+local prev = require('telescope.previewers')
+
+-- determine file preview based on file size
+local check_file_size = function(filepath, bufnr, opts)
+  opts = opts or {}
+
+  filepath = vim.fn.expand(filepath)
+  vim.loop.fs_stat(filepath, function(_, stat)
+    if not stat then return end
+    if stat.size > 100000 then
+      return
+    else
+      prev.buffer_previewer_maker(filepath, bufnr, opts)
+    end
+  end)
+end
 
 M.setup = function()
   telescope.setup {
     defaults = {
-
       prompt_prefix = ' ',
       selection_caret = ' ',
       path_display = { 'smart' },
@@ -19,7 +34,8 @@ M.setup = function()
       selection_strategy = 'reset',
       sorting_strategy = 'ascending',
       layout_strategy = 'bottom_pane',
-      winblend = 10,
+      winblend = 0,
+      buffer_previewer_maker = check_file_size,
 
       layout_config = {
         width = 0.90,
@@ -44,7 +60,9 @@ M.setup = function()
         '--line-number',
         '--column',
         '--smart-case',
-        -- '--ignore-file=' .. HOME .. '/.fdignore'
+        '--trim',
+        '--iglob=!{packer_compiled.lua,*.bak*}',
+        '--iglob=!*.bak*'
       },
 
       mappings = {
@@ -117,10 +135,10 @@ M.setup = function()
     pickers = {
       find_files = {
         find_command = {
-          "fd",
-          "--type",
-          "f",
-          -- "--strip-cwd-prefix"  -- remove ./ (hidden files)
+          'fd',
+          '--type',
+          'f',
+          -- '--strip-cwd-prefix'  -- remove ./ (hidden files)
         },
       }
     },
@@ -140,9 +158,9 @@ M.setup = function()
         override_generic_sorter = true,
          -- override the file sorter
         override_file_sorter = true,
-        -- or "ignore_case" or "respect_case"
-        -- the default case_mode is "smart_case"
-        case_mode = "smart_case",
+        -- or 'ignore_case' or 'respect_case'
+        -- the default case_mode is 'smart_case'
+        case_mode = 'smart_case',
       },
 
       bookmarks = {
@@ -164,6 +182,7 @@ M.setup = function()
   -- must be ran after telescope setup
   telescope.load_extension('fzf')
   telescope.load_extension('bookmarks')
+  telescope.load_extension('frecency')
 end
 
 return M

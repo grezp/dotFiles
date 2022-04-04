@@ -84,12 +84,12 @@ local function lsp_keymaps(bufnr)
 
     if teles_status_ok then
       local map_tele = require('user.telescope.builtins').map_tele
-      map_tele('<leader>ed', "diags", _, bufnr)
+      map_tele('<leader>ed', 'diags', _, bufnr)
 
-      map_tele('<leader>ld', "lsp_defs", _, bufnr)
-      map_tele('<leader>lr', "lsp_refs", _, bufnr)
-      map_tele('<leader>li', "lsp_impl", _, bufnr)
-      map_tele('<leader>ls', "lsp_global_symbols", _, bufnr)
+      map_tele('<leader>ld', 'lsp_defs', _, bufnr)
+      map_tele('<leader>lr', 'lsp_refs', _, bufnr)
+      map_tele('<leader>li', 'lsp_impl', _, bufnr)
+      map_tele('<leader>ls', 'lsp_global_symbols', _, bufnr)
     else
       -- See `:help vim.lsp.*` for documentation on any of the below functions
       ut.buf_keymap(bufnr, 'n', '<Leader>lD', '<cmd>lua vim.lsp.buf.declaration()<CR>')

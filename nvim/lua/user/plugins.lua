@@ -78,7 +78,10 @@ return packer.startup {
         { 'nvim-lua/plenary.nvim' },                                  -- additional neovim APIs
         { 'kyazdani42/nvim-web-devicons' },                           -- icons
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }, -- FZF
-        { 'dhruvmanila/telescope-bookmarks.nvim' },
+        { 'dhruvmanila/telescope-bookmarks.nvim' },                   -- open bookmarks
+        { 'nvim-telescope/telescope-frecency.nvim',                   -- improves file selection base on history
+          requires = { 'tami5/sqlite.lua' },
+        },
       }
     }
 
