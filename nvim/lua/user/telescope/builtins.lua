@@ -139,27 +139,56 @@ end
 --   require("telescope").extensions.file_browser.file_browser(opts)
 -- end
 
--- function M.lsp_references()
---   require("telescope.builtin").lsp_references {
---     layout_strategy = "vertical",
---     layout_config = {
---       prompt_position = "top",
---     },
---     sorting_strategy = "ascending",
---     ignore_filename = false,
---   }
--- end
---
--- function M.lsp_implementations()
---   require("telescope.builtin").lsp_implementations {
---     layout_strategy = "vertical",
---     layout_config = {
---       prompt_position = "top",
---     },
---     sorting_strategy = "ascending",
---     ignore_filename = false,
---   }
--- end
+function M.lsp_refs()
+  require("telescope.builtin").lsp_references {
+    ignore_filename = false,
+  }
+end
+
+function M.lsp_defs()
+  require("telescope.builtin").lsp_definitions {
+    ignore_filename = false,
+  }
+end
+
+function M.lsp_impl()
+  require("telescope.builtin").lsp_implementations {
+    ignore_filename = false,
+  }
+end
+
+function M.lsp_global_symbols()
+  require("telescope.builtin").lsp_dynamic_workspace_symbols {
+    ignore_filename = false,
+  }
+end
+
+function M.diags()
+  require("telescope.builtin").diagnostics {
+  }
+end
+
+TelescopeMapArgs = TelescopeMapArgs or {}
+
+M.map_tele = function(key, f, options, buffer)
+  local map_key = vim.api.nvim_replace_termcodes(key .. f, true, true, true)
+
+  TelescopeMapArgs[map_key] = options or {}
+
+  local mode = "n"
+  local rhs = string.format("<cmd>lua require('user.telescope.builtins')['%s'](TelescopeMapArgs['%s'])<CR>", f, map_key)
+
+  local map_options = {
+    noremap = true,
+    silent = true,
+  }
+
+  if not buffer then
+    vim.api.nvim_set_keymap(mode, key, rhs, map_options)
+  else
+    vim.api.nvim_buf_set_keymap(buffer, mode, key, rhs, map_options)
+    end
+end
 
 return setmetatable({}, {
   __index = function(_, k)

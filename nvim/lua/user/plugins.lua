@@ -45,6 +45,7 @@ return packer.startup {
     use 'famiu/bufdelete.nvim'            -- deletes buffer w/o closing/changing panes
     use 'jghauser/mkdir.nvim'             -- create missing dir(s) like 'mkdir -p'
     use 'tpope/vim-surround'              -- surround selected text with chars (e.g. '/")
+    use 'tpope/vim-repeat'                -- repeat plugins with .
 
     -- snippets --
     use {
