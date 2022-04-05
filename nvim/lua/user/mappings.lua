@@ -39,9 +39,6 @@ ut.keymap('x', 'K', [[:move '<-2<CR>gv-gv]])    -- move selected text v cursor
 -- keep prev copy in buffer 0
 ut.keymap('v', 'p', '"_dP')
 
--- file explorer
-ut.keymap('n', '<Leader>te', ':Lex 30<CR>')   -- toggles netrw as left vert split
-
 -- terminal
 ut.keymap('t', '<Leader><Esc>', '<C-\\><C-n>')
 

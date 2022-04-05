@@ -4,6 +4,7 @@ vim.g.mapleader = ' '
 require('user.plugins')
 require('user.plugins-conf')
 require('user.settings')
+require('user.which-key')
 require('user.mappings')
 require('user.statusline')
 require('user.augroups')

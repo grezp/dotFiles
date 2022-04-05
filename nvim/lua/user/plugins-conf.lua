@@ -1,6 +1,5 @@
 local utils_status_ok,      ut          = pcall(require, 'user.utils')
 local comment_status_ok,    comment     = pcall(require, 'Comment')
-local which_key_status_ok,  which_key   = pcall(require, 'which-key')
 local gitsigns_status_ok,   gitsigns    = pcall(require, 'gitsigns')
 local blankline_status_ok,  blankline   = pcall(require, 'indent_blankline')
 local treesitter_status_ok, treesitter  = pcall(require, 'nvim-treesitter.configs')
@@ -15,12 +14,6 @@ if comment_status_ok then
   comment.setup()
 else
   vim.notify('Comment not found!')
-end
-
-if which_key_status_ok then
-  which_key.setup()
-else
-  vim.notify('which-key not found!')
 end
 
 if gitsigns_status_ok then
@@ -75,11 +68,6 @@ end
 --------------
 if utils_status_ok then
 
-  -- WhichKey --
-  if which_key_status_ok then
-    ut.Ex.cabbrev('W', 'WhichKey')
-  end
-
   -- gitsigns --
   if gitsigns_status_ok then
     ut.keymap('n', ']c', [[&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>']], {expr=true})
@@ -111,8 +99,6 @@ if utils_status_ok then
   ut.keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]])
   ut.keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
   ut.keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
-  ut.keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]])
-  ut.keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]])
 
   ut.keymap('x', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
   ut.keymap('x', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])

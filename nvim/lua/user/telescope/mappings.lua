@@ -16,7 +16,7 @@ map_tele('<leader>fl', 'grep_last_search')
 -- Files
 map_tele('<leader>ff', 'fd')
 map_tele('<leader>fa', 'search_all_files')
-map_tele('<leader>fz', 'search_only_certain_files')
+map_tele('<leader>fc', 'search_only_certain_files')
 map_tele('<leader>fo', 'oldfiles')
 
 -- Git
