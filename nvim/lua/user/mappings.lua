@@ -20,7 +20,6 @@ ut.keymap('n', '<Leader>bb', ':ls<CR>:buffer<Space>')     -- list buffers, then 
 ut.keymap('n', '<Leader>bl', ':ls<CR>')                   -- list buffers
 ut.keymap('n', '<Leader>bn', ':bnext<CR>')                -- next buffer
 ut.keymap('n', '<Leader>bp', ':bprev<CR>')                -- prev buffer
-ut.keymap('n', '<Leader>bd', ':Bdelete<CR>')              -- delete buffer
 ut.keymap('n', '<Leader>bD', ':bdelete<CR>')              -- delete buffer
 
 -- windows
@@ -45,11 +44,4 @@ ut.keymap('t', '<Leader><Esc>', '<C-\\><C-n>')
 -- misc.
 ut.keymap('n', '<Leader>cd', 'cd %:p:h<CR>')        -- change neovim directory to current file
 ut.keymap('n', '<Leader>*', [[<Cmd>let @/=''.expand('<cword>').''<bar>set hlsearch<CR>]]) -- highlight word w/o moving
-
--------------
--- Plugins --
--------------
-
---indent-blankline
-ut.keymap('n', '<leader>ti', '<cmd>IndentBlanklineToggle!<CR>')
 
