@@ -87,6 +87,7 @@ return packer.startup {
 
     -- performance --
     use 'nathom/filetype.nvim'        -- improves filetype startup time
+    use 'lewis6991/impatient.nvim'    -- Speed up loading Lua modules
 
     -- lsp --
     use 'neovim/nvim-lspconfig'           -- Collection of configurations for the built-in LSP client

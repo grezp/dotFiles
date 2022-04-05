@@ -1,9 +1,18 @@
 local ut = require('user.utils')
+local impatient_status_ok, impatient = pcall(require, 'impatient')
 local blankline_status_ok, blankline = pcall(require, 'indent_blankline')
 
 -------------------
 -- SIMPLE SETUPS --
 -------------------
+
+-- impatiet --
+-- needs to be setup before all other plugins --
+if impatient_status_ok then
+  impatient.enable_profile()
+else
+  vim.notify('impatient not found!')
+end
 
 -- indent blankline --
 if blankline_status_ok then
