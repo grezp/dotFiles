@@ -322,11 +322,15 @@ Statusline = setmetatable(M, {
 })
 
 -- set statusline
-api.nvim_exec([[
-  augroup Statusline
-  au!
-  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline('active')
-  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline('inactive')
-  augroup END
-]], false)
+local augroup = vim.api.nvim_create_augroup
+local aucmd = vim.api.nvim_create_autocmd
+local status_grp = augroup('StatusLine', { clear = true })
 
+aucmd({ 'WinEnter', 'BufEnter' }, {
+  group = status_grp,
+  command = "setlocal statusline=%!v:lua.Statusline('active')",
+})
+aucmd({ 'WinLeave', 'BufLeave' }, {
+  group = status_grp,
+  command = "setlocal statusline=%!v:lua.Statusline('inactive')",
+})
