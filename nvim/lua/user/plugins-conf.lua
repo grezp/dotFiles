@@ -35,14 +35,6 @@ end
 ut.keymap('', '<Leader>nn', ':NR!<CR>')
 ut.keymap('', '<Leader>ns', ':WR<CR>:bdelete!<CR>')
 
--- hlslens --
-ut.keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]])
-ut.keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]])
-ut.keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
-ut.keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
-ut.keymap('x', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
-ut.keymap('x', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
-
 -- bufdelete --
 ut.keymap('n', '<Leader>bd', [[:lua require('bufdelete').bufdelete(0, true)<CR>]])
 
