@@ -28,7 +28,7 @@ aucmd(out_event, {
 })
 
 -- disable auto-comments on new line
-local auto_comment_grp = augroup('cursorFocus', { clear = true })
+local auto_comment_grp = augroup('noAutoComments', { clear = true })
 aucmd({ 'BufEnter', 'BufRead' }, {
   group = auto_comment_grp,
   command = 'setlocal formatoptions-=cro',
