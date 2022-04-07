@@ -29,7 +29,14 @@ M.setup = function()
     defaults = {
       prompt_prefix = ' ',
       selection_caret = ' ',
-      path_display = { 'smart' },
+
+      path_display = { 'shorten',
+        shorten = {
+          len = 5,
+          exclude = {1, -1},
+        }
+      },
+
       initial_mode = 'insert',
       selection_strategy = 'reset',
       sorting_strategy = 'ascending',
