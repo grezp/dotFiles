@@ -43,5 +43,5 @@ ut.keymap('t', '<Leader><Esc>', '<C-\\><C-n>')
 
 -- misc.
 ut.keymap('n', '<Leader>cd', 'cd %:p:h<CR>')        -- change neovim directory to current file
-ut.keymap('n', '<Leader>*', [[<Cmd>let @/=''.expand('<cword>').''<bar>set hlsearch<CR>]]) -- highlight word w/o moving
+ut.keymap('n', '<Leader>*', [[<Cmd>let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>]]) -- highlight word w/o moving
 

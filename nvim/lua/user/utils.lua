@@ -3,13 +3,27 @@ local M = {}
 -- generic keymaps --
 M.keymap = function(mode, shortcut, command, opts)
   opts = opts or { noremap = true, silent = true }
-  vim.api.nvim_set_keymap(mode, shortcut, command, opts)
+
+  if type(mode) == 'table' then
+    for _, m in ipairs(mode) do
+      vim.api.nvim_set_keymap(m, shortcut, command, opts)
+    end
+  else
+    vim.api.nvim_set_keymap(mode, shortcut, command, opts)
+  end
 end
 
 -- generic buffer keymaps --
 M.buf_keymap = function(bufnr, mode, shortcut, command, opts)
   opts = opts or { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, mode, shortcut, command, opts)
+
+  if type(mode) == 'table' then
+    for _, m in pairs(mode) do
+      vim.api.nvim_buf_set_keymap(bufnr, m, shortcut, command, opts)
+    end
+  else
+    vim.api.nvim_buf_set_keymap(bufnr, mode, shortcut, command, opts)
+  end
 end
 
 M.Ex = setmetatable({}, {

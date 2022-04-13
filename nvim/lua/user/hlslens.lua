@@ -50,8 +50,6 @@ hlslens.setup({
 local ut = require('user.utils')
 ut.keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]])
 ut.keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]])
-ut.keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
-ut.keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
-ut.keymap('x', '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
-ut.keymap('x', '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap({'n', 'x'}, '*', [[*<Cmd>lua require('hlslens').start()<CR>]])
+ut.keymap({'n', 'x'}, '#', [[#<Cmd>lua require('hlslens').start()<CR>]])
 
