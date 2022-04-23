@@ -26,6 +26,10 @@ else
   vim.notify('indent_blankline not found!')
 end
 
+-- csv.vim --
+vim.g.csv_nomap_bs = 1
+vim.g.csv_nomap_space = 1
+vim.g.csv_nomap_cr = 1
 
 ---------------------
 -- PLUGIN MAPPINGS --

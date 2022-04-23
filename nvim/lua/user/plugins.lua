@@ -46,6 +46,7 @@ return packer.startup {
     use 'jghauser/mkdir.nvim'             -- create missing dir(s) like 'mkdir -p'
     use 'tpope/vim-surround'              -- surround selected text with chars (e.g. '/")
     use 'tpope/vim-repeat'                -- repeat plugins with .
+    use 'chrisbra/csv.vim'                -- edit csv files in vim
 
     -- snippets --
     use {
