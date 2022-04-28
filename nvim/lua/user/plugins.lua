@@ -47,6 +47,7 @@ return packer.startup {
     use 'tpope/vim-surround'              -- surround selected text with chars (e.g. '/")
     use 'tpope/vim-repeat'                -- repeat plugins with .
     use 'chrisbra/csv.vim'                -- edit csv files in vim
+    use 'windwp/nvim-autopairs'           -- auto completes pairs: {}, (), [], "", ''
 
     -- snippets --
     use {

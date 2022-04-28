@@ -48,14 +48,6 @@ end
 
 -- toggles diags with same key map
 local toggle = true
-function _G.toggle_diags()
-  if toggle then
-    toggle = false
-    return vim.diagnostic.disable()
-  end
-  toggle = true
-  return vim.diagnostic.enable()
-end
 
 local function lsp_keymaps(bufnr)
   if utils_status_ok then
@@ -64,7 +56,15 @@ local function lsp_keymaps(bufnr)
     ut.buf_keymap(bufnr, 'n', '<Leader>ek', '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>')
     ut.buf_keymap(bufnr, 'n', '<Leader>ej', '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>')
     ut.buf_keymap(bufnr, 'n', '<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>')
-    ut.buf_keymap(bufnr, 'n', '<Leader>te', '<cmd>lua _G.toggle_diags()<CR>')
+    vim.keymap.set('n', '<Leader>te', function()
+      if toggle then
+        toggle = false
+        return vim.diagnostic.disable()
+      end
+      toggle = true
+      return vim.diagnostic.enable()
+    end
+    )
 
     if teles_status_ok then
       local map_tele = require('user.telescope.builtins').map_tele
