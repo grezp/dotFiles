@@ -104,6 +104,7 @@ return packer.startup {
     -- completion --
     use {
       'hrsh7th/nvim-cmp',                             -- autocompletion engine
+      commit = "dd63981",
       requires = {
         { 'hrsh7th/cmp-buffer' },                     -- autocomplete from buffer & enable '/' search
         { 'hrsh7th/cmp-path' },                       -- autocomplete directory path
