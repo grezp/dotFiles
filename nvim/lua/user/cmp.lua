@@ -46,6 +46,20 @@ cmp.setup {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
+    ['<C-n>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
+    ['<C-p>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end,
   },
 
   -- these are like cmp 'plugins'
@@ -55,7 +69,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
-    { name = 'buffer', keyword_length = 5 },
+    { name = 'buffer', keyword_length = 3 },
   },
 
   -- shows where autocomplete is comming from
@@ -134,5 +148,7 @@ cmp.setup.cmdline('/', {
     name = 'buffer',
     max_item_count = 20,
     keyword_length = 3,
-  }})
+  }}),
+
+  mapping = cmp.mapping.preset.cmdline(),
 })
