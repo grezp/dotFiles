@@ -39,9 +39,8 @@ cmp.setup {
   mapping = {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-y>'] = cmp.mapping(cmp.mapping.confirm { select = true }, { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<tab>'] = cmp.config.disable,
     ['<C-e>'] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
@@ -123,15 +122,8 @@ cmp.setup {
   },
 
   window = {
-    completion = {
-      border = 'rounded',
-      -- scrollbar = '║',
-      scrollbar = 'x',
-    },
-
-    documentation = {
-      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-    },
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
 
   experimental = {
@@ -139,16 +131,25 @@ cmp.setup {
   },
 }
 
--- search setup
--- /@ look for function and var defs
+-- `/` cmdline setup.
 cmp.setup.cmdline('/', {
-  sources = cmp.config.sources(
-  { name = 'nvim_lsp_document_symbol' },
-  {{
-    name = 'buffer',
-    max_item_count = 20,
-    keyword_length = 3,
-  }}),
-
   mapping = cmp.mapping.preset.cmdline(),
+
+  sources = cmp.config.sources({
+    -- /@ look for function and var defs
+    { name = 'nvim_lsp_document_symbol' },
+  }, {
+    { name = 'buffer' }
+  }),
+})
+
+-- `:` cmdline setup.
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
 })

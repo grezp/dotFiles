@@ -107,6 +107,7 @@ return packer.startup {
       requires = {
         { 'hrsh7th/cmp-buffer' },                     -- autocomplete from buffer & enable '/' search
         { 'hrsh7th/cmp-path' },                       -- autocomplete directory path
+        { 'hrsh7th/cmp-cmdline' },                    -- autocomplete cmd line
         { 'hrsh7th/cmp-nvim-lua' },                   -- autocomplete Lua API
         { 'hrsh7th/cmp-nvim-lsp' },                   -- autocomplete from LSP
         { 'hrsh7th/cmp-nvim-lsp-document-symbol' },   -- allow '/@' to search for func defs
