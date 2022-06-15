@@ -37,7 +37,6 @@ return packer.startup {
     use 'wbthomason/packer.nvim'                -- Packer can manage itself
 
     -- utility --
-    use 'chrisbra/NrrwRgn'                -- narrow code snippets like emacs
     use 'numToStr/Comment.nvim'           -- comment code w/ vi movements
     use 'folke/which-key.nvim'            -- shows what keys do + auto show buffers/registers
     use 'ggandor/lightspeed.nvim'         -- jump to text quickly by matching 2 chars

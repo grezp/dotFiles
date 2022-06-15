@@ -97,6 +97,17 @@ function M.grep_last_search(opts)
   }
 end
 
+function M.grep_only_certain_files()
+  require('telescope.builtin').live_grep {
+    find_command = {
+      'rg',
+      '--files',
+      '--type',
+      vim.fn.input 'Type: ',
+    },
+  }
+end
+
 function M.bookmarks()
   require('telescope').extensions.bookmarks.bookmarks()
 end

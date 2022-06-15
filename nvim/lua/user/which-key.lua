@@ -73,37 +73,41 @@ wk.register({
   ['<leader>'] = {
     name = 'custom maps',
 
-    -- telescope
+    -- telescope Find
     f = {
-      name = 'fuzzy find',
+      name = 'Find Files',
 
       -- neovim files
       n = 'find Neovim files',
       p = 'fild installed Plugins',
 
+      -- files
+      f = 'find Files',
+      a = 'find All files',
+      c = 'find Certain file type',
+      o = 'find Old files',
+
       -- grep
       g = 'Grep files',
       w = 'grep Word on cursor',
       l = 'grep Last word',
+      t = 'grep certain file Type',
+    },
 
-      -- files
-      f = 'find Files',
-      a = 'find All files',
-      c = 'find Certain file',
-      o = 'find Old files',
+    -- telescope neovim
+    n = {
+      name = 'neoVim',
 
-      -- neovim
-      b = 'find opened Buffers',
-      h = 'find neovim Help',
-      v = 'find neovim Options',
-      m = 'find Man pages',
-      ["'"] = 'find Marks',
-      ['"'] = 'find Registers',
-      ['/'] = 'find pattern in buffer',
+      b = 'opened Buffers',
+      h = 'neovim Help',
+      v = 'neovim Options',
+      m = 'Man pages',
+      ["'"] = 'Marks',
+      ['"'] = 'Registers',
+      ['/'] = '/pattern',
 
       -- misc
       ['<leader>'] = 'telescope Builtins',
-      s = 'find Safari bookmarks',
     },
 
     -- LSP
@@ -123,7 +127,8 @@ wk.register({
     e = {
       name = 'Error Diagnostics',
 
-      e = 'show Errow Diagnostics',
+      e = 'show Error diagnostics',
+      d = 'Diagnostics finder',
       k = 'go to next error',
       j = 'go to prev error',
       l = 'List all errors',
@@ -141,14 +146,6 @@ wk.register({
       b = 'Blame hunk',
       d = 'Diff this',
       D = 'Diff against last commit'
-    },
-
-    -- NrrwRng
-    n = {
-      name = 'NrrwRng',
-      n = 'narrow region to new buffer',
-      r = 'narrow region to split',
-      s = 'save narrow region',
     },
 
     -- git

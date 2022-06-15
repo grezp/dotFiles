@@ -35,13 +35,6 @@ vim.g.csv_nomap_cr = 1
 -- PLUGIN MAPPINGS --
 ---------------------
 
--- NrrwRgn --
-ut.keymap('', '<Leader>nn', ':NR!<CR>')
-ut.keymap('', '<Leader>ns', ':WR<CR>:bdelete!<CR>')
-
--- bufdelete --
-ut.keymap('n', '<Leader>bd', [[:lua require('bufdelete').bufdelete(0, true)<CR>]])
-
 -- fugitive
 ut.keymap('n', '<Leader>gf', '<cmd>Git<CR>')
 ut.keymap('n', '<Leader>gl', '<cmd>GcLog<CR>')
