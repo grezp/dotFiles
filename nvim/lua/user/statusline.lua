@@ -168,7 +168,7 @@ end
 
 -- output git active branch
 M.get_git_branch = function()
-  local branch = vim.fn['fugitive#head']()
+  local branch = vim.fn['FugitiveHead']()
 
   if branch ~= nil and branch:len() > 0 then
     return ' ' .. branch .. ' '

@@ -69,7 +69,8 @@ M.setup = function()
         '--smart-case',
         '--trim',
         '--iglob=!{packer_compiled.lua,*.bak*}',
-        '--iglob=!*.bak*'
+        '--iglob=!*.bak*',
+        '--iglob=!{*.cpp.ii.cpp}',
       },
 
       mappings = {
