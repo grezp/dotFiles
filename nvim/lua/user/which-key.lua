@@ -161,8 +161,9 @@ wk.register({
       e = 'toggle Error Diagnostics',
       b = 'toggle gitsigns Blame',
       d = 'toggle gitsigns Deleted lines',
-      i = 'toggle indent-blankline',
+      i = 'toggle Indent-blankline',
       u = 'toggle aUto pairs',
+      s = 'toggle white Space',
     },
 
     -- buffers

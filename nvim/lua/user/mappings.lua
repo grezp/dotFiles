@@ -35,13 +35,17 @@ ut.keymap('v', 'K', [[:move .-2<CR>==]])        -- move selected text v cursor
 ut.keymap('x', 'J', [[:move '>+1<CR>gv-gv]])    -- move selected text ^ cursor
 ut.keymap('x', 'K', [[:move '<-2<CR>gv-gv]])    -- move selected text v cursor
 
--- keep prev copy in buffer 0
-ut.keymap('v', 'p', '"_dP')
-
 -- terminal
 ut.keymap('t', '<Leader><Esc>', '<C-\\><C-n>')
 
--- misc.
-ut.keymap('n', '<Leader>cd', 'cd %:p:h<CR>')        -- change neovim directory to current file
-ut.keymap('n', '<Leader>*', [[<Cmd>let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>]]) -- highlight word w/o moving
+-- misc. --
+-----------
 
+-- change neovim directory to current file
+ut.keymap('n', '<Leader>cd', ':cd %:p:h<CR>')
+--- /@ look for function and var defs
+ut.keymap('n', '<Leader>*', [[<Cmd>let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>]])
+-- keep prev copy in buffer 0
+ut.keymap('v', 'p', '"_dP')
+-- toggle white space
+ut.keymap('n', '<Leader>ts', ':set list!<CR>')
