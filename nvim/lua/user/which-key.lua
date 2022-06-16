@@ -180,6 +180,12 @@ wk.register({
     O = 'blank line ^ cursor',
 
   },
+
+  -- resize windows
+  ['<C-Up>'] = 'increase height',
+  ['<C-Down>'] = 'decrease height',
+  ['<C-Left>'] = 'increase width',
+  ['<C-Right>'] = 'decrease width',
 })
 
 wk.register({
