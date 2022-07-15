@@ -68,8 +68,8 @@ M.setup = function()
         '--column',
         '--smart-case',
         '--trim',
-        '--iglob=!{packer_compiled.lua,*.bak*}',
-        '--iglob=!*.bak*',
+        '--iglob=!{packer_compiled.lua}',
+        '--iglob=!{*.bak*}',
         '--iglob=!{*.cpp.ii.cpp}',
       },
 

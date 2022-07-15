@@ -29,7 +29,7 @@ end
 
 function M.fd()
   require('telescope.builtin').fd {
-    hidden = true,      -- show hidden files
+    hidden = false,     -- don't show hidden files
     no_ignore = false,  -- don't show ignore files
     sorting_strategy = 'ascending',
     find_command = {
