@@ -71,6 +71,8 @@ M.setup = function()
         '--iglob=!{packer_compiled.lua}',
         '--iglob=!{*.bak*}',
         '--iglob=!{*.cpp.ii.cpp}',
+        '--iglob=!{lost+found}',
+        '--iglob=!{x86_64_linux*}',
       },
 
       mappings = {
