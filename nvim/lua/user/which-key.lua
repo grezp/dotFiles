@@ -179,6 +179,15 @@ wk.register({
     o = 'blank line v cursor',
     O = 'blank line ^ cursor',
 
+    -- clear case
+    c = {
+      name = 'Clear Case',
+
+      o = 'checkOut',
+      u = 'Undo checkout',
+      i = 'checkIn',
+      l = 'List Activities'
+    }
   },
 
   -- resize windows

@@ -38,6 +38,12 @@ ut.keymap('x', 'K', [[:move '<-2<CR>gv-gv]])    -- move selected text v cursor
 -- terminal
 ut.keymap('t', '<Leader><Esc>', '<C-\\><C-n>')
 
+-- clear case
+ut.keymap('n', '<Leader>co', ':!ct co -nc %<CR>')       -- checkout file
+ut.keymap('n', '<Leader>cu', ':!ct unco -rm %<CR>')     -- undo checkout
+ut.keymap('n', '<Leader>ci', ':!ct ci -nc %<CR>')       -- checkin file
+ut.keymap('n', '<Leader>cl', ':!ct lsact -l<CR>')       -- list activities
+
 -- misc. --
 -----------
 
