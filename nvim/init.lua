@@ -1,6 +1,4 @@
-HOME = os.getenv('HOME')
-vim.g.mapleader = ' '
-
+require('core.globals')
 require('core.augroups')
 require('core.settings')
 
