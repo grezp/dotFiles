@@ -1,4 +1,4 @@
-local utils_status_ok, ut = pcall(require, 'user.utils')
+local utils_status_ok, ut = pcall(require, 'core.utils')
 local teles_status_ok,  _ = pcall(require, 'telescope')
 local M = {}
 
@@ -67,7 +67,7 @@ local function lsp_keymaps(bufnr)
     )
 
     if teles_status_ok then
-      local map_tele = require('user.telescope.builtins').map_tele
+      local map_tele = require('plugins.telescope.builtins').map_tele
       map_tele('<leader>ed', 'diags', _, bufnr)
 
       map_tele('<leader>ld', 'lsp_defs', _, bufnr)
@@ -91,7 +91,7 @@ local function lsp_keymaps(bufnr)
     ut.buf_keymap(bufnr, 'n', '<Leader>lK', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
     vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
   else
-    vim.notify('user.utils not found')
+    vim.notify('core.utils not found')
   end
 end
 

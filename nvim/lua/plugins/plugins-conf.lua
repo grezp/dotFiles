@@ -1,4 +1,4 @@
-local ut = require('user.utils')
+local ut = require('core.utils')
 local impatient_status_ok, impatient = pcall(require, 'impatient')
 local blankline_status_ok, blankline = pcall(require, 'indent_blankline')
 

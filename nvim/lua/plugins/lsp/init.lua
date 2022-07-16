@@ -4,6 +4,6 @@ if not status_ok then
 	return
 end
 
-require('user.lsp.lsp-installer')
-require('user.lsp.centos-lsp')
-require('user.lsp.handlers').setup()
+require('plugins.lsp.lsp-installer')
+require('plugins.lsp.centos-lsp')
+require('plugins.lsp.handlers').setup()

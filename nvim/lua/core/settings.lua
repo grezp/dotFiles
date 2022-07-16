@@ -1,4 +1,4 @@
-local ut = require('user.utils')
+local ut = require('core.utils')
 
 -- reformats folds to be fix indentation + {...}
 function _G.custom_fold_text()

@@ -4,5 +4,5 @@ if not status_ok then
 	return
 end
 
-require('user.telescope.setup').setup()
-require('user.telescope.mappings')
+require('plugins.telescope.setup').setup()
+require('plugins.telescope.mappings')

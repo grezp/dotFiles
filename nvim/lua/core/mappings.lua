@@ -1,6 +1,6 @@
-local status_ok, ut = pcall(require, 'user.utils')
+local status_ok, ut = pcall(require, 'core.utils')
 if not status_ok then
-  vim.notify('user.utils not found')
+  vim.notify('core.utils not found')
   return
 end
 

@@ -54,7 +54,7 @@ gitsigns.setup {
   },
 }
 
-local ut = require('user.utils')
+local ut = require('core.utils')
 ut.keymap('n', ']c', [[&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>']], {expr=true})
 ut.keymap('n', '[c', [[&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>']], {expr=true})
 

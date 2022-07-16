@@ -5,7 +5,7 @@ if not status_ok then
   return
 end
 
-local ut = require('user.utils')
+local ut = require('core.utils')
 
 neogit.setup {
   disable_signs = false,

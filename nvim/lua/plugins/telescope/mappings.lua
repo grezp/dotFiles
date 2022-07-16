@@ -1,5 +1,5 @@
-local map_tele = require('user.telescope.builtins').map_tele
-local keymap = require('user.utils').keymap
+local map_tele = require('plugins.telescope.builtins').map_tele
+local keymap = require('core.utils').keymap
 
 keymap('c', '<c-r><c-r>', '<Plug>(TelescopeFuzzyCommandSearch)')
 

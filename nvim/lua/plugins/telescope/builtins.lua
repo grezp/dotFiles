@@ -153,7 +153,7 @@ M.map_tele = function(key, f, options, buffer)
   TelescopeMapArgs[map_key] = options or {}
 
   local mode = 'n'
-  local cmd = [[<cmd>lua require('user.telescope.builtins')]]
+  local cmd = [[<cmd>lua require('plugins.telescope.builtins')]]
   cmd = cmd .. [[['%s'](TelescopeMapArgs['%s'])<CR>]]
   local rhs = string.format(cmd, f, map_key)
 
