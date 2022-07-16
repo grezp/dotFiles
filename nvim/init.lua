@@ -1,11 +1,12 @@
 HOME = os.getenv('HOME')
 vim.g.mapleader = ' '
 
-require('core.plugins')
+require('core.augroups')
 require('core.settings')
+
+require('core.plugins')
 require('core.mappings')
 require('plugins.statusline')
-require('core.augroups')
 require('core.colors')
 
 -- plugin configs
