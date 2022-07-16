@@ -16,7 +16,6 @@ o.encoding = 'utf-8'
 o.hidden = true                           -- change buffer w/o saving
 o.history = 1000                          -- save cmd history
 o.dictionary = '/usr/share/dict/words'    -- dictionary file
-o.clipboard = "unnamedplus"               -- '+' clipboard register
 o.ruler = false
 
 -- misc behavior
