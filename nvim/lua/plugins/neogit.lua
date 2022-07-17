@@ -5,8 +5,6 @@ if not status_ok then
   return
 end
 
-local ut = require('core.utils')
-
 neogit.setup {
   disable_signs = false,
   disable_hint = false,
@@ -67,6 +65,4 @@ neogit.setup {
     }
   }
 }
-
-ut.keymap('n', '<leader>gg', '<cmd>Neogit<CR>')
 

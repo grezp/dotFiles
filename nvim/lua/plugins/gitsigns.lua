@@ -54,19 +54,3 @@ gitsigns.setup {
   },
 }
 
-local ut = require('core.utils')
-ut.keymap('n', ']c', [[&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>']], {expr=true})
-ut.keymap('n', '[c', [[&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>']], {expr=true})
-
-ut.keymap({'n', 'v'},  '<leader>hs', ':Gitsigns stage_hunk<CR>')
-ut.keymap({'n', 'v'},  '<leader>hu', ':Gitsigns undo_stage_hunk<CR>')
-ut.keymap({'n', 'v'},  '<leader>hr', ':Gitsigns reset_hunk<CR>')
-ut.keymap('n', '<leader>hS', '<cmd>Gitsigns stage_buffer<CR>')
-ut.keymap('n', '<leader>hR', '<cmd>Gitsigns reset_buffer<CR>')
-ut.keymap('n', '<leader>hp', '<cmd>Gitsigns preview_hunk<CR>')
-ut.keymap('n', '<leader>hb', '<cmd>lua require"gitsigns".blame_line {full=true, ignore_whitespace=true}<CR>')
-ut.keymap('n', '<leader>tb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
-ut.keymap('n', '<leader>hd', '<cmd>Gitsigns diffthis<CR>')
-ut.keymap('n', '<leader>hD', '<cmd>lua require"gitsigns".diffthis("~")<CR>')
-ut.keymap('n', '<leader>td', '<cmd>Gitsigns toggle_deleted<CR>')
-

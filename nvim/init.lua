@@ -2,8 +2,12 @@ require('core.globals')
 require('core.augroups')
 require('core.settings')
 
+vim.defer_fn(function()
+  local maps = require('core.mappings')
+  require("core.utils").load_mappings(maps)
+end, 0)
+
 require('core.plugins')
-require('core.mappings')
 require('plugins.statusline')
 require('core.colors')
 

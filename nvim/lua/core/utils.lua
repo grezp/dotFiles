@@ -1,29 +1,41 @@
 local M = {}
 
--- generic keymaps --
-M.keymap = function(mode, shortcut, command, opts)
-  opts = opts or { noremap = true, silent = true }
+local merge_tb = vim.tbl_deep_extend
 
-  if type(mode) == 'table' then
-    for _, m in ipairs(mode) do
-      vim.api.nvim_set_keymap(m, shortcut, command, opts)
-    end
-  else
-    vim.api.nvim_set_keymap(mode, shortcut, command, opts)
-  end
-end
+M.load_mappings = function(mappings, mapping_opt)
+   -- set mapping function with/without whichkey
+   local set_maps
+   local whichkey_exists, wk = pcall(require, "which-key")
 
--- generic buffer keymaps --
-M.buf_keymap = function(bufnr, mode, shortcut, command, opts)
-  opts = opts or { noremap = true, silent = true }
+   if whichkey_exists then
+      set_maps = function(keybind, mapping_info, opts)
+         wk.register({ [keybind] = mapping_info }, opts)
+      end
+   else
+      set_maps = function(keybind, mapping_info, opts)
+         local mode = opts.mode
+         opts.mode = nil
+         vim.keymap.set(mode, keybind, mapping_info[1], opts)
+      end
+   end
 
-  if type(mode) == 'table' then
-    for _, m in pairs(mode) do
-      vim.api.nvim_buf_set_keymap(bufnr, m, shortcut, command, opts)
-    end
-  else
-    vim.api.nvim_buf_set_keymap(bufnr, mode, shortcut, command, opts)
-  end
+   mappings.lspconfig = nil
+
+   for _, section in pairs(mappings) do
+      for mode, mode_values in pairs(section) do
+         for keybind, mapping_info in pairs(mode_values) do
+            -- merge default + user opts
+            local default_opts = merge_tb('force', { mode = mode }, mapping_opt or {})
+            local opts = merge_tb('force', default_opts, mapping_info.opts or {})
+
+            if mapping_info.opts then
+               mapping_info.opts = nil
+            end
+
+            set_maps(keybind, mapping_info, opts)
+         end
+      end
+   end
 end
 
 M.Ex = setmetatable({}, {

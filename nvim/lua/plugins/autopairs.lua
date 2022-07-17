@@ -30,26 +30,3 @@ autopairs.setup({
   map_c_w = false,
 })
 
--- toggles autopairs
-local toggle = true
-
-Toggle_pair = true
-vim.keymap.set('n', '<leader>tu', function()
-  if toggle then
-    toggle = false
-    return require('nvim-autopairs').disable()
-  end
-  toggle = true
-  return require('nvim-autopairs').enable()
-end
-)
-
-vim.keymap.set('i', '<C-u>', function()
-  if toggle then
-    toggle = false
-    return require('nvim-autopairs').disable()
-  end
-  toggle = true
-  return require('nvim-autopairs').enable()
-end
-)

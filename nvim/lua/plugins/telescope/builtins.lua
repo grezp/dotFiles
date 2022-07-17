@@ -1,3 +1,9 @@
+local status_ok, _ = pcall(require, 'telescope')
+if not status_ok then
+  vim.notify('telescope not found!')
+  return
+end
+
 local M = {}
 
 function M.edit_neovim()
@@ -145,7 +151,22 @@ function M.diags()
   }
 end
 
+function M.cur_buf_fzy_find()
+  require('telescope.builtin').current_buffer_fuzzy_find {
+  }
+end
+
 TelescopeMapArgs = TelescopeMapArgs or {}
+
+M.tele_func = function(f)
+  local map_key = vim.api.nvim_replace_termcodes(f, true, true, true)
+
+
+  local cmd = [[<cmd>lua require('plugins.telescope.builtins')]]
+  cmd = cmd .. [[['%s'](TelescopeMapArgs['%s'])<CR>]]
+
+  return string.format(cmd, f, map_key)
+end
 
 M.map_tele = function(key, f, options, buffer)
   local map_key = vim.api.nvim_replace_termcodes(f, true, true, true)

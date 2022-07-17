@@ -46,53 +46,7 @@ M.setup = function()
   })
 end
 
--- toggles diags with same key map
-local toggle = true
-
 local function lsp_keymaps(bufnr)
-  if utils_status_ok then
-    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-    ut.buf_keymap(bufnr, 'n', '<Leader>ee', '<cmd>lua vim.diagnostic.open_float()<CR>')
-    ut.buf_keymap(bufnr, 'n', '<Leader>ek', '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>')
-    ut.buf_keymap(bufnr, 'n', '<Leader>ej', '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>')
-    ut.buf_keymap(bufnr, 'n', '<Leader>el', '<cmd>lua vim.diagnostic.setloclist()<CR>')
-    vim.keymap.set('n', '<Leader>te', function()
-      if toggle then
-        toggle = false
-        return vim.diagnostic.disable()
-      end
-      toggle = true
-      return vim.diagnostic.enable()
-    end
-    )
-
-    if teles_status_ok then
-      local map_tele = require('plugins.telescope.builtins').map_tele
-      map_tele('<leader>ed', 'diags', _, bufnr)
-
-      map_tele('<leader>ld', 'lsp_defs', _, bufnr)
-      map_tele('<leader>lr', 'lsp_refs', _, bufnr)
-      map_tele('<leader>li', 'lsp_impl', _, bufnr)
-      map_tele('<leader>lg', 'lsp_global_symbols', _, bufnr)
-    else
-      -- See `:help vim.lsp.*` for documentation on any of the below functions
-      ut.buf_keymap(bufnr, 'n', '<Leader>lD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-      ut.buf_keymap(bufnr, 'n', '<Leader>ld', '<cmd>lua vim.lsp.buf.definition()<CR>')
-      ut.buf_keymap(bufnr, 'n', '<Leader>lr', '<cmd>lua vim.lsp.buf.references()<CR>')
-      ut.buf_keymap(bufnr, 'n', '<Leader>li', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-      -- ut.buf_keymap(bufnr, 'n', '<Leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-      -- ut.buf_keymap(bufnr, 'n', '<Leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
-      -- ut.buf_keymap(bufnr, 'n', '<Leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
-      -- ut.buf_keymap(bufnr, 'n', '<Leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
-    end
-
-    ut.buf_keymap(bufnr, 'n', '<Leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>')
-    ut.buf_keymap(bufnr, 'n', '<Leader>lk', '<cmd>lua vim.lsp.buf.hover()<CR>')
-    ut.buf_keymap(bufnr, 'n', '<Leader>lK', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
-  else
-    vim.notify('core.utils not found')
-  end
 end
 
 M.on_attach = function(client, bufnr)
