@@ -138,6 +138,7 @@ M.telescope = {
 }
 
 -- git
+local signs = require('gitsigns')
 M.git = {
   n = {
     ['<Leader>g'] = { name = '  Git' },
@@ -150,15 +151,15 @@ M.git = {
     ['<Leader>gl'] = { '<cmd> GcLog  <CR>','git Log'},
 
     -- git signs
-    ['<leader>gs'] = { require('gitsigns').stage_hunk,      '  Stage hunk' },
-    ['<leader>gu'] = { require('gitsigns').undo_stage_hunk, '  Unstage hunk' },
-    ['<leader>gr'] = { require('gitsigns').reset_hunk,      '  Reset hunk' },
-    ['<leader>gS'] = { require('gitsigns').stage_buffer,    '  Stage buffer' },
-    ['<leader>gR'] = { require('gitsigns').reset_buffer,    '  Reset buffer' },
-    ['<leader>gp'] = { require('gitsigns').preview_hunk,    '響 Preview hunk' },
+    ['<leader>gs'] = { function() signs.stage_hunk() end,      '  Stage hunk' },
+    ['<leader>gu'] = { function() signs.undo_stage_hunk() end, '  Unstage hunk' },
+    ['<leader>gr'] = { function() signs.reset_hunk() end,      '  Reset hunk' },
+    ['<leader>gS'] = { function() signs.stage_buffer() end,    '  Stage buffer' },
+    ['<leader>gR'] = { function() signs.reset_buffer() end,    '  Reset buffer' },
+    ['<leader>gp'] = { function() signs.preview_hunk() end,    '響 Preview hunk' },
     ['<leader>gd'] = { require('gitsigns').diffthis,        '者 Diff this' },
     ['<leader>gb'] = { function ()
-      require"gitsigns".blame_line {
+      signs.blame_line {
         full=true,
         ignore_whitespace=true
       } end,
@@ -166,13 +167,13 @@ M.git = {
     },
 
     -- toggle
-    ['<leader>tb'] = { require('gitsigns').toggle_current_line_blame, '  git Blame' },
-    ['<leader>td'] = { require('gitsigns').toggle_deleted,            'ﴗ  git show Deleted' },
+    ['<leader>tb'] = { function() signs.toggle_current_line_blame() end, '  git Blame' },
+    ['<leader>td'] = { function() signs.toggle_deleted() end,            'ﴗ  git show Deleted' },
 
     [']c'] = {
       function()
         if vim.wo.diff then return ']c' end
-        vim.schedule(function() require('gitsigns').next_hunk() end)
+        vim.schedule(function() signs.next_hunk() end)
         return '<Ignore>'
       end,
       '  next hunk'
@@ -180,7 +181,7 @@ M.git = {
     ['[c'] = {
       function()
         if vim.wo.diff then return '[c' end
-        vim.schedule(function() require('gitsigns').prev_hunk() end)
+        vim.schedule(function() signs.prev_hunk() end)
         return '<Ignore>'
       end,
       '  prev hunk'
@@ -191,9 +192,9 @@ M.git = {
     ['<Leader>g'] = { name = '  Git' },
 
     -- git signs
-    ['<leader>gs'] = { require('gitsigns').stage_hunk,      '  Stage hunk' },
-    ['<leader>gu'] = { require('gitsigns').undo_stage_hunk, '  Unstage hunk' },
-    ['<leader>gr'] = { require('gitsigns').reset_hunk,      '  Reset hunk' },
+    ['<leader>gs'] = { function() signs.stage_hunk() end,      '  Stage hunk' },
+    ['<leader>gu'] = { function() signs.undo_stage_hunk() end, '  Unstage hunk' },
+    ['<leader>gr'] = { function() signs.reset_hunk() end,      '  Reset hunk' },
   }
 }
 
