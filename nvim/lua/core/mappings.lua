@@ -98,7 +98,7 @@ M.clear_case = {
 }
 
 local tele = require('plugins.telescope.builtins').tele_func
-M.telescope_tmp = {
+M.telescope = {
   n = {
     ['<Leader>f']  = { name = '  Find Files' },
 
@@ -199,7 +199,7 @@ M.git = {
 
 
 -- lsp
-M.lspconfig_tmp = {
+M.lspconfig = {
   n = {
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     ['<Leader>l'] = { name = '  LSP' },

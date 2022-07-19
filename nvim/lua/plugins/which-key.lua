@@ -68,7 +68,11 @@ wk.setup {
 }
 
 
-local maps = require('core.mappings')
-local map_groups = { groups = vim.deepcopy(maps.groups) }
-require('core.utils').load_mappings(map_groups)
+-- local maps = require('core.mappings')
+-- local map_groups = { groups = vim.deepcopy(maps.groups) }
+--
+-- maps.disabled = nil
+-- maps.groups = nil
+--
+-- require('core.utils').load_mappings(map_groups)
 

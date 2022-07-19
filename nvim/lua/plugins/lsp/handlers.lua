@@ -1,5 +1,3 @@
-local utils_status_ok, ut = pcall(require, 'core.utils')
-local teles_status_ok,  _ = pcall(require, 'telescope')
 local M = {}
 
 -- TODO: backfill this to template
@@ -46,11 +44,11 @@ M.setup = function()
   })
 end
 
-local function lsp_keymaps(bufnr)
-end
 
 M.on_attach = function(client, bufnr)
-  lsp_keymaps(bufnr)
+  local lsp_mappings = require('core.mappings').lspconfig
+  require('core.utils').load_mappings({ lsp_mappings }, { bufnr })
+
   print('LSP attached '..client.name..' to buffer '..bufnr)
 end
 

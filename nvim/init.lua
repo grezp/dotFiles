@@ -1,15 +1,14 @@
-require('core.globals')
 require('core.augroups')
 require('core.settings')
 
 vim.defer_fn(function()
-  local maps = require('core.mappings')
-  require("core.utils").load_mappings(maps)
+  require("core.utils").load_mappings()
 end, 0)
 
 require('core.plugins')
-require('plugins.statusline')
-require('core.colors')
+require('custom.globals')
+require('custom.statusline')
+require('custom.colors')
 
 -- plugin configs
 require('plugins.plugins-conf')
