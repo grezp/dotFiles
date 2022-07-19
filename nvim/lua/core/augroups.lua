@@ -41,7 +41,7 @@ aucmd({ 'BufEnter', 'BufRead' }, {
 local packer_grp = augroup('packer_user_config', { clear = true })
 aucmd('BufWritePost', {
   group = packer_grp,
-  pattern = 'plugins.lua',
+  pattern = 'packer.lua',
   command = 'source <afile> | PackerSync',
 })
 
