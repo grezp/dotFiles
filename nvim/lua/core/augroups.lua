@@ -37,14 +37,6 @@ aucmd({ 'BufEnter', 'BufRead' }, {
   command = "set fo-=c fo-=r fo-=o",
 })
 
--- reloads neovim whenever plugins.lua file is saved
-local packer_grp = augroup('packer_user_config', { clear = true })
-aucmd('BufWritePost', {
-  group = packer_grp,
-  pattern = 'packer.lua',
-  command = 'source <afile> | PackerSync',
-})
-
 -- go to last loc when opening a buffer
 aucmd( 'BufReadPost', {
   command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g`\"" | endif]]

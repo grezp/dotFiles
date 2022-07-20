@@ -157,7 +157,7 @@ M.git = {
     ['<leader>gS'] = { function() signs.stage_buffer() end,    '  Stage buffer' },
     ['<leader>gR'] = { function() signs.reset_buffer() end,    '  Reset buffer' },
     ['<leader>gp'] = { function() signs.preview_hunk() end,    '響 Preview hunk' },
-    ['<leader>gd'] = { require('gitsigns').diffthis,        '者 Diff this' },
+    ['<leader>gd'] = { function() signs.diffthis() end,        '者 Diff this' },
     ['<leader>gb'] = { function ()
       signs.blame_line {
         full=true,
@@ -282,6 +282,9 @@ M.others = {
       end,
       '  aUto pairs'
     },
+
+    -- packer
+    ['\\\\'] = { '<cmd> PackerSync <CR>', 'Packer Sync' },
   },
 
   i = {
