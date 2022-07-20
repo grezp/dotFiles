@@ -34,7 +34,77 @@ packer.init {
 -- packer installs plugins here
 return packer.startup {
   function(use)
-    use 'wbthomason/packer.nvim'                -- Packer can manage itself
+    use 'wbthomason/packer.nvim'    -- Packer can manage itself
+    use 'nvim-lua/plenary.nvim'
+
+
+    -- performance --
+    use {
+      'lewis6991/impatient.nvim',     --Speed up loading Lua modules
+      config = function()
+        require('plugins.configs.others').impatient()
+      end,
+    }
+    use 'nathom/filetype.nvim'        -- improves filetype startup time
+
+
+    -- aesthesics --
+    use 'folke/tokyonight.nvim'
+    use 'kyazdani42/nvim-web-devicons'        -- icons
+    use {
+      'lukas-reineke/indent-blankline.nvim',  -- create indent line for spaces
+      config = function()
+        require('plugins.configs.others').blankline()
+      end
+    }
+
+
+    -- treesitter
+    use {                                       -- nvim hl based on syntax
+      'nvim-treesitter/nvim-treesitter',
+      run = ':TSUpdate'
+    }
+
+
+    -- git --
+    use 'tpope/vim-fugitive'              -- git wrapper for vim
+    use 'sindrets/diffview.nvim'          -- provides inline diffs
+    use 'lewis6991/gitsigns.nvim'         -- displays inline git changes + blame
+    use 'TimUntersberger/neogit'          -- magit clone
+
+
+    -- lsp --
+    use 'neovim/nvim-lspconfig'           -- Collection of configurations for the built-in LSP client
+    use 'williamboman/nvim-lsp-installer' -- install lang servers in ~/.local/share/nvim/lsp_servers
+
+
+    -- snippets --
+    use 'L3MON4D3/LuaSnip'              -- snippet engine
+    use 'rafamadriz/friendly-snippets'  -- collection of snippets for several langs
+
+
+    -- completion --
+    use 'hrsh7th/nvim-cmp'                        -- autocompletion engine
+    use 'hrsh7th/cmp-buffer'                      -- autocomplete from buffer & enable '/' search
+    use 'hrsh7th/cmp-path'                        -- autocomplete directory path
+    use 'hrsh7th/cmp-cmdline'                     -- autocomplete cmd line
+    use 'hrsh7th/cmp-nvim-lua'                    -- autocomplete Lua API
+    use 'hrsh7th/cmp-nvim-lsp'                    -- autocomplete from LSP
+    use 'hrsh7th/cmp-nvim-lsp-document-symbol'    -- allow '/@' to search for func defs
+    use 'saadparwaiz1/cmp_luasnip'                -- enable luasnip as cmp snippet engine
+
+
+    -- searching --
+    use 'nvim-telescope/telescope.nvim'             -- fuzzy finder
+    use {
+      'nvim-telescope/telescope-fzf-native.nvim',   -- FZF
+      run = 'make'
+    }
+    use {
+      'nvim-telescope/telescope-frecency.nvim',     -- improves file selection base on history
+      requires = { 'tami5/sqlite.lua' },
+    }
+
 
     -- utility --
     use 'numToStr/Comment.nvim'           -- comment code w/ vi movements
@@ -45,78 +115,13 @@ return packer.startup {
     use 'jghauser/mkdir.nvim'             -- create missing dir(s) like 'mkdir -p'
     use 'tpope/vim-surround'              -- surround selected text with chars (e.g. '/")
     use 'tpope/vim-repeat'                -- repeat plugins with .
-    use 'chrisbra/csv.vim'                -- edit csv files in vim
     use 'windwp/nvim-autopairs'           -- auto completes pairs: {}, (), [], "", ''
-
-    -- snippets --
     use {
-      'L3MON4D3/LuaSnip',                     -- snippet engine
-      requires = {
-        { 'rafamadriz/friendly-snippets' },   -- collection of snippets for several langs
-      }
+      'chrisbra/csv.vim',                 -- edit csv files in vim
+      config = function()
+        require('plugins.configs.others').csv()
+      end
     }
-
-    -- git --
-    use 'tpope/vim-fugitive'              -- git wrapper for vim
-    use 'sindrets/diffview.nvim'          -- provides inline diffs
-    use {                                 -- displays inline git changes + blame
-      'lewis6991/gitsigns.nvim',
-      requires = {
-        'nvim-lua/plenary.nvim'
-      }
-    }
-    use {                                 -- magit clone
-      'TimUntersberger/neogit',
-      requires = {
-        'nvim-lua/plenary.nvim'
-      }
-    }
-
-    -- searching --
-    use {
-      'nvim-telescope/telescope.nvim',          -- fuzzy finder
-      requires = {
-        { 'nvim-lua/plenary.nvim' },                                  -- additional neovim APIs
-        { 'kyazdani42/nvim-web-devicons' },                           -- icons
-        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }, -- FZF
-        { 'dhruvmanila/telescope-bookmarks.nvim' },                   -- open bookmarks
-        { 'nvim-telescope/telescope-frecency.nvim',                   -- improves file selection base on history
-          requires = { 'tami5/sqlite.lua' },
-        },
-      }
-    }
-
-    -- performance --
-    use 'nathom/filetype.nvim'        -- improves filetype startup time
-    use 'lewis6991/impatient.nvim'    -- Speed up loading Lua modules
-
-    -- lsp --
-    use 'neovim/nvim-lspconfig'           -- Collection of configurations for the built-in LSP client
-    use 'williamboman/nvim-lsp-installer' -- install lang servers in ~/.local/share/nvim/lsp_servers
-
-    -- treesitter
-    use {                                       -- nvim hl based on syntax
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate'
-    }
-
-    -- completion --
-    use {
-      'hrsh7th/nvim-cmp',                             -- autocompletion engine
-      requires = {
-        { 'hrsh7th/cmp-buffer' },                     -- autocomplete from buffer & enable '/' search
-        { 'hrsh7th/cmp-path' },                       -- autocomplete directory path
-        { 'hrsh7th/cmp-cmdline' },                    -- autocomplete cmd line
-        { 'hrsh7th/cmp-nvim-lua' },                   -- autocomplete Lua API
-        { 'hrsh7th/cmp-nvim-lsp' },                   -- autocomplete from LSP
-        { 'hrsh7th/cmp-nvim-lsp-document-symbol' },   -- allow '/@' to search for func defs
-        { 'saadparwaiz1/cmp_luasnip' },               -- enable luasnip as cmp snippet engine
-      }
-    }
-
-    -- aesthesics --
-    use 'folke/tokyonight.nvim'
-    use 'lukas-reineke/indent-blankline.nvim'   -- create indent line for spaces
 
     -- Automatically set up your configuration after cloning packer.nvim
     if PACKER_BOOTSTRAP then
