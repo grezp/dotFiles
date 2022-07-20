@@ -318,7 +318,7 @@ M.set_explorer = function(self)
   local color = self.colors
   local sep = self.separators
 
-  local title = color.normal_inv .. ' File Tree '
+  local title = color.normal_inv .. ' Nvim Tree '
   local l_sep = color.inactive .. sep.lh_arrow .. sep.lh_arrow
   local r_sep = color.inactive .. sep.rh_arrow .. sep.rh_arrow
 

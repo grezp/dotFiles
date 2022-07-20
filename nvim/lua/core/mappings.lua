@@ -21,7 +21,7 @@ M.general = {
     -- general
     ['<ESC>']     = { '<cmd> noh <CR>', '  no highlight' },
     ['<Leader>o'] = { 'o<ESC>',         '  new line below' },
-    ['<Leader>O'] = { 'o<ESC>',         '  new line above' },
+    ['<Leader>O'] = { 'O<ESC>',         '  new line above' },
 
     -- system file
     ['<Leader>s'] = { '<cmd> w <CR>',  '  saves current file'},
@@ -30,8 +30,6 @@ M.general = {
 
     -- buffers
     ['<Leader>b']  = { name = '  Buffers' },
-    ['<Leader>bb'] = { '<cmd> ls <CR><cmd> buffer<Space>', '  list buffer, then select' },
-    ['<Leader>bl'] = { '<cmd> ls<CR>',                     '  list buffer' },
     ['<Leader>bn'] = { '<cmd> bnext<CR>',                  '  next buffer' },
     ['<Leader>bp'] = { '<cmd> bprev<CR>',                  '  prev buffer' },
     ['<Leader>bd'] = { '<cmd> Bdelete<CR>',                '  delete buffer' },
@@ -198,7 +196,6 @@ M.git = {
   }
 }
 
-
 -- lsp
 M.lspconfig = {
   n = {
@@ -263,16 +260,38 @@ M.lspconfig = {
   }
 
 }
+
 M.nvimtree = {
    n = {
       -- toggle
-      ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
+      ['<C-n>'] = { '<cmd> NvimTreeToggle <CR>', '   toggle nvimtree' },
 
       -- focus
-      ["<leader>,"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
+      ['<leader>,'] = { '<cmd> NvimTreeFocus <CR>', '   focus nvimtree' },
    },
 }
 
+M.bufferline = {
+  n = {
+    ['<Leader>bb'] = { '<cmd> BufferLinePick <CR>',        '  list buffer, then select' },
+
+    -- cycle through buffers
+    ['<TAB>']   = { '<cmd> BufferLineCycleNext <CR>', '  goto next buffer' },
+    ['<S-Tab>'] = { '<cmd> BufferLineCyclePrev <CR>', '  goto prev buffer' },
+
+    -- jump to buffer pos
+    ['<Leader>b0'] = { '<cmd> lua require("bufferline").go_to_buffer(1, true) <CR>',  '0  goto 1st buffer' },
+    ['<Leader>b$'] = { '<cmd> BufferLineGoToBuffer -1 <CR>',                          '$  goto last buffer' },
+
+    -- move buffers
+    ['<Leader>bl'] = { '<cmd> BufferLineMoveNext <CR>', '  move buffer right' },
+    ['<Leader>bh'] = { '<cmd> BufferLineMovePrev <CR>', '  move buffer left' },
+
+    -- sort buffer
+    ['<Leader>be'] = { '<cmd> BufferLineSortByExtension <CR>', '  sort by extension' },
+    ['<Leader>bs'] = { '<cmd> BufferLineSortByDirectory <CR>', '  sort by directory' },
+  }
+}
 
 M.others = {
   n = {

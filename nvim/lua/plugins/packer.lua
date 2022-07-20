@@ -123,6 +123,10 @@ return packer.startup {
         require('plugins.configs.others').csv()
       end
     }
+    use {
+      'akinsho/bufferline.nvim',          -- display buffer int tabline
+      tag = 'v2.*'
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     if PACKER_BOOTSTRAP then
