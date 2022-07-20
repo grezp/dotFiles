@@ -8,7 +8,7 @@ local out_event = { 'WinLeave', 'BufLeave', 'FocusLost', 'InsertEnter' }
 local num_toggle_grp = augroup('numberToggle', { clear = true })
 
 aucmd(in_event, {
-   group = num_toggle_grp,
+  group = num_toggle_grp,
   command = 'set relativenumber number',
 })
 aucmd(out_event, {

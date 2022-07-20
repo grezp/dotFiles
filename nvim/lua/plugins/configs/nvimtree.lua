@@ -7,12 +7,12 @@ end
 nvimtree.setup {
   filters = {
     dotfiles = false,
-    exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
+    exclude = {},
   },
   disable_netrw = true,
   hijack_netrw = true,
   open_on_setup = false,
-  ignore_ft_on_setup = { "alpha" },
+  ignore_ft_on_setup = {},
   hijack_cursor = true,
   hijack_unnamed_buffer_when_opening = false,
   update_cwd = true,
@@ -23,9 +23,9 @@ nvimtree.setup {
   view = {
     adaptive_size = true,
     side = "left",
-    width = 25,
+    width = 30,
     hide_root_folder = true,
-   relativenumber = true,
+    relativenumber = true,
   },
   git = {
     enable = false,
