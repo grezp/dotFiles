@@ -1,9 +1,3 @@
-local status_ok, _ = pcall(require, 'telescope')
-if not status_ok then
-  vim.notify('telescope not found!')
-  return
-end
-
 local M = {}
 
 function M.edit_neovim()
