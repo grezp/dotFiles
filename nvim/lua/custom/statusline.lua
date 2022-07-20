@@ -25,6 +25,7 @@ M.colors = {
   alt_ch        = '%#AltToCh#',
 
   normal        = '%#NormalModeStatus#',
+  normal_inv    = '%#NormalModeStatusInv#',
   insert        = '%#InsertModeStatus#',
   visual        = '%#VisualModeStatus#',
   replace       = '%#ReplaceModeStatus#',
@@ -171,7 +172,7 @@ M.get_git_branch = function()
   local branch = vim.fn['FugitiveHead']()
 
   if branch ~= nil and branch:len() > 0 then
-    return ' ' .. branch .. ' '
+    return '  ' .. branch .. ' '
   end
 
   return ''
@@ -310,15 +311,26 @@ M.set_inactive = function(self)
 
   return table.concat{
     '%=', ls_arrow_a2b, ls_arrow_a2b, filename, rs_arrow_a2b, rs_arrow_a2b, '%=',
-    }
+  }
+end
+
+M.set_explorer = function(self)
+  local color = self.colors
+  local sep = self.separators
+
+  local title = color.normal_inv .. ' File Tree '
+  local l_sep = color.inactive .. sep.lh_arrow .. sep.lh_arrow
+  local r_sep = color.inactive .. sep.rh_arrow .. sep.rh_arrow
+
+
+  return table.concat({ '%=', l_sep, title, r_sep, '%=' })
 end
 
 -- define status line
 Statusline = setmetatable(M, {
-  __call = function(statusline, mode)
-    if mode == 'active' then return statusline:set_active() end
-    if mode == 'inactive' then return statusline:set_inactive() end
-  end
+  __call = function(self, mode)
+    return self["set_" .. mode](self)
+  end,
 })
 
 -- set statusline
@@ -333,4 +345,9 @@ aucmd({ 'WinEnter', 'BufEnter' }, {
 aucmd({ 'WinLeave', 'BufLeave' }, {
   group = status_grp,
   command = "setlocal statusline=%!v:lua.Statusline('inactive')",
+})
+aucmd({ 'WinEnter', 'BufEnter', 'FileType' }, {
+  group = status_grp,
+  pattern = 'NvimTree_1',
+  command = "setlocal statusline=%!v:lua.Statusline('explorer')",
 })

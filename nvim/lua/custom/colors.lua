@@ -56,11 +56,12 @@ M.custom_hl_groups = {
   FileModsInv     = { fg = green2,  bg = status },
 
   -- mode colors
-  NormalModeStatus  = { fg = status, bg = purple },
-  InsertModeStatus  = { fg = status, bg = green },
-  VisualModeStatus  = { fg = status, bg = blue },
-  ReplaceModeStatus = { fg = status, bg = red },
-  OtherModeStatus   = { fg = status, bg = orange },
+  NormalModeStatus    = { fg = status, bg = purple },
+  NormalModeStatusInv = { fg = purple, bg = status },
+  InsertModeStatus    = { fg = status, bg = green },
+  VisualModeStatus    = { fg = status, bg = blue },
+  ReplaceModeStatus   = { fg = status, bg = red },
+  OtherModeStatus     = { fg = status, bg = orange },
 
   -- mode colors
   NormalModeAltStatus  = { fg = purple, bg = status2 },

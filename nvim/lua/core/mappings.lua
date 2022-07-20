@@ -263,6 +263,16 @@ M.lspconfig = {
   }
 
 }
+M.nvimtree = {
+   n = {
+      -- toggle
+      ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
+
+      -- focus
+      ["<leader>,"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
+   },
+}
+
 
 M.others = {
   n = {
