@@ -48,6 +48,8 @@ M.general = {
     ["p"] = { '"_dP', opts = { silent = true } },
     ['<Leader>ts'] = { '<cmd> set list!<CR>', '  white Space' },
 
+    ['\\c'] = { ':cd %:p:h<CR>', '  change directory' },
+
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
     -- empty mode is same as using <cmd> :map
@@ -391,7 +393,7 @@ M.others = {
     },
 
     -- packer
-    ['\\\\'] = { '<cmd> source ~/.config/nvim/lua/plugins/packer.lua | PackerSync <CR>', 'Packer Sync' },
+    ['\\\\'] = { '<cmd> source ~/.config/nvim/lua/plugins/packer.lua | PackerSync <CR>', '  Packer Sync' },
   },
 
   i = {
