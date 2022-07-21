@@ -359,6 +359,18 @@ M.nvterm = {
   },
 }
 
+M.neoclip ={
+  n = {
+    ['<Leader>nn'] = { '<cmd> Telescope neoclip <CR>', '  neoclip'},
+    ['<Leader>nr'] = { ':Telescope neoclip ', '  neoclip -> register'}
+  },
+
+  i = {
+    ['<C-n>'] = { '<cmd> Telescope neoclip <CR>', '  neoclip'},
+  }
+
+}
+
 M.others = {
   n = {
     -- indent_line

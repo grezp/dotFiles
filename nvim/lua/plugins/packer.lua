@@ -118,8 +118,11 @@ return packer.startup {
     use 'windwp/nvim-autopairs'           -- auto completes pairs: {}, (), [], "", ''
     use 'kyazdani42/nvim-tree.lua'        -- file explorer
     use {
-      'NvChad/nvterm',                    -- nvim terminal
-      module = 'nvterm',
+      'AckslD/nvim-neoclip.lua',          -- clipboard manager
+      requires = {
+        { 'kkharji/sqlite.lua' },
+        { 'nvim-telescope/telescope.nvim' },
+      }
     }
     use 'NvChad/nvterm'                   -- nvim terminal
     use {

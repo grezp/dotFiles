@@ -170,4 +170,5 @@ tele.setup {
 -- must be ran after telescope setup
 tele.load_extension('fzf')
 tele.load_extension('frecency')
+tele.load_extension('neoclip')
 
