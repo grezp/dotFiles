@@ -88,6 +88,7 @@ M.general = {
 
 M.clear_case = {
   n = {
+    ['<Leader>c'] = '  ClearTool',
     ['<Leader>co'] = { '<cmd> !ct co -nc %<CR>',   '  checkout file' },
     ['<Leader>cu'] = { '<cmd> !ct unco -rm %<CR>', '  undo checkout' },
     ['<Leader>ci'] = { '<cmd> !ct ci -nc %<CR>',   '  checkin file' },
@@ -142,11 +143,11 @@ M.git = {
     ['<Leader>g'] = { name = '  Git' },
 
     -- Neogit
-    ['<Leader>gg'] = { '<cmd> Neogit <CR>', 'Neogit'},
+    ['<Leader>gg'] = { '<cmd> Neogit <CR>', '  Neogit'},
 
     -- fugitive
-    ['<Leader>gf'] = { '<cmd> Git <CR>',   'Git'},
-    ['<Leader>gl'] = { '<cmd> GcLog  <CR>','git Log'},
+    ['<Leader>gf'] = { '<cmd> Git <CR>',   '  Git'},
+    ['<Leader>gl'] = { '<cmd> GcLog  <CR>','ﰗ  git Log'},
 
     -- git signs
     ['<leader>gs'] = { function() signs.stage_hunk() end,      '  Stage hunk' },
@@ -201,29 +202,29 @@ M.lspconfig = {
   n = {
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     ['<Leader>l'] = { name = '  LSP' },
-    ['<Leader>ld'] = { tele('lsp_defs'), '  go to Definition' },
-    ['<Leader>lr'] = { tele('lsp_refs'), '  find References' },
-    ['<Leader>li'] = { tele('lsp_impl'), '  find Implementation' },
-    ['<Leader>lg'] = { tele('lsp_global_symbols'), '  find Global symbols' },
+    ['<Leader>ld'] = { tele('lsp_defs'), '  go to Definition' },
+    ['<Leader>lr'] = { tele('lsp_refs'), '  find References' },
+    ['<Leader>li'] = { tele('lsp_impl'), '  find Implementation' },
+    ['<Leader>lg'] = { tele('lsp_global_symbols'), '  find Global symbols' },
     ['<Leader>lD'] = {
       function() vim.lsp.buf.declaration() end,
-      '  go to Declaration'
+      '  go to Declaration'
     },
     ['<Leader>ln'] = {
       function() vim.lsp.buf.rename() end,
-      '  reName references'
+      '  reName references'
     },
     ['<Leader>lk'] = {
       function() vim.lsp.buf.hover() end,
-      '  display symbol information'
+      '  display symbol information'
     },
     ['<Leader>lK'] = {
       function() vim.lsp.buf.signature_help() end,
-      '  display signature help'
+      '  display signature help'
     },
     ['<Leader>lF'] = {
       function() vim.lsp.buf.formatting() end,
-      '  Format code'
+      '  Format code'
     },
 
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions

@@ -116,7 +116,6 @@ return packer.startup {
     use 'tpope/vim-surround'              -- surround selected text with chars (e.g. '/")
     use 'tpope/vim-repeat'                -- repeat plugins with .
     use 'windwp/nvim-autopairs'           -- auto completes pairs: {}, (), [], "", ''
-    use "kyazdani42/nvim-tree.lua"        -- file explorer
     use {
       'chrisbra/csv.vim',                 -- edit csv files in vim
       config = function()
