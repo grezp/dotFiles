@@ -297,64 +297,64 @@ M.bufferline = {
 M.nvterm = {
   t = {
     -- toggle in terminal mode
-    ["<A-i>"] = {
+    ['<A-i>'] = {
       function()
-        require("nvterm.terminal").toggle "float"
+        require('nvterm.terminal').toggle 'float'
       end,
-      "   toggle floating term",
+      '   toggle floating term',
     },
 
-    ["<A-h>"] = {
+    ['<A-h>'] = {
       function()
-        require("nvterm.terminal").toggle "horizontal"
+        require('nvterm.terminal').toggle 'horizontal'
       end,
-      "   toggle horizontal term",
+      '   toggle horizontal term',
     },
 
-    ["<A-v>"] = {
+    ['<A-v>'] = {
       function()
-        require("nvterm.terminal").toggle "vertical"
+        require('nvterm.terminal').toggle 'vertical'
       end,
-      "   toggle vertical term",
+      '   toggle vertical term',
     },
   },
 
   n = {
     -- toggle in normal mode
-    ["<A-i>"] = {
+    ['<A-i>'] = {
       function()
-        require("nvterm.terminal").toggle "float"
+        require('nvterm.terminal').toggle 'float'
       end,
-      "   toggle floating term",
+      '   toggle floating term',
     },
 
-    ["<A-h>"] = {
+    ['<A-h>'] = {
       function()
-        require("nvterm.terminal").toggle "horizontal"
+        require('nvterm.terminal').toggle 'horizontal'
       end,
-      "   toggle horizontal term",
+      '   toggle horizontal term',
     },
 
-    ["<A-v>"] = {
+    ['<A-v>'] = {
       function()
-        require("nvterm.terminal").toggle "vertical"
+        require('nvterm.terminal').toggle 'vertical'
       end,
-      "   toggle vertical term",
+      '   toggle vertical term',
     },
 
     -- new
-    ["<leader>h"] = {
+    ['<leader>h'] = {
       function()
-        require("nvterm.terminal").new "horizontal"
+        require('nvterm.terminal').new 'horizontal'
       end,
-      "   new horizontal term",
+      '   new horizontal term',
     },
 
-    ["<leader>v"] = {
+    ['<leader>v'] = {
       function()
-        require("nvterm.terminal").new "vertical"
+        require('nvterm.terminal').new 'vertical'
       end,
-      "   new vertical term",
+      '   new vertical term',
     },
   },
 }
@@ -379,7 +379,7 @@ M.others = {
     },
 
     -- packer
-    ['\\\\'] = { '<cmd> PackerSync <CR>', 'Packer Sync' },
+    ['\\\\'] = { '<cmd> source ~/.config/nvim/lua/plugins/packer.lua | PackerSync <CR>', 'Packer Sync' },
   },
 
   i = {

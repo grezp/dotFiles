@@ -121,6 +121,7 @@ return packer.startup {
       'NvChad/nvterm',                    -- nvim terminal
       module = 'nvterm',
     }
+    use 'NvChad/nvterm'                   -- nvim terminal
     use {
       'chrisbra/csv.vim',                 -- edit csv files in vim
       config = function()
