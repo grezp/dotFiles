@@ -2,6 +2,9 @@ local toggle_diags = true
 local toggle_pairs = true
 
 local opts1 = { noremap = true, silent = true }
+local opts2 = { expr = true }
+local opts3 = { silent = true }
+
 local function termcodes(str)
    return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -41,23 +44,27 @@ M.general = {
     ['<C-Up>']    = { ':resize +2<CR>',          '  window height' },
     ['<C-Down>']  = { ':resize -2<CR>',          '  window height' },
     ['<C-Left>']  = { ':vertical resize -2<CR>', '  window height' },
-    ['<C-Rigth>'] = { ':vertical resize +2<CR>', '  window height' },
+    ['<C-Right>'] = { ':vertical resize +2<CR>', '  window height' },
 
     -- misc
-    -- keep prev copy in buffer 0
-    ["p"] = { '"_dP', opts = { silent = true } },
+    -- toggle white space
     ['<Leader>ts'] = { '<cmd> set list!<CR>', '  white Space' },
-
+    -- chnage dir
     ['\\c'] = { ':cd %:p:h<CR>', '  change directory' },
+    -- source current file
+    ['\\s'] = { ':so %<CR>',     'ﰇ  source current file' },
+    -- Don't copy the replaced text after pasting in visual mode
+    -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
+    ['p'] = { 'p:let @+=@0<CR>:let @"=@0<CR>', '', opts = opts3 },
 
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
     -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
     -- empty mode is same as using <cmd> :map
     -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
-    ['j']      = { [[v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj']], opts = { expr = true } },
-    ['k']      = { [[v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk']], opts = { expr = true } },
-    ['<Up>']   = { [[v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk']], opts = { expr = true } },
-    ['<Down>'] = { [[v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj']], opts = { expr = true } },
+    ['j']      = { [[v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj']], '', opts = opts2 },
+    ['k']      = { [[v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk']], '', opts = opts2 },
+    ['<Up>']   = { [[v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk']], '', opts = opts2 },
+    ['<Down>'] = { [[v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj']], '', opts = opts2 },
 
     ['<Leader>']  = { name = '  Custom' },
     ['<Leader>t'] = { name = '  Toggle' },
@@ -71,14 +78,14 @@ M.general = {
     ['J'] = { [[:move .+1<CR>==]], '  move selected text' },
     ['K'] = { [[:move .-2<CR>==]], '  move selected text' },
 
-    ['j']      = { [[v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj']], opts = { expr = true } },
-    ['k']      = { [[v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk']], opts = { expr = true } },
-    ['<Up>']   = { [[v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk']], opts = { expr = true } },
-    ['<Down>'] = { [[v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj']], opts = { expr = true } },
+    ['j']      = { [[v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj']], '', opts = opts2 },
+    ['k']      = { [[v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk']], '', opts = opts2 },
+    ['<Up>']   = { [[v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk']], '', opts = opts2 },
+    ['<Down>'] = { [[v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj']], '', opts = opts2 },
 
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
-    ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
+    ['p'] = { 'p:let @+=@0<CR>:let @"=@0<CR>', '', opts = opts3 },
   },
 
   x = {
@@ -343,25 +350,10 @@ M.nvterm = {
       end,
       '   toggle vertical term',
     },
-
-    -- new
-    ['<leader>h'] = {
-      function()
-        require('nvterm.terminal').new 'horizontal'
-      end,
-      '   new horizontal term',
-    },
-
-    ['<leader>v'] = {
-      function()
-        require('nvterm.terminal').new 'vertical'
-      end,
-      '   new vertical term',
-    },
   },
 }
 
-M.neoclip ={
+M.neoclip = {
   n = {
     ['<Leader>nn'] = { '<cmd> Telescope neoclip <CR>', '  neoclip'},
     ['<Leader>nr'] = { ':Telescope neoclip ', '  neoclip -> register'}
@@ -409,7 +401,7 @@ M.others = {
     },
 
     -- packer
-    ['\\\\'] = { '<cmd> source ~/.config/nvim/lua/plugins/packer.lua | PackerSync <CR>', '  Packer Sync' },
+    ['\\p'] = { '<cmd> source ~/.config/nvim/lua/plugins/packer.lua | PackerSync <CR>', '  Packer Sync' },
   },
 
   i = {
