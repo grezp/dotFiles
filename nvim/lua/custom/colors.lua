@@ -24,9 +24,13 @@ local blue   = c.blue
 local red    = c.red
 local orange = c.orange
 local green2 = c.green1
+local violet1 = util.darken( c.magenta, 0.7)
+local violet2 = util.darken( c.magenta, 0.5)
+local bg_hi  = c.bg_highlight
 
 local cursor_bg = '#bb9af7'
 local cursor_fg = '#1f2335'
+
 
 function M.highlight(group, styles)
   local bg = styles.bg and 'guibg=' .. styles.bg or 'guibg=NONE'
@@ -78,6 +82,14 @@ M.custom_hl_groups = {
 
   -- indent_blankline
   IndentBlanklineContextChar = { fg = c.blue },
+
+  -- lightspeed
+  LightspeedOneCharMatch    = { fg = bg_hi,   bg = violet2 },
+  LightspeedPendingOpArea   = { fg = bg_hi,   bg = violet2 },
+  LightspeedShortcut        = { fg = bg_hi,   bg = violet2 },
+  LightspeedLabel           = { fg = violet1, bg = bg_hi,   gui='bold,underline' },
+  LightspeedLabelOverlapped = { fg = violet1, bg = bg_hi,   gui='bold,underline' },
+
 }
 
 M.apply_highlight(M.custom_hl_groups)
