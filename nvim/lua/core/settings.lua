@@ -88,9 +88,9 @@ o.foldnestmax = 10
 o.foldtext = 'v:lua.custom_fold_text()'
 
 -- setup global tags
-if file_exists(home .. '/tags/tags-unison')  then o.tags.append { home .. '/tags/tags-unison'  } end
-if file_exists(home .. '/tags/tags-methods') then o.tags.append { home .. '/tags/tags-methods' } end
-if file_exists(home .. '/tags/tags-plugins') then o.tags.append { home .. '/tags/tags-plugins' } end
+if file_exists(home .. '/tags/tags-unison')  then o.tags = o.tags + {home .. '/tags/tags-unison' } end
+if file_exists(home .. '/tags/tags-methods') then o.tags = o.tags + {home .. '/tags/tags-methods'} end
+if file_exists(home .. '/tags/tags-plugins') then o.tags = o.tags + {home .. '/tags/tags-plugins'} end
 
 -- set ruby path -> improves startup time
 g.ruby_path = ''

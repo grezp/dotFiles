@@ -14,7 +14,7 @@ M.impatient = function()
     return
   end
 
-    impatient.enable_profile()
+  impatient.enable_profile()
 end
 
 -- indent blankline --

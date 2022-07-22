@@ -168,7 +168,19 @@ tele.setup {
 }
 
 -- must be ran after telescope setup
-tele.load_extension('fzf')
-tele.load_extension('frecency')
-tele.load_extension('neoclip')
+local fzf_present, _ = pcall(tele.load_extension, 'fzf_lib')
+local frecency_present, _ = pcall(tele.load_extension, 'frecency')
+local neoclip_present, _ = pcall(tele.load_extension, 'neoclip')
+
+if not fzf_present then
+  vim.notify('telescope extension: fzf not found!')
+end
+
+if not frecency_present then
+  vim.notify('telescope extension: frecency not found!')
+end
+
+if not neoclip_present then
+  vim.notify('telescope extension: neoclip not found!')
+end
 

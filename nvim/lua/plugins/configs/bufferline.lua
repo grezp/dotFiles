@@ -1,4 +1,10 @@
-require('bufferline').setup {
+local status_ok, bufferline = pcall(require, 'bufferline')
+if not status_ok then
+  vim.notify('bufferline not found!')
+  return
+end
+
+bufferline.setup {
   options = {
     mode = 'buffers', -- set to 'tabs' to only show tabpages instead
     numbers = 'none', -- 'none' | 'ordinal' | 'buffer_id' | 'both' | function({ ordinal, id, lower, raise }): string,
