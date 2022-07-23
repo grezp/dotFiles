@@ -168,7 +168,7 @@ tele.setup {
 }
 
 -- must be ran after telescope setup
-local fzf_present, _ = pcall(tele.load_extension, 'fzf_lib')
+local fzf_present, _ = pcall(tele.load_extension, 'fzf')
 local frecency_present, _ = pcall(tele.load_extension, 'frecency')
 local neoclip_present, _ = pcall(tele.load_extension, 'neoclip')
 
