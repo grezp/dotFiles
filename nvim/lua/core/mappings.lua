@@ -87,6 +87,7 @@ M.general = {
 
 }
 
+local ccase = require('custom.ccase')
 M.clear_case = {
   n = {
     ['<Leader>c'] = '  ClearTool',
@@ -94,6 +95,11 @@ M.clear_case = {
     ['<Leader>cu'] = { '<cmd> !ct unco -rm %<CR>', '  undo checkout' },
     ['<Leader>ci'] = { '<cmd> !ct ci -nc %<CR>',   '  checkin file' },
     ['<Leader>cl'] = { '<cmd> !ct lsact -l<CR>',   '  list activities' },
+
+    ['<Leader>cd']  = '  diff options',
+    ['<Leader>cdd'] = { function () ccase.CtDiff(nil, 0) end, '  diff version #' },
+    ['<Leader>cdp'] = { function () ccase.CtDiff(nil, 1) end, 'ﭣ  diff predecessor' },
+    ['<Leader>cdf'] = { function () ccase.CtDiff(nil, 2) end, '  diff first version' },
   }
 }
 
