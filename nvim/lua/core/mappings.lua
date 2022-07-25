@@ -144,65 +144,66 @@ M.telescope = {
 }
 
 -- git
-local signs = require('gitsigns')
-M.git = {
-  n = {
-    ['<Leader>g'] = { name = '  Git' },
+local signs_ok, signs = pcall(require, 'gitsigns')
+if signs_ok then
+  M.git = {
+    n = {
+      ['<Leader>g'] = { name = '  Git' },
 
-    -- Neogit
-    ['<Leader>gg'] = { '<cmd> Neogit <CR>', '  Neogit'},
+      -- Neogit
+      ['<Leader>gg'] = { '<cmd> Neogit <CR>', '  Neogit'},
 
-    -- fugitive
-    ['<Leader>gf'] = { '<cmd> Git <CR>',   '  Git'},
-    ['<Leader>gl'] = { '<cmd> GcLog  <CR>','ﰗ  git Log'},
+      -- fugitive
+      ['<Leader>gf'] = { '<cmd> Git <CR>',   '  Git'},
+      ['<Leader>gl'] = { '<cmd> GcLog  <CR>','ﰗ  git Log'},
 
-    -- git signs
-    ['<leader>gs'] = { function() signs.stage_hunk() end,      '  Stage hunk' },
-    ['<leader>gu'] = { function() signs.undo_stage_hunk() end, '  Unstage hunk' },
-    ['<leader>gr'] = { function() signs.reset_hunk() end,      '  Reset hunk' },
-    ['<leader>gS'] = { function() signs.stage_buffer() end,    '  Stage buffer' },
-    ['<leader>gR'] = { function() signs.reset_buffer() end,    '  Reset buffer' },
-    ['<leader>gp'] = { function() signs.preview_hunk() end,    '響 Preview hunk' },
-    ['<leader>gd'] = { function() signs.diffthis() end,        '者 Diff this' },
-    ['<leader>gb'] = { function ()
-      signs.blame_line {
-        full=true,
-        ignore_whitespace=true
-      } end,
-      '  Blame hunk'
+      -- git signs
+      ['<leader>gs'] = { function() signs.stage_hunk() end,      '  Stage hunk' },
+      ['<leader>gu'] = { function() signs.undo_stage_hunk() end, '  Unstage hunk' },
+      ['<leader>gr'] = { function() signs.reset_hunk() end,      '  Reset hunk' },
+      ['<leader>gS'] = { function() signs.stage_buffer() end,    '  Stage buffer' },
+      ['<leader>gR'] = { function() signs.reset_buffer() end,    '  Reset buffer' },
+      ['<leader>gp'] = { function() signs.preview_hunk() end,    '響 Preview hunk' },
+      ['<leader>gd'] = { function() signs.diffthis() end,        '者 Diff this' },
+      ['<leader>gb'] = { function ()
+        signs.blame_line {
+          full=true,
+          ignore_whitespace=true
+        } end,
+        '  Blame hunk'
+      },
+
+      -- toggle
+      ['<leader>tb'] = { function() signs.toggle_current_line_blame() end, '  git Blame' },
+      ['<leader>td'] = { function() signs.toggle_deleted() end,            'ﴗ  git show Deleted' },
+
+      [']c'] = {
+        function()
+          if vim.wo.diff then return ']c' end
+          vim.schedule(function() signs.next_hunk() end)
+          return '<Ignore>'
+        end,
+        '  next hunk'
+      },
+      ['[c'] = {
+        function()
+          if vim.wo.diff then return '[c' end
+          vim.schedule(function() signs.prev_hunk() end)
+          return '<Ignore>'
+        end,
+        '  prev hunk'
+      },
     },
 
-    -- toggle
-    ['<leader>tb'] = { function() signs.toggle_current_line_blame() end, '  git Blame' },
-    ['<leader>td'] = { function() signs.toggle_deleted() end,            'ﴗ  git show Deleted' },
+    v = {
+      ['<Leader>g'] = { name = '  Git' },
 
-    [']c'] = {
-      function()
-        if vim.wo.diff then return ']c' end
-        vim.schedule(function() signs.next_hunk() end)
-        return '<Ignore>'
-      end,
-      '  next hunk'
-    },
-    ['[c'] = {
-      function()
-        if vim.wo.diff then return '[c' end
-        vim.schedule(function() signs.prev_hunk() end)
-        return '<Ignore>'
-      end,
-      '  prev hunk'
-    },
-  },
-
-  v = {
-    ['<Leader>g'] = { name = '  Git' },
-
-    -- git signs
-    ['<leader>gs'] = { function() signs.stage_hunk() end,      '  Stage hunk' },
-    ['<leader>gu'] = { function() signs.undo_stage_hunk() end, '  Unstage hunk' },
-    ['<leader>gr'] = { function() signs.reset_hunk() end,      '  Reset hunk' },
+      -- git signs
+      ['<leader>gs'] = { ':Gitsigns stage_hunk<CR>',      '  Stage hunk' },
+      ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>',      '  Reset hunk' },
+    }
   }
-}
+end
 
 -- lsp
 M.lspconfig = {

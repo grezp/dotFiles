@@ -21,6 +21,7 @@ M.load_mappings = function(mappings, mapping_opt)
 
   mappings = mappings or vim.deepcopy(require('core.mappings'))
   mappings.lspconfig = nil
+  mappings.git = nil
 
   for _, section in pairs(mappings) do
     for mode, mode_values in pairs(section) do

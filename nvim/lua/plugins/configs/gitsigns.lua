@@ -52,5 +52,10 @@ gitsigns.setup {
   yadm = {
     enable = false
   },
+
+  on_attach = function(bufnr)
+    local git_mappings = require('core.mappings').git
+    require('core.utils').load_mappings({ git_mappings }, { bufnr })
+  end
 }
 
