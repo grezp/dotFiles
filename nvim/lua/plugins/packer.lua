@@ -38,102 +38,319 @@ return packer.startup {
     use 'nvim-lua/plenary.nvim'
 
 
+    -----------------
     -- performance --
+    -----------------
     use {
       'lewis6991/impatient.nvim',     --Speed up loading Lua modules
       config = function()
         require('plugins.configs.others').impatient()
       end,
     }
+
     use 'nathom/filetype.nvim'        -- improves filetype startup time
 
 
+    ----------------
     -- aesthesics --
+    ----------------
+    -- theme
     use 'folke/tokyonight.nvim'
-    use 'kyazdani42/nvim-web-devicons'        -- icons
+    -- icons
+    use 'kyazdani42/nvim-web-devicons'
+
     use {
-      'lukas-reineke/indent-blankline.nvim',  -- create indent line for spaces
+      -- create indent line for spaces
+      'lukas-reineke/indent-blankline.nvim',
+      setup = function()
+        require('core.lazy_load').on_file_open('indent-blankline.nvim')
+      end,
       config = function()
         require('plugins.configs.others').blankline()
       end
     }
 
 
-    -- treesitter
-    use {                                       -- nvim hl based on syntax
+    ----------------
+    -- treesitter --
+    ----------------
+    use {
+      -- nvim hl based on syntax
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate'
+      run = ':TSUpdate',
+      config = function()
+        require('plugins.configs.treesitter')
+      end,
     }
 
 
+    ---------
     -- git --
-    use 'tpope/vim-fugitive'              -- git wrapper for vim
-    use 'sindrets/diffview.nvim'          -- provides inline diffs
-    use 'lewis6991/gitsigns.nvim'         -- displays inline git changes + blame
-    use 'TimUntersberger/neogit'          -- magit clone
+    ---------
+    use {
+      -- git wrapper for vim
+      'tpope/vim-fugitive',
+      -- TODO: write git branch name for status line
+      -- cmd = { 'Git', 'Gstatus', 'Gblame', 'Gpush', 'Gpull', 'Gvdiffsplit' },
+    }
+
+    use {
+      -- displays inline git changes + blame
+      'lewis6991/gitsigns.nvim',
+      ft = 'gitcommit',
+      setup = function()
+        require('core.lazy_load').gitsigns()
+      end,
+      config = function()
+        require('plugins.configs.gitsigns')
+      end
+    }
+
+    use {
+      -- magit clone
+      'TimUntersberger/neogit',
+      cmd = 'Neogit',
+      config = function()
+        require('plugins.configs.neogit')
+      end
+    }
+
+    use {
+      -- provides inline diffs
+      'sindrets/diffview.nvim',
+      cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewLog' }
+    }
 
 
+    ---------
     -- lsp --
-    use 'neovim/nvim-lspconfig'           -- Collection of configurations for the built-in LSP client
-    use 'williamboman/nvim-lsp-installer' -- install lang servers in ~/.local/share/nvim/lsp_servers
+    ---------
+    use {
+      -- install lang servers in ~/.local/share/nvim/lsp_servers
+      'williamboman/nvim-lsp-installer',
+      opt = true,
+      cmd = require('core.lazy_load').lsp_cmds,
+      setup = function()
+        require('core.lazy_load').on_file_open('nvim-lsp-installer')
+      end,
+    }
+
+    use {
+      -- Collection of configurations for the built-in LSP client
+      'neovim/nvim-lspconfig',
+      after = 'nvim-lsp-installer',
+      module = 'lspconfig',
+      config = function()
+        require('plugins.lsp')
+      end,
+    }
 
 
+    --------------
     -- snippets --
-    use 'L3MON4D3/LuaSnip'              -- snippet engine
-    use 'rafamadriz/friendly-snippets'  -- collection of snippets for several langs
+    --------------
+    use {
+      -- collection of snippets for several langs
+      'rafamadriz/friendly-snippets',
+      module = 'cmp_nvim_lsp',
+      event = 'InsertEnter',
+    }
+
+    use {
+      -- snippet engine
+      'L3MON4D3/LuaSnip',
+      wants = 'friendly-snippets',
+      after = 'friendly-snippets',
+      config = function()
+        require('plugins.configs.luasnips')
+      end,
+    }
 
 
+    ----------------
     -- completion --
-    use 'hrsh7th/nvim-cmp'                        -- autocompletion engine
-    use 'hrsh7th/cmp-buffer'                      -- autocomplete from buffer & enable '/' search
-    use 'hrsh7th/cmp-path'                        -- autocomplete directory path
-    use 'hrsh7th/cmp-cmdline'                     -- autocomplete cmd line
-    use 'hrsh7th/cmp-nvim-lua'                    -- autocomplete Lua API
-    use 'hrsh7th/cmp-nvim-lsp'                    -- autocomplete from LSP
-    use 'hrsh7th/cmp-nvim-lsp-document-symbol'    -- allow '/@' to search for func defs
-    use 'saadparwaiz1/cmp_luasnip'                -- enable luasnip as cmp snippet engine
+    ----------------
+    use {
+      -- autocompletion engine
+      'hrsh7th/nvim-cmp',
+      after = 'LuaSnip',
+      config = function()
+        require('plugins.configs.cmp')
+      end,
+    }
+
+    use {
+        -- enable luasnip as cmp snippet engine
+      'saadparwaiz1/cmp_luasnip',
+      after = 'nvim-cmp',
+    }
+
+    use {
+      -- autocomplete Lua API
+      'hrsh7th/cmp-nvim-lua',
+      after = 'cmp_luasnip',
+    }
+
+    use {
+      -- autocomplete from LSP
+      'hrsh7th/cmp-nvim-lsp',
+      after = 'cmp-nvim-lua',
+    }
+
+    use {
+      -- autocomplete from buffer & enable '/' search
+      'hrsh7th/cmp-buffer',
+      after = 'cmp-nvim-lsp',
+    }
+
+    use {
+      -- autocomplete directory path
+      'hrsh7th/cmp-path',
+      after = 'cmp-buffer',
+    }
+
+    use {
+      -- autocomplete cmd line
+      'hrsh7th/cmp-cmdline',
+      after = 'cmp-path'
+    }
 
 
+    ---------------
     -- searching --
-    use 'nvim-telescope/telescope.nvim'             -- fuzzy finder
+    ---------------
+    use {
+      -- fuzzy finder
+      'nvim-telescope/telescope.nvim',
+      config = function()
+        require('plugins.telescope')
+      end,
+    }
+
     use {
       'nvim-telescope/telescope-fzf-native.nvim',   -- FZF
-      run = 'make'
+      run = 'make',
     }
+
     use {
       'nvim-telescope/telescope-frecency.nvim',     -- improves file selection base on history
       requires = { 'tami5/sqlite.lua' },
     }
 
 
+    -------------
     -- utility --
-    use 'numToStr/Comment.nvim'           -- comment code w/ vi movements
-    use 'folke/which-key.nvim'            -- shows what keys do + auto show buffers/registers
-    use 'ggandor/lightspeed.nvim'         -- jump to text quickly by matching 2 chars
-    use 'kevinhwang91/nvim-hlslens'       -- improves search by placing tags to jump to
-    use 'famiu/bufdelete.nvim'            -- deletes buffer w/o closing/changing panes
-    use 'jghauser/mkdir.nvim'             -- create missing dir(s) like 'mkdir -p'
-    use 'tpope/vim-surround'              -- surround selected text with chars (e.g. '/")
-    use 'tpope/vim-repeat'                -- repeat plugins with .
-    use 'windwp/nvim-autopairs'           -- auto completes pairs: {}, (), [], "", ''
-    use 'kyazdani42/nvim-tree.lua'        -- file explorer
+    -------------
     use {
-      'AckslD/nvim-neoclip.lua',          -- clipboard manager
+      -- comment code w/ vi movements
+      'numToStr/Comment.nvim',
+      module = 'Comment',
+      keys = { 'gc', 'gb', 'vgc', 'vgb'  },
+      config = function()
+        require('plugins.configs.comment')
+      end,
+    }
+
+    use {
+      -- jump to text quickly by matching 2 chars
+      'ggandor/lightspeed.nvim',
+    }
+
+    use {
+      -- improves search by placing tags to jump to
+      'kevinhwang91/nvim-hlslens',
+      module = 'hlslens',
+      config = function()
+        require('plugins.configs.hlslens')
+      end
+    }
+
+    use {
+      -- deletes buffer w/o closing/changing panes
+      'famiu/bufdelete.nvim',
+      cmd = { 'Bdelete', 'Bwipeout' },
+    }
+
+    use {
+      -- create missing dir(s) like 'mkdir -p'
+      'jghauser/mkdir.nvim',
+    }
+
+    use {
+      -- surround selected text with chars
+      'tpope/vim-surround',
+      -- TODO: 'machakann/vim-sandwich'
+    }
+
+    use {
+      -- repeat plugins with .
+      'tpope/vim-repeat',
+    }
+
+    use {
+      -- auto completes pairs: {}, (), [], "", ''
+      'windwp/nvim-autopairs',
+      after = 'nvim-cmp',
+      config = function()
+        require('plugins.configs.autopairs')
+      end,
+    }
+
+    use {
+      -- file explorer
+      'kyazdani42/nvim-tree.lua',
+      cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
+      config = function()
+        require('plugins.configs.nvimtree')
+      end,
+    }
+
+    use {
+      -- clipboard manager
+      'AckslD/nvim-neoclip.lua',
       requires = {
         { 'kkharji/sqlite.lua' },
         { 'nvim-telescope/telescope.nvim' },
-      }
+      },
+      config = function()
+        require('plugins.configs.neoclip')
+      end,
     }
-    use 'NvChad/nvterm'                   -- nvim terminal
+
     use {
-      'chrisbra/csv.vim',                 -- edit csv files in vim
+      -- nvim terminal
+      'NvChad/nvterm',
+      module = 'nvterm',
+      config = function()
+        require('plugins.configs.nvterm')
+      end,
+    }
+
+    use {
+       -- edit csv files in vim
+      'chrisbra/csv.vim',
+      ft = 'csv',
       config = function()
         require('plugins.configs.others').csv()
       end
     }
+
     use {
-      'akinsho/bufferline.nvim',          -- display buffer int tabline
-      tag = 'v2.*'
+      -- display buffer int tabline
+      'akinsho/bufferline.nvim',
+      tag = 'v2.*',
+      config = function()
+        require('plugins.configs.bufferline')
+      end
+    }
+
+    use {
+      -- shows what keys do + auto show buffers/registers
+      'folke/which-key.nvim',
+      module = 'which-key',
+      config = function()
+        require('plugins.configs.which-key')
+      end,
     }
 
     -- Automatically set up your configuration after cloning packer.nvim

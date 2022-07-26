@@ -10,4 +10,4 @@ require('custom.statusline')
 require('custom.colors')
 
 -- plugin configs
-require('plugins')
+require('plugins.packer')

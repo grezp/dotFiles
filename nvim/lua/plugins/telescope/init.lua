@@ -27,7 +27,7 @@ tele.setup {
     prompt_prefix = ' ',
     selection_caret = ' ',
 
-    path_display = smart,
+    path_display = { 'smart' },
 
     initial_mode = 'insert',
     selection_strategy = 'reset',
