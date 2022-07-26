@@ -32,20 +32,9 @@ local cursor_bg = '#bb9af7'
 local cursor_fg = '#1f2335'
 
 
-function M.highlight(group, styles)
-  local bg = styles.bg and 'guibg=' .. styles.bg or 'guibg=NONE'
-  local fg = styles.fg and 'guifg=' .. styles.fg or 'guifg=NONE'
-  local sp = styles.sp and 'guisp=' .. styles.sp or 'guisp=NONE'
-  local gui = styles.gui and 'gui=' .. styles.gui or 'gui=NONE'
-
-  vim.api.nvim_command(
-    'hi! ' .. group .. ' ' .. bg .. ' ' .. fg .. ' ' .. sp .. ' ' .. gui
-  )
-end
-
 function M.apply_highlight(groups)
   for group, styles in pairs(groups) do
-    M.highlight(group, styles)
+    vim.api.nvim_set_hl(0, group, styles)
   end
 end
 
@@ -56,7 +45,7 @@ M.custom_hl_groups = {
   AltToCh         = { fg = status2, bg = green2 },
   StatusLineAlt   = { fg = blue55,  bg = status2 },
   StatusLineNCAlt = { fg = status2, bg = status },
-  FileMods        = { fg = status,  bg = green2,  gui = 'bold' },
+  FileMods        = { fg = status,  bg = green2, bold = true },
   FileModsInv     = { fg = green2,  bg = status },
 
   -- mode colors
@@ -87,8 +76,8 @@ M.custom_hl_groups = {
   LightspeedOneCharMatch    = { fg = bg_hi,   bg = violet2 },
   LightspeedPendingOpArea   = { fg = bg_hi,   bg = violet2 },
   LightspeedShortcut        = { fg = bg_hi,   bg = violet2 },
-  LightspeedLabel           = { fg = violet1, bg = bg_hi,   gui='bold,underline' },
-  LightspeedLabelOverlapped = { fg = violet1, bg = bg_hi,   gui='bold,underline' },
+  LightspeedLabel           = { fg = violet1, bg = bg_hi,   bold = true, underline = true },
+  LightspeedLabelOverlapped = { fg = violet1, bg = bg_hi,   bold = true, underline = true },
 
 }
 
