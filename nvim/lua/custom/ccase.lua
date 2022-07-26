@@ -47,7 +47,7 @@ M.CtShowViewName = function()
 
   -- Show the view name:
   vim.api.nvim_echo({{
-      'Set view: ' .. set_view .. '\nDirectory view: ' .. dir_view,
+      'Set view: ' .. set_view .. '\nDirectory view: ' .. dir_view .. '\n\n',
       'Question',
     }}, true, {}
   )

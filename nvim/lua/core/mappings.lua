@@ -100,6 +100,9 @@ M.clear_case = {
     ['<Leader>cdd'] = { function () ccase.CtDiff(nil, 0) end, '  diff version #' },
     ['<Leader>cdp'] = { function () ccase.CtDiff(nil, 1) end, 'ﭣ  diff predecessor' },
     ['<Leader>cdf'] = { function () ccase.CtDiff(nil, 2) end, '  diff first version' },
+
+    ['<Leader>cs'] = { function () ccase.CtShowViewName() end,  '  show view name' },
+    ['<Leader>ca'] = { function () ccase.CtAnnotate() end,      '  annotate element (blame)' },
   }
 }
 
