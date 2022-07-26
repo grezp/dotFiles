@@ -154,11 +154,12 @@ if signs_ok then
       ['<Leader>g'] = { name = '  Git' },
 
       -- Neogit
-      ['<Leader>gg'] = { '<cmd> Neogit <CR>', '  Neogit'},
+      ['<Leader>gn'] = { '<cmd> Neogit <CR>', '  Neogit'},
 
       -- fugitive
-      ['<Leader>gf'] = { '<cmd> Git <CR>',   '  Git'},
-      ['<Leader>gl'] = { '<cmd> GcLog  <CR>','ﰗ  git Log'},
+      ['<Leader>gg'] = { '<cmd> Git <CR>',          '  fuGitive'},
+      ['<Leader>gl'] = { '<cmd> GcLog  <CR>',       'ﰗ  git Log'},
+      ['<Leader>gm'] = { '<cmd> G mergetool <CR>',  '  git Merge'},
 
       -- git signs
       ['<leader>gs'] = { function() signs.stage_hunk() end,      '  Stage hunk' },
@@ -180,7 +181,7 @@ if signs_ok then
       ['<leader>tb'] = { function() signs.toggle_current_line_blame() end, '  git Blame' },
       ['<leader>td'] = { function() signs.toggle_deleted() end,            'ﴗ  git show Deleted' },
 
-      [']c'] = {
+      [']g'] = {
         function()
           if vim.wo.diff then return ']c' end
           vim.schedule(function() signs.next_hunk() end)
@@ -188,7 +189,7 @@ if signs_ok then
         end,
         '  next hunk'
       },
-      ['[c'] = {
+      ['[g'] = {
         function()
           if vim.wo.diff then return '[c' end
           vim.schedule(function() signs.prev_hunk() end)
