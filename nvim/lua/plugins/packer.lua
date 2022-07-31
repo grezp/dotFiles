@@ -274,17 +274,14 @@ return packer.startup {
     use {
       -- create missing dir(s) like 'mkdir -p'
       'jghauser/mkdir.nvim',
+      event = 'BufWrite',
     }
 
     use {
-      -- surround selected text with chars
-      'tpope/vim-surround',
-      -- TODO: 'machakann/vim-sandwich'
-    }
-
-    use {
-      -- repeat plugins with .
-      'tpope/vim-repeat',
+      'kylechui/nvim-surround',
+      config = function()
+          require("nvim-surround").setup()
+      end
     }
 
     use {

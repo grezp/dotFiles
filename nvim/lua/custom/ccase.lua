@@ -185,10 +185,10 @@ M.CtDiff = function(fname, diff_version)
 
     -- If they change their mind and want predecessor, allow that
     if ver_num:find('^p') then
-      print('Comparing to predecessor...')
+      print('\nComparing to predecessor...')
       cmp_to_ver = fn.system('cleartool des -s -pre "' .. fname_and_ver .. '"')
 
-      print('cmp_to_ver: ' .. cmp_to_ver)
+      print('\ncmp_to_ver: ' .. cmp_to_ver)
     end
 
   -- check if diff_version is comparing predecessor
