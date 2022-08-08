@@ -252,8 +252,12 @@ return packer.startup {
     }
 
     use {
-      -- jump to text quickly by matching 2 chars
-      'ggandor/lightspeed.nvim',
+      -- jump to text quickly by matching 1|2 chars
+      'phaazon/hop.nvim',
+      branch = 'v2',
+      config = function()
+        require'hop'.setup()
+      end,
     }
 
     use {

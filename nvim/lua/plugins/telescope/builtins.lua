@@ -108,10 +108,6 @@ function M.grep_only_certain_files()
   }
 end
 
-function M.bookmarks()
-  require('telescope').extensions.bookmarks.bookmarks()
-end
-
 function M.oldfiles()
   require('telescope').extensions.frecency.frecency()
 end

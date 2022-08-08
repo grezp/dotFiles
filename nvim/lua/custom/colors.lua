@@ -24,9 +24,10 @@ local blue   = c.blue
 local red    = c.red
 local orange = c.orange
 local green2 = c.green1
-local violet1 = util.darken( c.magenta, 0.7)
-local violet2 = util.darken( c.magenta, 0.5)
-local bg_hi  = c.bg_highlight
+-- local violet1 = util.darken( c.magenta, 0.7)
+-- local violet2 = util.darken( c.magenta, 0.5)
+-- local magenta = c.magenta
+-- local bg_hi  = c.bg_highlight
 
 local cursor_bg = '#bb9af7'
 local cursor_fg = '#1f2335'
@@ -73,12 +74,14 @@ M.custom_hl_groups = {
   IndentBlanklineContextChar = { fg = c.blue },
 
   -- lightspeed
-  LightspeedOneCharMatch    = { fg = bg_hi,   bg = violet2 },
-  LightspeedPendingOpArea   = { fg = bg_hi,   bg = violet2 },
-  LightspeedShortcut        = { fg = bg_hi,   bg = violet2 },
-  LightspeedLabel           = { fg = violet1, bg = bg_hi,   bold = true, underline = true },
-  LightspeedLabelOverlapped = { fg = violet1, bg = bg_hi,   bold = true, underline = true },
+  -- LightspeedOneCharMatch    = { fg = bg_hi,   bg = violet2 },
+  -- LightspeedPendingOpArea   = { fg = bg_hi,   bg = violet2 },
+  -- LightspeedShortcut        = { fg = bg_hi,   bg = violet2 },
+  -- LightspeedLabel           = { fg = violet1, bg = bg_hi,   bold = true, underline = true },
+  -- LightspeedLabelOverlapped = { fg = violet1, bg = bg_hi,   bold = true, underline = true },
 
+  -- HopNextKey  = { fg = bg_hi, bg = magenta },
+  -- HopNextKey  = { fg = bg_hi, bg = violet2 },
 }
 
 M.apply_highlight(M.custom_hl_groups)
