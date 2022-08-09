@@ -171,6 +171,7 @@ tele.setup {
 local fzf_present, _ = pcall(tele.load_extension, 'fzf')
 local frecency_present, _ = pcall(tele.load_extension, 'frecency')
 local neoclip_present, _ = pcall(tele.load_extension, 'neoclip')
+local project_present, _ = pcall(tele.load_extension, 'projects')
 
 if not fzf_present then
   vim.notify('telescope extension: fzf not found!')
@@ -182,5 +183,9 @@ end
 
 if not neoclip_present then
   vim.notify('telescope extension: neoclip not found!')
+end
+
+if not project_present then
+  vim.notify('telescope extension: projcects not found!')
 end
 
