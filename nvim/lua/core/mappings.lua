@@ -537,6 +537,70 @@ if hop_ok then
         'move to prev char biagram'
       },
 
+    },
+
+    o = {
+
+      ['f'] = {
+        function()
+          hop.hint_char1({
+            direction = hint.HintDirection.AFTER_CURSOR,
+            current_line_only = true
+          })
+        end,
+        'move to next char'
+      },
+
+      ['F'] = {
+        function()
+          hop.hint_char1({
+            direction = hint.HintDirection.BEFORE_CURSOR,
+            current_line_only = true
+          })
+        end,
+        'move to prev char'
+      },
+
+      ['t'] = {
+        function()
+          hop.hint_char1({
+            direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
+            current_line_only = true,
+            hint_offset = -1
+        })
+        end,
+        'move before next char'
+      },
+
+      ['T'] = {
+        function()
+          hop.hint_char1({
+            direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
+            current_line_only = true,
+            hint_offset = 1
+        })
+        end,
+        'move before prev char'
+      },
+
+      ['z'] = {
+        function()
+          hop.hint_char2({
+            direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
+          })
+        end,
+        'move to next char biagram'
+      },
+
+      ['Z'] = {
+        function()
+          hop.hint_char2({
+            direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
+          })
+        end,
+        'move to prev char biagram'
+      },
+
     }
   }
 end
