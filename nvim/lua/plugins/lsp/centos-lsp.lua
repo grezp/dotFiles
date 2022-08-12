@@ -8,5 +8,6 @@ if ut.file_exists('/etc/centos-release') then
 
   -- clangd logs: ~/.cache/nvim/lsp.log
   -- cmd = { 'clangd', '--background-index', '--log=verbose' },
+  cmd = { 'clangd', '--completion-style=detailed' },
   }
 end
