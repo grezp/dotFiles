@@ -36,7 +36,7 @@ local kind_icons = {
 
 cmp.setup {
   -- configure mappings
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-y>'] = cmp.mapping(cmp.mapping.confirm { select = true }, { 'i', 'c' }),
@@ -59,17 +59,16 @@ cmp.setup {
         fallback()
       end
     end,
-  },
+  }),
 
-  -- these are like cmp 'plugins'
-  -- order signifies which completions are shown first
-  sources = {
-    { name = 'nvim_lua' },
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'path' },
-    { name = 'buffer', keyword_length = 3 },
-  },
+  sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'nvim_lua' },
+      { name = 'luasnip' },
+      { name = 'path' },
+    }, {
+      { name = 'buffer', keyword_length = 3 },
+    }),
 
   -- shows where autocomplete is comming from
   formatting = {
@@ -135,12 +134,9 @@ cmp.setup {
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
 
-  sources = cmp.config.sources({
-    -- /@ look for function and var defs
-    { name = 'nvim_lsp_document_symbol' },
-  }, {
+  sources = {
     { name = 'buffer' }
-  }),
+  }
 })
 
 -- `:` cmdline setup.
