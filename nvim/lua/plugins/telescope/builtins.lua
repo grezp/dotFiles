@@ -108,6 +108,12 @@ function M.grep_only_certain_files()
   }
 end
 
+function M.grep_opened_buffers()
+  require('telescope.builtin').live_grep {
+    grep_open_files = true,
+  }
+end
+
 function M.oldfiles()
   require('telescope').extensions.frecency.frecency()
 end

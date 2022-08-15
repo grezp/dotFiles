@@ -126,6 +126,7 @@ M.telescope = {
     ['<leader>fw'] = { tele('grep_string'),             '  grep Word on Cursor' },
     ['<leader>fl'] = { tele('grep_last_search'),        '  grep Last word' },
     ['<leader>fc'] = { tele('grep_only_certain_files'), '  grep certain file type' },
+    ['<leader>fb'] = { tele('grep_opened_buffers'),     '  grep opened Buffers' },
 
     -- Nvim
     ['<Leader>n']  = { name = '  NeoVim' },
