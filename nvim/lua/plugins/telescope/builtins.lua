@@ -17,7 +17,7 @@ end
 function M.installed_plugins()
   require('telescope.builtin').find_files {
     prompt_title = '~ nvim packages ~',
-    cwd = vim.fn.stdpath 'data' .. '/site/pack/packer/start/',
+    cwd = vim.fn.stdpath 'data' .. '/site/pack/packer/',
     find_command = {
       'fd',
       '--type',

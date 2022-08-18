@@ -83,6 +83,8 @@ M.general = {
   x = {
     ['J'] = { [[:move '>+1<CR>gv-gv]], '  move selected text' },
     ['K'] = { [[:move '<-2<CR>gv-gv]], '  move selected text' },
+
+    ['p'] = { 'p:let @+=@0<CR>:let @"=@0<CR>', '', opts = opts3 },
   }
 
 }

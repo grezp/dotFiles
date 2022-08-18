@@ -17,7 +17,7 @@ local options = {
         height = 0.4,
         border = 'single',
       },
-      horizontal = { location = 'rightbelow', split_ratio = 0.3 },
+      horizontal = { location = 'botright', split_ratio = 0.3 },
       vertical = { location = 'rightbelow', split_ratio = 0.5 },
     },
   },

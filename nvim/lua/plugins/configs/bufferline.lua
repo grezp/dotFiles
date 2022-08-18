@@ -34,7 +34,8 @@ bufferline.setup {
     --     return vim.fn.fnamemodify(buf.name, ':t:r')
     --   end
     -- end,
-    max_name_length = 18,
+    -- max_name_length = 18,
+    max_name_length = 25,
     max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
     tab_size = 18,
     diagnostics = false, -- | 'nvim_lsp' | 'coc'

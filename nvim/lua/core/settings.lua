@@ -22,7 +22,6 @@ o.ruler = false
 o.backspace = 'indent,eol,start'          -- backspace works on every char in insert mode
 o.mouse = 'n'                             -- enable mouse
 o.shortmess = 'asSWF'
-o.whichwrap:append "<>[]hl"
 
 -- display settings
 o.wrap = false              -- do not wrap long lines onto next
