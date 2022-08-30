@@ -42,6 +42,8 @@ PR_USER='%F{red}%n%f'
 PR_PROMPT='%F{red}➤ %f'
 fi
 
+NEWLINE=$'\n'
+
 # Check if we are on SSH or not
 if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
 PR_HOST='%F{red}%M%f' # SSH
@@ -53,8 +55,7 @@ local user_host="${PR_USER}%F{green}@${PR_HOST}"
 local current_dir="%F{blue}%~%f"
 local git_branch='${vcs_info_msg_0_}'
 
-PROMPT="╭─${user_host} ${current_dir} ${git_branch}
-╰─$PR_PROMPT "
+PROMPT="╭─${user_host} ${current_dir} ${git_branch}${NEWLINE}╰─$PR_PROMPT "
 }
 
 ############################################################
@@ -196,6 +197,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 ############################################################
 ######################## USER FUNCS ########################
 ############################################################
+
+source "$HOME/.cargo/env"
 
 # Flash qmk firmware to keeb
 # qmkFlash () {
