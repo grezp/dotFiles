@@ -15,7 +15,7 @@ M.general = {
 
   n = {
     -- general
-    ['<ESC>']     = { ':noh<CR>', '  no highlight' },
+    ['<ESC>']     = { '<cmd>noh<CR>', '  no highlight' },
     ['<Leader>o'] = { 'o<ESC>',         '  new line below' },
     ['<Leader>O'] = { 'O<ESC>',         '  new line above' },
 
@@ -33,18 +33,20 @@ M.general = {
 
     -- windows
     ['<Leader>w'] = { '<C-w>',                   '  window keybind' },
-    ['<C-Up>']    = { ':resize +2<CR>',          '  window height' },
-    ['<C-Down>']  = { ':resize -2<CR>',          '  window height' },
-    ['<C-Left>']  = { ':vertical resize -2<CR>', '  window height' },
-    ['<C-Right>'] = { ':vertical resize +2<CR>', '  window height' },
+    ['<C-Up>']    = { '<cmd>resize +2<CR>',          '  window height' },
+    ['<C-Down>']  = { '<cmd>resize -2<CR>',          '  window height' },
+    ['<C-Left>']  = { '<cmd>vertical resize -2<CR>', '  window height' },
+    ['<C-Right>'] = { '<cmd>vertical resize +2<CR>', '  window height' },
 
     -- misc
     -- toggle white space
     ['<Leader>ts'] = { '<cmd> set list!<CR>', '  white Space' },
+    -- toggle number line & rel num
+    ['<Leader>tn'] = { '<cmd> set number! relativenumber! <CR>', '  Number line'},
     -- chnage dir
-    ['\\c'] = { ':cd %:p:h<CR>', '  change directory' },
+    ['\\c'] = { '<cmd>cd %:p:h<CR>', '  change directory' },
     -- source current file
-    ['\\s'] = { ':so %<CR>',     'ﰇ  source current file' },
+    ['\\s'] = { '<cmd>so %<CR>',     'ﰇ  source current file' },
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
     ['p'] = { 'p:let @+=@0<CR>:let @"=@0<CR>', '', opts = opts3 },
@@ -67,8 +69,8 @@ M.general = {
   },
 
   v = {
-    ['J'] = { [[:move .+1<CR>==]], '  move selected text' },
-    ['K'] = { [[:move .-2<CR>==]], '  move selected text' },
+    ['J'] = { [[<cmd>move .+1<CR>==]], '  move selected text' },
+    ['K'] = { [[<cmd>move .-2<CR>==]], '  move selected text' },
 
     ['j']      = { [[v:count || mode(1)[0:1] == 'no' ? 'j' : 'gj']], '', opts = opts2 },
     ['k']      = { [[v:count || mode(1)[0:1] == 'no' ? 'k' : 'gk']], '', opts = opts2 },
@@ -81,8 +83,8 @@ M.general = {
   },
 
   x = {
-    ['J'] = { [[:move '>+1<CR>gv-gv]], '  move selected text' },
-    ['K'] = { [[:move '<-2<CR>gv-gv]], '  move selected text' },
+    ['J'] = { [[<cmd>move '>+1<CR>gv-gv]], '  move selected text' },
+    ['K'] = { [[<cmd>move '<-2<CR>gv-gv]], '  move selected text' },
 
     ['p'] = { 'p:let @+=@0<CR>:let @"=@0<CR>', '', opts = opts3 },
   }
@@ -206,8 +208,8 @@ if signs_ok then
       ['<Leader>g'] = { name = '  Git' },
 
       -- git signs
-      ['<leader>gs'] = { ':Gitsigns stage_hunk<CR>',      '  Stage hunk' },
-      ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>',      '  Reset hunk' },
+      ['<leader>gs'] = { '<cmd>Gitsigns stage_hunk<CR>',      '  Stage hunk' },
+      ['<leader>gr'] = { '<cmd>Gitsigns reset_hunk<CR>',      '  Reset hunk' },
     }
   }
 end
@@ -362,7 +364,7 @@ M.nvterm = {
 M.neoclip = {
   n = {
     ['<Leader>nn'] = { '<cmd> Telescope neoclip <CR>', '  neoclip'},
-    ['<Leader>nr'] = { ':Telescope neoclip ', '  neoclip -> register'}
+    ['<Leader>nr'] = { '<cmd>Telescope neoclip ', '  neoclip -> register'}
   },
 
   i = {
@@ -373,8 +375,8 @@ M.neoclip = {
 
 M.hlslens_tmp = {
   n = {
-    ['n']  = { [[:execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1 },
-    ['N']  = { [[:execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1 },
+    ['n']  = { [[<cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1 },
+    ['N']  = { [[<cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1 },
     ['*']  = { [[*<Cmd>lua require('hlslens').start()<CR>]],  '', opts = opts1},
     ['#']  = { [[#<Cmd>lua require('hlslens').start()<CR>]],  '', opts = opts1},
     ['g*'] = { [[g*<Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1},
