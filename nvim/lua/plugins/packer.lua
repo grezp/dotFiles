@@ -346,13 +346,6 @@ return packer.startup {
     }
 
     use {
-      'ahmedkhalf/project.nvim',
-      config = function()
-        require("project_nvim").setup()
-      end
-    }
-
-    use {
       -- shows what keys do + auto show buffers/registers
       'folke/which-key.nvim',
       module = 'which-key',

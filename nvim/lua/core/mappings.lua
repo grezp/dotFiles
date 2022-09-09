@@ -139,7 +139,6 @@ M.telescope = {
     ['<leader>nm'] = { tele('man_pages'),         '龎 man Pages' },
     ["<leader>n'"] = { tele('marks'),             '  Marks' },
     ['<leader>n"'] = { tele('registers'),         '  Registers' },
-    ['<leader>np'] = { ':Telescope projects<CR>', 'ﮛ  Projects' },
 
     -- Telescope
     ['<leader>n<leader>'] = { tele('builtin'), '  Telescope' },
