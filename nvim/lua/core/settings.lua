@@ -68,7 +68,7 @@ o.smartindent = true
 o.expandtab = true              -- convert tabs to spaces
 o.tabstop = 4                   -- set tab space to 4
 o.shiftwidth = 4                -- shift line by 4 spaces (<< and >>)
-o.list = true                   -- show tab, eol, & trail chars
+o.list = false                   -- show tab, eol, & trail chars
 o.listchars = 'tab:▸ ,trail:●'  -- char to show for tab and trail
 o.showbreak= '↪'                -- character to show when line is broken
 

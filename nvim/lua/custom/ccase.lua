@@ -254,7 +254,7 @@ M.CtCmd = function(cmd_str, name)
     fn.system(cmd_str .. ' > ' .. tmp_file)
 
     -- overwrite name if not passed
-    if name ~= nil then
+    if name == nil then
       name = 'ccase_results'
     end
 

@@ -111,6 +111,7 @@ end
 function M.grep_opened_buffers()
   require('telescope.builtin').live_grep {
     grep_open_files = true,
+    prompt_title = 'Grep Opened Buffers',
   }
 end
 
