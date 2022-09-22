@@ -282,6 +282,12 @@ return packer.startup {
     }
 
     use {
+      -- display startup time
+      'dstein64/vim-startuptime',
+      cmd = { 'StartupTime' },
+    }
+
+    use {
       'kylechui/nvim-surround',
       config = function()
           require("nvim-surround").setup()

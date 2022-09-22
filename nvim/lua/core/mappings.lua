@@ -15,7 +15,7 @@ M.general = {
 
   n = {
     -- general
-    ['<ESC>']     = { '<cmd>noh<CR>', '  no highlight' },
+    ['<ESC>']     = { ':noh<CR>', '  no highlight' },
     ['<Leader>o'] = { 'o<ESC>',         '  new line below' },
     ['<Leader>O'] = { 'O<ESC>',         '  new line above' },
 
@@ -376,12 +376,12 @@ M.neoclip = {
 
 M.hlslens_tmp = {
   n = {
-    ['n']  = { [[<cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1 },
-    ['N']  = { [[<cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1 },
-    ['*']  = { [[*<Cmd>lua require('hlslens').start()<CR>]],  '', opts = opts1},
-    ['#']  = { [[#<Cmd>lua require('hlslens').start()<CR>]],  '', opts = opts1},
-    ['g*'] = { [[g*<Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1},
-    ['g#'] = { [[g#<Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1},
+    ['n']  = { [[:execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1 },
+    ['N']  = { [[:execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], '', opts = opts1 },
+    ['*']  = { [[*:lua require('hlslens').start()<CR>]],  '', opts = opts1},
+    ['#']  = { [[#:lua require('hlslens').start()<CR>]],  '', opts = opts1},
+    ['g*'] = { [[g*:lua require('hlslens').start()<CR>]], '', opts = opts1},
+    ['g#'] = { [[g#:lua require('hlslens').start()<CR>]], '', opts = opts1},
 
     ['<Leader>*'] = {
       [[<cmd>let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR><Cmd>lua require('hlslens').start()<CR>]],

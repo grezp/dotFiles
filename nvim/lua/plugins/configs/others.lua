@@ -27,8 +27,8 @@ M.blankline = function()
     return
   end
 
-  vim.g.indent_blankline_char = '┊'
   blankline.setup {
+    char = '┊',
     show_current_context = true,
   }
 end
