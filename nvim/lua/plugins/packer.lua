@@ -44,7 +44,7 @@ return packer.startup {
     use {
       'lewis6991/impatient.nvim',     --Speed up loading Lua modules
       config = function()
-        require('plugins.configs.others').impatient()
+        require('impatient')
       end,
     }
 
@@ -62,12 +62,12 @@ return packer.startup {
     use {
       -- create indent line for spaces
       'lukas-reineke/indent-blankline.nvim',
-      setup = function()
-        require('core.lazy_load').on_file_open('indent-blankline.nvim')
-      end,
       config = function()
-        require('plugins.configs.others').blankline()
-      end
+        require('indent_blankline').setup {
+          char = '┊',
+          show_current_context = true,
+        }
+      end,
     }
 
 
@@ -338,7 +338,7 @@ return packer.startup {
       'chrisbra/csv.vim',
       ft = 'csv',
       config = function()
-        require('plugins.configs.others').csv()
+        vim.g.no_csv_maps = 1
       end
     }
 
