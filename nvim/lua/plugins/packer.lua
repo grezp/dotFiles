@@ -254,6 +254,7 @@ return packer.startup {
     use {
       -- jump to text quickly by matching 1|2 chars
       'phaazon/hop.nvim',
+      module = 'hop',
       branch = 'v2',
       config = function()
         require'hop'.setup()
