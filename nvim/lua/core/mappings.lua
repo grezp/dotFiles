@@ -106,6 +106,16 @@ M.clear_case = {
   }
 }
 
+local sc = require('custom.search_code')
+M.search_code = {
+  n = {
+    ['<Leader>s'] = '  SETI Search Code',
+    ['<Leader>ss'] = { function() sc.search_code() end,                   '  Search word: cursor' },
+    ['<Leader>si'] = { function() sc.search_code({sc_input = true}) end,  '  search word: user Input' },
+    ['<Leader>sp'] = { function() sc.pick_seti_proj() end,                '  pick SETI Project' },
+  }
+}
+
 local tele = require('plugins.telescope.builtins').tele_func
 M.telescope = {
   n = {
