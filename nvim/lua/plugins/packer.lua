@@ -252,12 +252,25 @@ return packer.startup {
     }
 
     use {
-      -- jump to text quickly by matching 1|2 chars
-      'phaazon/hop.nvim',
-      module = 'hop',
-      branch = 'v2',
+      -- jump to text quickly by matching 2 chars
+      'ggandor/leap.nvim',
+      -- module = 'leap',
       config = function()
-        require'hop'.setup()
+        require('leap').add_default_mappings()
+        local opts = {
+          safe_labels = { 'a', 'r', 's', 't', 'n', 'e', 'i', 'o'},
+          labels = { 'a', 'r', 's', 't', 'n', 'e', 'i', 'o'}
+        }
+        require('leap').setup(opts)
+      end,
+    }
+
+    use {
+      -- jump to text quickly by matching 1 chars
+      'ggandor/flit.nvim',
+      -- module = 'leap',
+      config = function()
+        require('flit').setup()
       end,
     }
 

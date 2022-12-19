@@ -23,6 +23,7 @@ local purple  = c.purple
 local green   = c.green2
 local blue    = c.blue
 local red     = c.red
+local red1    = c.red1
 local orange  = c.orange
 local green2  = c.green1
 local blue7_d85   = util.lighten(c.blue7, 0.85)
@@ -79,6 +80,10 @@ M.custom_hl_groups = {
 
   -- indent_blankline
   IndentBlanklineContextChar = { fg = c.blue },
+
+  -- leap
+  LeapMatch        = { fg = c.red1, bold = true },
+  LeapLabelPrimary = { fg = c.red1, bold = true },
 }
 
 M.apply_highlight(M.custom_hl_groups)
