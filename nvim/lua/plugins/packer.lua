@@ -258,11 +258,12 @@ return packer.startup {
       -- jump to text quickly by matching 2 chars
       'ggandor/leap.nvim',
       -- module = 'leap',
+      requires = { 'tpope/vim-repeat' },
       config = function()
         require('leap').add_default_mappings()
         local opts = {
-          safe_labels = { 'a', 'r', 's', 't', 'n', 'e', 'i', 'o'},
-          labels = { 'a', 'r', 's', 't', 'n', 'e', 'i', 'o'}
+          labels = { 'a', 'r', 's', 't', 'n', 'e', 'i', 'o', 'g', 'm', 'd', 'h',
+                     'c', 'x', 'z', 'p', 'f', 'w', 'q', 'l', 'u', 'y', 'v', 'k' },
         }
         require('leap').setup(opts)
       end,

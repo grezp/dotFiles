@@ -93,7 +93,7 @@ M.clear_case = {
     ['<Leader>co'] = { '<cmd> !ct co -nc %<CR>',             '  checkout file' },
     ['<Leader>cu'] = { '<cmd> !ct unco -rm %<CR>',           '  undo checkout' },
     ['<Leader>ci'] = { '<cmd> !ct ci -nc %<CR>',             '  checkin file' },
-    ['<Leader>cl'] = { '<cmd> !ct lsact -l<CR>',             '  list activities' },
+    ['<Leader>cl'] = { '<cmd> !ct lsact -l | grep "@@" | sort<CR>', '  list activities' },
     ['<Leader>cr'] = { '<cmd> !ct rebase -rec -com<CR>',     'מּ  Rebase view' },
 
     ['<Leader>cd']  = '  diff options',
