@@ -77,7 +77,10 @@ return packer.startup {
     use {
       -- nvim hl based on syntax
       'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
+      run = function()
+        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+        ts_update()
+      end,
       config = function()
         require('plugins.configs.treesitter')
       end,
