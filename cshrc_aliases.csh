@@ -38,10 +38,12 @@ alias ctreb 'ct rebase -rec -com'
 alias ctsa  'ct setactivity'
 alias cts   'ct setview'
 alias ctu   'ct unco'
-alias ctv   'ct lsview -short | grep jsmendes | grep -v integration | sort'
+alias ctv   'ct lsview -short | grep pgutierr | grep -v integration | sort'
 
 alias se     'setenv LTX_UT_ERROR_HANDLER Learn'
 alias ue     'unsetenv LTX_UT_ERROR_HANDLER'
+
+alias cgmakeg 'cgmake BUILD_TYPE=dbg'
 
 # wave & cal factors
 alias cfs   '/user/tools/LINUX/bin/cfs'
@@ -52,3 +54,4 @@ alias pdf   '/user/tools/`uname`/bin/acroread'
 
 alias oss       'ls -1 /opt/ltx/releases/ | grep pgutierr_ | sort'
 alias cp_build  '/user/tools/linux/bin/copy_build -to po -b '
+alias p_target  'echo $TARGET_NAME'
