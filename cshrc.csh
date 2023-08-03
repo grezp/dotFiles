@@ -4,7 +4,7 @@
 
 alias cp 'cp -i'
 alias mv 'mv -i'
-alias ls 'ls --color=auto -F'
+alias ls 'ls --color=auto'
 alias ll 'ls -lF'
 alias la 'ls -laF'
 alias lr 'ls -ltrF'
