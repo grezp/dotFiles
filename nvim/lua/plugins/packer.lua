@@ -363,7 +363,7 @@ return packer.startup {
     use {
       -- display buffer int tabline
       'akinsho/bufferline.nvim',
-      tag = 'v2.*',
+      tag = '*',
       config = function()
         require('plugins.configs.bufferline')
       end

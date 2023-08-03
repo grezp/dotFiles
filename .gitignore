@@ -3,3 +3,4 @@ plugin/
 tmp/
 tags
 .netrwhist
+.DS_Store
