@@ -62,7 +62,7 @@ setenv PATH /usr/local/bin:${PATH}
 setenv PATH /usr/local:${PATH}
 
 setenv PATH "$HOME/miniconda3/bin:$PATH"
-setenv LD_LIBRARY_PATH $HOME/miniconda3/lib:${LD_LIBRARY_PATH}
+#setenv LD_LIBRARY_PATH $HOME/miniconda3/lib:${LD_LIBRARY_PATH}
 
 if ( $?MANPATH == 0 ) then
   setenv MANPATH $HOME/local/share/man
@@ -74,8 +74,8 @@ setenv MANPATH $HOME/tools/llvm/share/man:${MANPATH}
 setenv MANPATH $HOME/miniconda3/share/man:${MANPATH}
 setenv MANPATH $HOME/.fzf/man:${MANPATH}
 
-setenv CC $HOME/miniconda3/bin/gcc
-setenv CXX $HOME/miniconda3/bin/g++
+# setenv CC $HOME/miniconda3/bin/gcc
+# setenv CXX $HOME/miniconda3/bin/g++
 setenv XDG_CONFIG_HOME $HOME/.config
 setenv CUSTOMER_DIR /ltx/customer/
 # setenv LC_ALL='en_US.UTF-8'
