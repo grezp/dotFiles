@@ -34,6 +34,7 @@ M.setup = function()
   }
 
   vim.diagnostic.config(config)
+  vim.diagnostic.disable()
 
   vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = 'rounded',

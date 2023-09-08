@@ -10,6 +10,7 @@ g.mapleader = ' '
 -- use filetype.lua instead of filetype.vim
 g.did_load_filetypes = 0
 g.do_filetype_lua = 1
+vim.opt.filetype = "on"
 
 -- misc settings
 o.encoding = 'utf-8'

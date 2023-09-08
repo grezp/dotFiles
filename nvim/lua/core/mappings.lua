@@ -1,4 +1,4 @@
-local toggle_diags = true
+local toggle_diags = false
 local toggle_pairs = true
 
 local opts1 = { noremap = true, silent = true }
