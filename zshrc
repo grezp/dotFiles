@@ -157,6 +157,8 @@ bindkey '\C-x\C-e' edit-command-line
 # file rename magick
 bindkey "^[m" copy-prev-shell-word
 
+# disable Ctrl-d
+setopt IGNORE_EOF
 
 ############################################################
 ######################## USER EDITS ########################
@@ -191,7 +193,7 @@ export VISUAL=nvim
 export EDITOR=nvim
 export PATH="$PATH:$HOME/.emacs.d/bin"
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
-export PATH="/Users/grezp/Library/Python/3.8/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ############################################################
