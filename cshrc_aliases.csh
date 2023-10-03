@@ -46,10 +46,10 @@ alias ue     'unsetenv LTX_UT_ERROR_HANDLER'
 
 
 # wave & cal factors
-alias cfs   '/user/tools/LINUX/bin/cfs'
-alias ws    '/user/tools/LINUX/bin/ws'
-alias wa    '/user/tools/LINUX/bin/wa'
-alias pdf   '/user/tools/`uname`/bin/acroread'
+alias cfs   '/user/tools/LINUX/bin/cfs &'
+alias ws    '/user/tools/LINUX/bin/ws &'
+alias wa    '/user/tools/LINUX/bin/wa &'
+alias pdf   '/user/tools/`uname`/bin/acroread &'
 
 
 alias oss       'ls -1 /opt/ltx/releases/ | grep pgutierr_ | sort'
@@ -60,3 +60,16 @@ alias sbld      'source $HOME/scripts/set_bld'
 
 alias lg    'ls | grep -i'
 alias lrg   'lr | grep -i'
+
+#WS Tools
+alias cddev       "cd /user/tools/linux/Development"
+alias cdws        "cd /vobs/ui/tools/WaveformStudio"
+alias cdwa        "cd /vobs/ui/tools/WaveformAnalyzer"
+alias cdcfs       "cd /vobs/ui/tools/CalfactorStudio"
+
+alias cfsd        "$CADENCE_DIR/../CalfactorStudio/$ARCH_NAME/bin/CalfactorStudio &"
+alias wad         "$CADENCE_DIR/../WaveformAnalyzer/$ARCH_NAME/bin/WaveformAnalyzer &"
+alias wsd         "$CADENCE_DIR/../WaveformStudio/$ARCH_NAME/bin/WaveformStudio &"
+
+alias gcdev     git clone /u/pgutierr/Git/diags-debug.git'
+alias gcdevp    git clone ma-pgutierrez-72vm:/u/pgutierr/Git/diags-debug.git'

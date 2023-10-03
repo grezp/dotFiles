@@ -28,7 +28,7 @@ endif
 alias vnc-start 'vncserver $1'
 alias vnc-kill 'vncserver -kill $1'
 alias vnc-find 'ps -ef | grep 'pgutierr' | grep 'vnc''
-alias vnc-home 'vncserver -geometry 2240x1260 :99'
+alias vnc-home 'vncserver -geometry 2240x1260 :99 -AlwaysShared '
 
 alias res-info 'xdpyinfo | grep dimensions'
 
