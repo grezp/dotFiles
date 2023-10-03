@@ -71,5 +71,5 @@ alias cfsd        "$CADENCE_DIR/../CalfactorStudio/$ARCH_NAME/bin/CalfactorStudi
 alias wad         "$CADENCE_DIR/../WaveformAnalyzer/$ARCH_NAME/bin/WaveformAnalyzer &"
 alias wsd         "$CADENCE_DIR/../WaveformStudio/$ARCH_NAME/bin/WaveformStudio &"
 
-alias gcdev     git clone /u/pgutierr/Git/diags-debug.git'
-alias gcdevp    git clone ma-pgutierrez-72vm:/u/pgutierr/Git/diags-debug.git'
+alias gcdev     'git clone /u/pgutierr/Git/diags-debug.git'
+alias gcdevp    'git clone ma-pgutierrez-72vm:/u/pgutierr/Git/diags-debug.git'
