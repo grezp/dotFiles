@@ -1,13 +1,14 @@
-require('core.augroups')
-require('core.settings')
+--[[ Setting options ]]
+require("core.options")
 
-vim.defer_fn(function()
-  require("core.utils").load_mappings()
-end, 0)
+-- [[ Auto commands ]]
+require("core.autocmds")
 
-require('custom.globals')
-require('custom.statusline')
-require('custom.colors')
+-- [[ Basic keymaps ]]
+require("core.keymaps")
 
--- plugin configs
-require('plugins.packer')
+-- [[ Install and load plugins ]]
+require("plugins")
+
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
