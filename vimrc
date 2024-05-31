@@ -77,7 +77,7 @@ set noswapfile                  " prevent vim from creating swap files
 set showcmd                     " show keys pressed in cmd line
 set laststatus=2                " always show status bar
 set showmode                    " hides the mode (eg. insert, visual)
-set shortmess=aWF               " cmd message: use abrevs,no write, no file text
+set shortmess=asWF              " cmd message: use abrevs,no write, no file text
 set splitbelow                  " open horiz splits below
 set splitright                  " open vert split right
 set backspace=indent,eol,start  " allow bspc on indend, eol, & start
@@ -85,6 +85,7 @@ set wildmenu                    " cmd line completion
 set wildignorecase
 set wildignore=*/build/*,*.bak
 set tags+=tags
+set t_kb=
 " Cohu only:
 set tags+=/u/pgutierr/projects/qualcomm/thor/drivers/thorTags/tags
 " Qualcomm only:
