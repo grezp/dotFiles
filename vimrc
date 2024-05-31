@@ -85,6 +85,7 @@ set wildmenu                    " cmd line completion
 set wildignorecase
 set wildignore=*/build/*,*.bak
 set tags+=tags
+set t_kb=
 " Cohu only:
 set tags+=/u/pgutierr/projects/qualcomm/thor/drivers/thorTags/tags
 " Qualcomm only:
