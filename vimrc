@@ -66,6 +66,9 @@
 
 "___General_settings___" {{{{
 "______________________"
+set keyprotocol=                " fixes strange char at bootup
+let &term=&term                 " fixes strange char at bootup
+set t_kb+=                    " fixes backpace key
 set nowrap                      " no wrapping to next line
 set tabstop=4                   " set tab space to 4
 set expandtab                   " expand tabs to spaces
@@ -80,12 +83,11 @@ set showmode                    " hides the mode (eg. insert, visual)
 set shortmess=asWF              " cmd message: use abrevs,no write, no file text
 set splitbelow                  " open horiz splits below
 set splitright                  " open vert split right
-set backspace=indent,eol,start  " allow bspc on indend, eol, & start
+"set backspace=indent,eol,start  " allow bspc on indend, eol, & start
 set wildmenu                    " cmd line completion
 set wildignorecase
 set wildignore=*/build/*,*.bak
 set tags+=tags
-set t_kb=
 " Cohu only:
 set tags+=/u/pgutierr/projects/qualcomm/thor/drivers/thorTags/tags
 " Qualcomm only:
@@ -103,9 +105,8 @@ set smartcase               " stop ignorecase when searching w/ caps
 
 ""___Cursor options___" {{{
 ""____________________"
-"let &t_SI = "\<Esc>]50;CursorShape=1\x7"        " insert mode cursor
-"let &t_SR = "\<Esc>]50;CursorShape=2\x7"        " replace mode cursor
-"let &t_EI = "\<Esc>]50;CursorShape=0\x7"        " switch back to block cursor
+"let &t_TI = ""
+"let &t_TE = ""
 set cursorline                                  " cursor highlight on start
 "hi CursorLine ctermbg=DarkGrey cterm=bold|           " cursor highlight color
 " }}}
