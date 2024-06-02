@@ -194,6 +194,7 @@ export EDITOR=nvim
 export PATH="$PATH:$HOME/.emacs.d/bin"
 export PATH="/opt/homebrew/opt/grep/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ############################################################
