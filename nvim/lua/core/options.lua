@@ -92,7 +92,7 @@ o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
 o.fillchars = "fold:-"
 o.foldnestmax = 10
-o.foldtext = "v:lua.custom_fold_text()"
+-- o.foldtext = "v:lua.custom_fold_text()"
 
 -- Setup Global Tags --
 -----------------------
@@ -161,3 +161,12 @@ vim.schedule(function()
 	vim.opt.shadafile = vim.fn.expand("$HOME") .. "/.local/share/nvim/shada/main.shada"
 	vim.cmd([[ silent! rsh ]])
 end)
+
+-- configure uno/una files to behave like cpp filetypes
+-- used for commenting
+vim.filetype.add ({
+	extension = {
+		["uno"] = "cpp",
+		["una"] = "cpp",
+	},
+})

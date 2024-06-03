@@ -1,6 +1,8 @@
 return {
 	{
 		"numToStr/Comment.nvim",
+		lazy = false,
+
 		opts = {
 			---Add a space b/w comment and the line
 			---@type boolean|fun():boolean
@@ -67,13 +69,5 @@ return {
 			---Post-hook, called after commenting is done
 			post_hook = nil,
 		},
-
-		config = function()
-			local ft = require("Comment.ft")
-
-			-- set comment for specific file types
-			ft.set("una", "//%s")
-			ft.set("uno", "//%s")
-		end,
 	},
 }
