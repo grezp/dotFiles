@@ -9,8 +9,8 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 map("n", "<Leader>o", "o<ESC>", { desc = "new line below" })
 map("n", "<Leader>O", "O<ESC>", { desc = "new line above" })
 
-map("n", "fd", "<cmd>cd %:p:h<CR>", { desc = "change [d]irectory" })
-map("n", "fc", "<cmd>so %<CR>", { desc = "[s]ource file" })
+-- search pat under cursor
+map("n", "<Leader>*", [[<cmd>let @/='\<'.expand('<cword>').'\>'<bar>set hlsearch<CR>]], { desc = "search [*] under cursor"})
 
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
@@ -34,8 +34,15 @@ map("n", "<Leader>ts", "<cmd>set list!<CR>", { desc = "white [s]pace" })
 map("n", "<Leader>tw", "<cmd>set wrap! <CR>", { desc = "[w]rap line" })
 map("n", "<Leader>tn", "<cmd>set number! relativenumber! <CR>", { desc = "[n]umber Line" })
 
--- Diagnostic keymaps
+-- Diagnostic keymaps --
+------------------------
 map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [d]iagnostic message" })
 map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [d]iagnostic message" })
 map("n", "<leader>le", vim.diagnostic.open_float, { desc = "Show diagnostic [e]rror messages" })
 map("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Open diagnostic [q]uickfix list" })
+
+-- Files --
+-----------
+map("n", "<Leader>fd", "<cmd>cd %:p:h<CR>", { desc = "change [d]irectory" })
+map("n", "<Leader>fc", "<cmd>so %<CR>", { desc = "[s]ource file" })
+

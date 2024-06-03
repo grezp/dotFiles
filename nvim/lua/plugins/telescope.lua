@@ -77,12 +77,12 @@ return {
 
 			-- search [F]iles --
 			--------------------
-			map("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-			map("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-			map("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-			map("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-			map("n", "<leader>s.", builtin.oldfiles, { desc = "[S]earch Recent [.] Files" })
-			map("n", "<leader>sm", builtin.man_pages, { desc = "[S]earch [M]an pages" })
+			map("n", "<leader>sf", builtin.find_files, { desc = "[F]iles" })
+			map("n", "<leader>sw", builtin.grep_string, { desc = "current [W]ord" })
+			map("n", "<leader>sg", builtin.live_grep, { desc = "[G]rep" })
+			map("n", "<leader>sr", builtin.resume, { desc = "[R]esume search" })
+			map("n", "<leader>s.", builtin.oldfiles, { desc = "Recent [.] Files" })
+			map("n", "<leader>sm", builtin.man_pages, { desc = "[M]an pages" })
 
 			-- search all files, including hidden files
 			map("n", "<leader>sa", function()
@@ -91,7 +91,7 @@ return {
 					no_ignore = true,
 					no_ignore_parent = true,
 				})
-			end, { desc = "[S]earch [A]ll files" })
+			end, { desc = "[A]ll files" })
 
 			-- search pattern in all open buffers
 			map("n", "<leader>s/", function()
@@ -99,31 +99,31 @@ return {
 					grep_open_files = true,
 					prompt_title = "Live Grep in Open Files",
 				})
-			end, { desc = "[S]earch [/] in Open Files" })
+			end, { desc = "[/] in Open Files" })
 
 			-- search neovim config
 			map("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[S]earch [N]eovim files" })
+			end, { desc = "[N]eovim files" })
 
 			-- search neovim pluglins
 			map("n", "<leader>sp", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("data") .. "/lazy/" })
-			end, { desc = "[S]earch neovim [P]lugins" })
+			end, { desc = "neovim [P]lugins" })
 
 			-- search prev opened files
 			map("n", "<leader>so", function()
 				require("telescope").extensions.frecency.frecency()
-			end, { desc = "[S]earch prev [O]pen files" })
+			end, { desc = "prev [O]pen files" })
 
 			-- search [N]eovim --
 			---------------------
-			map("n", "<leader>nh", builtin.help_tags, { desc = "[N]eovim [H]elp" })
-			map("n", "<leader>nk", builtin.keymaps, { desc = "[N]eovim [K]eymaps" })
-			map("n", "<leader>nt", builtin.builtin, { desc = "[N]eovim [T]elescope" })
-			map("n", "<leader>no", builtin.vim_options, { desc = "[N]eovim [O]ptions" })
-			map("n", '<leader>n"', builtin.registers, { desc = '[N]eovim ["] registers' })
-			map("n", "<leader>n'", builtin.marks, { desc = "[N]eovim ['] marks" })
+			map("n", "<leader>nh", builtin.help_tags, { desc = "[H]elp" })
+			map("n", "<leader>nk", builtin.keymaps, { desc = "[K]eymaps" })
+			map("n", "<leader>nt", builtin.builtin, { desc = "[T]elescope" })
+			map("n", "<leader>no", builtin.vim_options, { desc = "[O]ptions" })
+			map("n", '<leader>n"', builtin.registers, { desc = '["] registers' })
+			map("n", "<leader>n'", builtin.marks, { desc = "['] marks" })
 			map("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 			map("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] Fuzzy search in current buffer" })
 

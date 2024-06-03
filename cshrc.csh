@@ -75,7 +75,8 @@ else
 endif
 
 
-# setenv CC $HOME/miniconda3/bin/gcc
+setenv CC $HOME/miniconda3/bin/gcc
+setenv CXX $HOME/miniconda3/bin/gcc
 # setenv CXX $HOME/miniconda3/bin/g++
 setenv XDG_CONFIG_HOME $HOME/.config
 # setenv LC_ALL='en_US.UTF-8'
